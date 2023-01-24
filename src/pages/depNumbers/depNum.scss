@@ -1,0 +1,115 @@
+.depnum{
+    width: 45rem;
+    margin: 0 auto;
+    background-image: url(../../../public/images/background.png);
+
+        .main_2{
+            width: 88.8%;
+            margin: auto;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            background: #FFFFFF;
+            border: 1px solid #94A3BA;
+            box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+
+            .header_{
+                width: 94%;
+                margin: auto;
+                display: flex;
+                padding: 20px 0;
+                align-items: center;
+                justify-content: space-around;
+                border-bottom: 1px solid gray;
+
+                h2{   
+                    margin-left: 4%;
+                    font-family: 'GHEA Grapalat';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 18px;
+                    line-height: 24px;
+                    color: #28374A;
+
+                }
+
+                img{
+                    margin-left: 2%;
+                }
+
+            }
+
+            table{
+                margin: auto;
+                margin-top: 20px;
+                width: 94%;
+
+                table, th, td {
+                    border: 1px solid white;
+                    border-collapse: collapse;
+                }
+
+                thead{
+                    background-color:  #E1AA5A;
+                    height: 28px;
+                }
+
+                th{
+                    font-family: 'GHEA Grapalat';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 12px;
+                    line-height: 24px;
+                    color: #263849;
+                }
+                
+                th:nth-child(1){
+                    text-align: left;
+                    padding-left: 2%;
+                }
+
+                th:nth-child(2){
+                    width: 15%;
+                }
+
+                td:nth-child(1){
+                    font-family: 'GHEA Grapalat';
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 12px;
+                    line-height: 24px;
+                    color: #263849;
+                    padding-left: 1%;
+                    background-color:#F5F5F5;
+                    border-left: 4px solid #E1AA5A;
+                }
+
+                td:nth-child(2){
+                    font-family: 'GHEA Grapalat';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 11px;
+                    line-height: 24px;
+                    color: #263849;
+                    text-align: center;
+                    background-color: #E1E1E1;
+                }
+                
+
+                tr td:nth-child(3){
+                    width: 15px;
+                    background-color: #E1E1E1;
+                }
+
+                td:nth-child(3) button{
+                    background-color: #E1E1E1;
+                    padding: 2px;
+                }
+
+                .ADD{
+                    margin: 20px 0;
+                }
+            }
+
+        }
+}
