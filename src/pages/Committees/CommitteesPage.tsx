@@ -100,12 +100,12 @@ export const CommitteesPage = () => {
                       </div> : <div>
                         <h3><span>{item.id}.</span>{item.title}</h3>
                         <p>{item.text}</p>
-                        {auth.accessToken && <><button onClick={() => { setValue(item.text); setEdit(item.id) }}><i className="fa-solid fa-pen"></i></button><button onClick={() => deleteItem(item.id)}><i className="fa-regular fa-trash-can"></i></button></>}</div>
+                        {auth.roles && <><button onClick={() => { setValue(item.text); setEdit(item.id) }}><i className="fa-solid fa-pen"></i></button><button onClick={() => deleteItem(item.id)}><i className="fa-regular fa-trash-can"></i></button></>}</div>
                     }
 
                   </div>)
                 }
-                <button onClick={() => setAdd(true)}><i  className="fa-solid fa-plus ADD"></i></button>
+                {auth.roles &&<button onClick={() => setAdd(true)}><i  className="fa-solid fa-plus ADD"></i></button>}
               </div>
             </div>}
       </div>

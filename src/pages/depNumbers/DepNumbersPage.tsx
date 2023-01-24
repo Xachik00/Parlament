@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 import { Header } from '../../components/Header/Header'; 
 import { useAppSelector, useAppDispatch } from '../../hooks/redux' 
 import { fetchDepNum } from "../../store/action/depNumbersActions"; 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faregular } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'; 
 import axios from '../../axios/index'; 
 import useAuth from '../../hooks/AdminHooks/useAuth'; 
@@ -70,12 +68,15 @@ export const DepNumbersPage = () => {
   
         {add ? <form>
           <label>Ստորաբաժանման անվանումը</label>
-          <textarea value={value} onChange={(e:any) => {setValue(e.target.value)}} style={{resize: "none"}}></textarea>
+          <textarea value={value} onChange={(e:any) => {setValue(e.target.value)}}></textarea>
 
           <label>Ներքին հեռ․</label>
-          <textarea value={value1} onChange={(e:any) => {setValue1(e.target.value)}} style={{resize: "none"}}></textarea>
+          <textarea value={value1} onChange={(e:any) => {setValue1(e.target.value)}}></textarea>
 
-          <button onClick={() => adminsSave(value, value1)}>Save</button> 
+          <div className='form_div'>
+            <button onClick={() => adminsSave(value, value1)} >Ավելացնել</button>
+            <button onClick={()=> setAdd(!add)} >Չեղարկել</button>
+          </div> 
 
         </form>  : <table> 
           <thead> 
@@ -86,14 +87,14 @@ export const DepNumbersPage = () => {
           </thead> 
         { 
           depnum.map((item:any, index:number)=> <tbody key={item.id}> 
-            {edit === index ? <tr> 
-              <td> 
-                <textarea value={value} onChange={(e:any) => {setValue(e.target.value)}} style={{resize: "none"}}></textarea> 
+            {edit === index ? <tr className='textarea_tr'> 
+              <td className='textarea_td'> 
+                <textarea value={value} onChange={(e:any) => {setValue(e.target.value)}}></textarea> 
               </td> 
-              <td> 
-                <textarea value={value1} onChange={(e:any) => {setValue1(e.target.value)}} style={{resize: "none"}}></textarea> 
+              <td className='textarea_td'> 
+                <textarea value={value1} onChange={(e:any) => {setValue1(e.target.value)}}></textarea> 
               </td> 
-              <td> 
+              <td className='textarea_td'> 
                 <button className='save'> <i onClick={() => adminSave(item.id, value, value1, "depnum")} className="fa-regular fa-square-check"></i></button>
               </td> 
               </tr> : <tr> 

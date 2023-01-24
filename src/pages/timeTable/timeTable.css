@@ -16,7 +16,7 @@
   border-radius: 5px;
 }
 
-.timeTable .main_1 .form {
+.timeTable .main_1 form {
   display: flex;
   text-align: center;
   flex-direction: column;
@@ -30,38 +30,54 @@
   background: #cccccc;
 }
 
-.timeTable .main_1 .form input {
+.timeTable .main_1 form textarea {
+  resize: none;
+  width: 80%;
+  height: 25px;
+  padding-top: 5px;
+  padding-left: 3px;
+}
+
+.timeTable .main_1 form .form_div {
+  margin-top: 20px;
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.timeTable .main_1 form input {
   margin-top: 3px;
   width: 280px;
   height: 30px;
   border-radius: 5px;
 }
 
-.timeTable .main_1 .form label {
+.timeTable .main_1 form label {
   margin-top: 15px;
+  margin-bottom: 10px;
   font-weight: 600;
 }
 
-.timeTable .main_1 .form button {
+.timeTable .main_1 form button {
   width: 80px;
   height: 30px;
   margin-top: 20px;
   border-radius: 5px;
 }
 
-.timeTable .main_1 .form .button {
+.timeTable .main_1 form .button {
   width: 220px;
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
 
-.timeTable .main_1 .form .button .button1 {
+.timeTable .main_1 form .button .button1 {
   background: #EDE9DE;
   width: 80px;
 }
 
-.timeTable .main_1 .form .button .button2 {
+.timeTable .main_1 form .button .button2 {
   background: #EAEFE3;
   width: 80px;
 }
@@ -175,6 +191,17 @@
 .timeTable .main_1 table td:nth-child(4) button {
   background-color: #E1E1E1;
   padding: 2px;
+}
+
+.timeTable .main_1 table tr td textarea {
+  width: 100%;
+  height: 100%;
+  font-family: 'GHEA Grapalat';
+  margin: auto;
+  border: 1px solid black;
+  margin-top: 10px;
+  padding-top: 10px;
+  resize: "none";
 }
 
 .timeTable .main_1 .h3-2 {

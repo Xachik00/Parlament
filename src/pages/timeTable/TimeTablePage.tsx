@@ -102,22 +102,19 @@ export const TimeTablePage = () => {
 
         {add ? <form className='form'>
 
-          <div>
             <label>Ստորաբաժանման անվանումը</label>
-            <textarea className='td1' value={value} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setValue(e.target.value) }} style={{ resize: "none" }}></textarea>
-          </div>
-          <div>
+            <textarea className='td1' value={value} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setValue(e.target.value) }}></textarea>
+
             <label>Օրը</label>
-            <textarea  className='td1' value={value1} onChange={(e: any) => { setValue1(e.target.value) }} style={{ resize: "none" }}></textarea>
-          </div>
-          <div>
+            <textarea  className='td1' value={value1} onChange={(e: any) => { setValue1(e.target.value) }}></textarea>
+          
             <label>Ժամը</label>
-            <textarea  className='td1' value={value2} onChange={(e: any) => { setValue2(e.target.value) }} style={{ resize: "none" }}></textarea>
+            <textarea  className='td1' value={value2} onChange={(e: any) => { setValue2(e.target.value) }}></textarea>
+          
+          <div className='form_div'>
+            <button onClick={() => adminsSave(value, value1, value2)} >Ավելացնել</button>
+            <button onClick={()=> setAdd(!add)} >Չեղարկել</button>
           </div>
-
-          <button onClick={() => adminsSave(value, value1, value2)} >Ավելացնել</button>
-          <button onClick={()=> setAdd(!add)} >Չեղարկել</button>
-
 
         </form> : add1 ? <form>
           <label>Ստորաբաժանման անվանումը</label>
@@ -129,7 +126,10 @@ export const TimeTablePage = () => {
           <label>Ժամը</label>
           <textarea value={valueCitizen2} onChange={(e: any) => { setValueCitizen2(e.target.value) }} style={{ resize: "none" }}></textarea>
 
-          <button onClick={() => adminsSave1(valueCitizen, valueCitizen1, valueCitizen2)}>Save</button>
+          <div className='form_div'>
+            <button onClick={() => adminsSave1(valueCitizen, valueCitizen1, valueCitizen2)} >Ավելացնել</button>
+            <button onClick={()=> setAdd(!add)} >Չեղարկել</button>
+          </div>
 
         </form> :
         <div>
