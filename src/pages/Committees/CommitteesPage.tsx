@@ -6,7 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import axios from '../../axios';
-import './Committees.scss'
+import './CommitteesPage.scss'
+import DeleteText from "../../components/Delete/DeleteText";
 
 export const CommitteesPage = () => {
 
@@ -16,33 +17,42 @@ export const CommitteesPage = () => {
   const { auth }: any = useAuth();
   const [add, setAdd] = useState(false)
   const [edit, setEdit] = useState(0)
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState(['',''])
   const [erorr, setErorr] = useState(false)
   const [erorr1, setErorr1] = useState(false)
+  const [removeitem,setRemoveitem]=useState([-1,{}])
   const [addValue, setAddValue] = useState(['', ''])
   const { Committees } = useAppSelector(state => state.Committees)
+
 
   useEffect(() => {
     dispatch(fetchCommittees())
   }, [dispatch])
 
-  async function saveData(title: string, value: string, id: number) {
+  async function saveData( value: string[], id: number) {
     setErorr(false)
-    if (value.trim() === '') {
-      setErorr(true)
+    setErorr1(false)
+    if (value[0].trim() === '' || value[1].trim() === '') {
+      if (value[0].trim() === '') {
+        setErorr(true)
+      }
+      if (value[1].trim() === '') {
+        setErorr1(true)
+      }
     } else {
       const newCommites = {
         id,
-        title,
-        text: value
+        title:value[0],
+        text: value[1]
       }
       await axios.patch('Committees/' + id, newCommites)
-      dispatch(fetchCommittees()) 
+      dispatch(fetchCommittees())
       setEdit(0)
     }
   }
 
-  async function deleteItem(id: Number) {
+  async function deleteItem(id: Number,e:any) {
+    e.preventDefault()
     await axios.delete('Committees/' + id)
     dispatch(fetchCommittees())
   }
@@ -58,12 +68,13 @@ export const CommitteesPage = () => {
         setErorr1(true)
       }
     } else {
-      const newnewDocCirculation = {
+      const newCommites = {
         title,
-        text,
+        text
       }
-      await axios.post('Committees/', newnewDocCirculation)
-      navigate(0)
+      await axios.post('Committees/', newCommites)
+      dispatch(fetchCommittees())
+      setAdd(false)
     }
   }
 
@@ -79,10 +90,10 @@ export const CommitteesPage = () => {
         <hr />
         {
           add ? <div className='addDiv'>
-            <span>Վերնագիր *։<textarea className={erorr1 ? 'erorrText' : 'text'} value={addValue[0]} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setAddValue([e.target.value, addValue[1]]); setErorr1(false) }} /></span>
-            <span>Տեղեկություն *։<textarea className={erorr ? 'erorrText' : 'text'} value={addValue[1]} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setAddValue([addValue[0], e.target.value]); setErorr(false) }} /></span>
-            <button onClick={() => addText(addValue[0], addValue[1])} className='save' >Հաստատել</button>
+            <span>Վերնագիր *։ <textarea className={erorr1 ? 'erorrText' : 'text'} value={addValue[0]} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setAddValue([e.target.value, addValue[1]]); setErorr1(false) }} /></span>
+            <span>Տեղեկություն *։ <textarea className={erorr ? 'erorrText' : 'text'} value={addValue[1]} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setAddValue([addValue[0], e.target.value]); setErorr(false) }} /></span>
             <button onClick={() => setAdd(false)} className='back' >Չեղարկել</button>
+            <button onClick={() => addText(addValue[0], addValue[1])} className='save' >Հաստատել</button>
             <p>* : Դաշտը պետք է լրացվի!!!</p>
           </div> :
 
@@ -90,24 +101,29 @@ export const CommitteesPage = () => {
               <h2>ՀՀ ԱԶԳԱՅԻՆ ԺՈՂՈՎԻ ՄՇՏԱԿԱՆ ՀԱՆՁՆԱԺՈՂՈՎՆԵՐԸ ԵՎ ՆՐԱՆՑ ԳՈՐԾՈՒՆԵՈՒԹՅԱՆ ՈԼՈՐՏՆԵՐԸ</h2>
               <div className='Committees_main_page'>
                 {
-                  Committees.map((item) => <div key={item.id}>
+                  Committees?.map((item) => <div key={item.id}>
                     {
                       edit === item.id ? <div className='edit_committees'>
-                        <h3>{item.title}</h3>
-                        <textarea className={erorr ? 'erorrText' : 'text'} value={value} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setValue(e.target.value); setErorr(false) }} />
-                        <button onClick={() => saveData(item.title, value, item.id)} ><i className="fa-regular fa-square-check"></i></button>
+                        <span>{item.id}.</span>
+                        <textarea className={erorr ? 'erorrText' : 'text'} value={value[0]} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setValue([e.target.value,value[1]]); setErorr(false) }} />
+                        <textarea className={erorr1 ? 'erorrText' : 'text'} value={value[1]} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setValue([value[0] ,e.target.value]); setErorr(false) }} />
+                        <button onClick={() => saveData(value, item.id)} ><i className="fa-regular fa-square-check"></i></button>
                         <button onClick={() => setEdit(0)} ><i className="fa-solid fa-xmark"></i></button>
                       </div> : <div>
                         <h3><span>{item.id}.</span>{item.title}</h3>
-                        <p>{item.text}</p>
-                        {auth.roles && <><button onClick={() => { setValue(item.text); setEdit(item.id) }}><i className="fa-solid fa-pen"></i></button><button onClick={() => deleteItem(item.id)}><i className="fa-regular fa-trash-can"></i></button></>}</div>
+                        <p>{item?.text}</p>
+                        {auth.roles && <>
+                        <button onClick={() => { setValue([item.title,item.text]); setEdit(item.id) }}><i className="fa-solid fa-pen"></i></button>
+                        <button onClick={(e) => setRemoveitem([item.id,e])}><i className="fa-regular fa-trash-can"></i></button>
+                        </>}</div>
                     }
 
                   </div>)
                 }
-                {auth.roles &&<button onClick={() => setAdd(true)}><i  className="fa-solid fa-plus ADD"></i></button>}
+                {auth.roles && <button onClick={() => {setAdd(true)}}><i className="fa-solid fa-plus ADD"></i></button>}
               </div>
             </div>}
+            {removeitem[0]!==-1 && <DeleteText removeitem={removeitem} setRemoveitem={setRemoveitem} deleteItem={deleteItem} />}
       </div>
     </div>
   )

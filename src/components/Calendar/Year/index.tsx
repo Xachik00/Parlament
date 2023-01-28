@@ -1,3 +1,4 @@
+
 import dayjs from 'dayjs'
 import isBetween from 'dayjs/plugin/isBetween'
 import { IYear } from '../types'
@@ -27,7 +28,7 @@ const Year = ({
   const [disabled, setDisabled] = useState(true)
   localStorage.setItem('data',JSON.stringify(item))
  
-
+  console.log(select);
 useEffect(()=>{
    const data:any = localStorage.getItem('data');
    const datas = JSON.parse(data)
@@ -40,7 +41,33 @@ useEffect(()=>{
     dispatch(fetchCalendar())
   }, [select])
 
-  const  calendarSave = () => {
+  const  calendarSave = async() => {
+    
+    if(Calendar.length>0){
+    const item = Calendar.map(el => el.id)
+    for (let i = 0; i < item.length; i++) {
+      await fetch('http://localhost:3000/Calendar/'+ item[i], {
+      
+    method: "DELETE",
+
+  })
+      
+    }
+   
+    }
+    for  (let i = 0; i < select.length; i++) {
+          
+    
+          await fetch('http://localhost:3000/Calendar', {
+      
+            method: "POST",
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id:select[i],day:select[i]} )
+          })
+        }
     navigate("/admin")
   }
 
@@ -84,7 +111,7 @@ useEffect(()=>{
 
               {daysArr.map((_, pos) => {
                 const day = pos + arrOffset;
-                const id: any = monthName + day
+                const id: any = `${dayjs().year()}` + "-" + month + "-" + day;
 
 
 
@@ -92,40 +119,27 @@ useEffect(()=>{
                  auth?.accessToken ? <div  onClick={async () => {
                         setDisabled(false)
                         if (select.indexOf(id) >= 0) {
-                          await fetch('http://localhost:3000/Calendar/'+id, {
-
-                          method: 'DELETE',
-                         
-                          
-                        })
+                     
                           setSelect(select.filter((el: string) => {
                             
                             return el !== id
                           }));
+                          console.log(select);
 
                         } if (select.indexOf(id) < 0) {
                           setSelect([...select,id])
-                          await fetch('http://localhost:3000/Calendar', {
-
-                          method: "POST",
-                          headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                          },
-                          body: JSON.stringify({id:id,day:id}
-                          )
-                        })
-                      }
+                          console.log(select);
+                      
                     
-                    }}
+                    }}}
                     key={pos}
-                    className={Calendar.map(item=> item.id).indexOf(id) >= 0 ? `checkday` : `day`}
+                    className={select.map((item:any)=> item).indexOf(id) >= 0 ? `checkday` : `day`}
                   >
-                    <p className={Calendar.map(item=> item.id).indexOf(id) >= 0 ? `checkday` : `day`}>{day}</p>
+                    <p className={select.map((item:any)=> item).indexOf(id) >= 0 ? `checkday` : `day`}>{day}</p>
                   </div> : <div   key={pos}
-                    className={Calendar.map(item=> item.id).indexOf(id) >= 0 ? `checkday` : `dayus`}
+                    className={select.map((item:any)=> item).indexOf(id) >= 0 ? `checkday` : `dayus`}
                   >
-                    <p className={Calendar.map(item=> item.id).indexOf(id) >= 0 ? `checkday` : `dayus`}>{day}</p>
+                    <p className={select.map((item:any)=> item).indexOf(id) >= 0 ? `checkday` : `dayus`}>{day}</p>
                   </div>
                   )
               })}
@@ -134,7 +148,7 @@ useEffect(()=>{
         )
       })}
     </div>
-    <div>{auth?.accessToken && <button className={disabled ? "disables" : "nodisables" } onClick={calendarSave}>Պահպանել</button>}</div>
+    <div>{auth?.accessToken && <button className={disabled ? "disables" : "nodisables" } onClick={()=>calendarSave()}>Պահպանել</button>}</div>
     </>
   )
 }

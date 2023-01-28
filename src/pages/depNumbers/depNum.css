@@ -119,6 +119,7 @@
 
 .depnum .main_2 table .ADD {
   margin: 20px 0;
+  cursor: pointer;
 }
 
 .depnum form {

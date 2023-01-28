@@ -5,6 +5,7 @@ import { fetchCommitte } from "../../store/action/NumbersAction";
 import useAuth from '../../hooks/AdminHooks/useAuth';
 import './StepStyle.scss'
 import { ErrorMessage } from '../Error/Error';
+import DeleteText from '../Delete/DeleteText';
 
 
 
@@ -13,6 +14,7 @@ export const CommittePage = () => {
   const { auth }: any = useAuth()
   const { Committe } = useAppSelector(state => state.Committes)
   const dispatch = useAppDispatch()
+  const [removeitem, setRemoveitem] = useState<any>([-1, {}])
   const [edit, setEdit] = useState<number>(-1)
   const [add, setAdd] = useState<boolean>(false)
   const [error, setError]=useState('')
@@ -198,7 +200,7 @@ export const CommittePage = () => {
                           cityphone: item.cityphone, internalphone: item.internalphone, internalphone2:item.internalphone2
                         })
                       }}><i className="fa-solid fa-pen"></i></button>
-                        <button onClick={(e) => Delete(item.id, e)}><i className="fa-regular fa-trash-can"></i></button></td>
+                        <button onClick={(e) => {setRemoveitem([item.id, e]);e.preventDefault()}}><i className="fa-regular fa-trash-can"></i></button></td>
                       }
                     </tr>
                   }
@@ -209,6 +211,7 @@ export const CommittePage = () => {
         </table>
         {auth.roles && <i onClick={() => { setAdd(!add) }} className="fa-solid fa-plus"></i>}
       </form>}
+      {removeitem[0] !== -1 && <DeleteText removeitem={removeitem} setRemoveitem={setRemoveitem} deleteItem={Delete} />}
     </>
   )
 }

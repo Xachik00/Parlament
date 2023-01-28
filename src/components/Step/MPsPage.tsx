@@ -3,8 +3,11 @@ import { useAppSelector, useAppDispatch } from '../../hooks/redux'
 import { fetchMpsnumber } from "../../store/action/NumbersAction";
 import useAuth from '../../hooks/AdminHooks/useAuth';
 import axios from '../../axios';
+import { IMPs } from '../../models/model';
 import './StepStyle.scss'
 import { ErrorMessage } from '../Error/Error';
+import DeleteText from '../Delete/DeleteText';
+
 
 interface Ibos {
   id: number,
@@ -12,41 +15,43 @@ interface Ibos {
   lastname: string,
   firstname: string,
   phonenumber: string,
-  key: string
+  key: boolean
 }
 
 export const MPsPage = () => {
   const { auth }: any = useAuth()
-  const nobos: Ibos[] = []
+  const nobos: IMPs[] = []
   const newsortnobos: string[] = []
   const aybub: string[] = []
   const bos: Ibos[] = []
+  const [removeitem, setRemoveitem] = useState([-1, {}])
   const { MPs } = useAppSelector(state => state.Mpsnumber)
   const dispatch = useAppDispatch()
   const [edit, setEdit] = useState<number>(-1)
-  const [error, setError]=useState('')
+  const [error, setError] = useState('')
   const [add, setAdd] = useState<boolean>(false)
   const [value, setValue] = useState({
     name: '',
     lastname: '',
     firstname: '',
     phonenumber: '',
+
   })
-  const [addvalue, setAddvalue] = useState({
+  const [addvalue, setAddvalue] = useState<any>({
     name: '',
     lastname: '',
     firstname: '',
     phonenumber: '',
-    key: 'noboss'
+    key: false,
   })
   useEffect(() => {
     dispatch(fetchMpsnumber())
   }, [dispatch])
 
-  const newMOs = MPs.filter(item => item.key === "boss")
+  const newMOs: any = MPs.filter(item => item.key === true)
   bos.push(...newMOs)
 
-  const newnobos = MPs.filter(item => item.key === "noboss")
+  const newnobos = MPs.filter(item => (item.key) === false)
 
   const sortnobos = newnobos.sort((a, b) => (a.lastname > b.lastname) ? 1 : -1)
   nobos.push(...sortnobos)
@@ -64,7 +69,7 @@ export const MPsPage = () => {
 
   async function Save(id: number) {
     const EditMPs = {
-      id, name: value.name, lastname: value.lastname, 
+      id, name: value.name, lastname: value.lastname,
       firstname: value.firstname, phonenumber: value.phonenumber,
     }
     await axios.patch('MPs/' + id, EditMPs)
@@ -75,20 +80,20 @@ export const MPsPage = () => {
   async function Add(e: React.FormEvent) {
     e.preventDefault()
     setError('');
-    if(addvalue.name.trim().length===0 || addvalue.lastname.trim().length===0 || addvalue.firstname.trim().length=== 0){
-    setError('Անհրաժեշտ է լրացնել');
+    if (addvalue.name.trim().length === 0 || addvalue.lastname.trim().length === 0 || addvalue.firstname.trim().length === 0) {
+      setError('Անհրաժեշտ է լրացնել');
       return
     }
     const newMPs = {
-      name: addvalue.name, lastname: addvalue.lastname, 
-      firstname: addvalue.firstname, phonenumber: addvalue.phonenumber, key: 'noboss'
+      name: addvalue.name, lastname: addvalue.lastname,
+      firstname: addvalue.firstname, phonenumber: addvalue.phonenumber, key: addvalue.key
     }
     await axios.post('MPs/', newMPs)
     dispatch(fetchMpsnumber())
     setAdd(false)
   }
 
-  async function Delete(id: number, e: React.FormEvent) {
+  async function Delete(id: number, e: any) {
     e.preventDefault()
     await axios.delete('MPs/' + id,)
     dispatch(fetchMpsnumber())
@@ -98,46 +103,58 @@ export const MPsPage = () => {
 
   return (
     <>
-      {add ? <form className='form'  onSubmit={(e) => Add(e)} >
+      {add ? 
+      <form className='form' onSubmit={(e) => Add(e)} >
 
         <label>Անուն</label>
         <input className='td1' value={addvalue.name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setAddvalue({ name: e.target.value, lastname: addvalue.lastname, 
-            firstname: addvalue.firstname, phonenumber: addvalue.phonenumber, key:'noboss'
+          setAddvalue({
+            name: e.target.value, lastname: addvalue.lastname,
+            firstname: addvalue.firstname, phonenumber: addvalue.phonenumber, key: false
           })
         }} />
-          {error && addvalue.name.trim().length===0 && <ErrorMessage error={error} />}
+        {error && addvalue.name.trim().length === 0 && <ErrorMessage error={error} />}
 
         <label>Ազգանուն</label>
         <input className='td1' value={addvalue.lastname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setAddvalue({
             name: addvalue.name, lastname: e.target.value,
-            firstname: addvalue.firstname, phonenumber: addvalue.phonenumber, key:'noboss'
+            firstname: addvalue.firstname, phonenumber: addvalue.phonenumber, key: false
           })
         }} />
-          {error &&  addvalue.lastname.trim().length===0 && <ErrorMessage error={error} />}
+        {error && addvalue.lastname.trim().length === 0 && <ErrorMessage error={error} />}
 
         <label>Հայրանուն</label>
         <input className='td1' value={addvalue.firstname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setAddvalue({
             name: addvalue.name, lastname: addvalue.lastname,
-            firstname: e.target.value, phonenumber: addvalue.phonenumber, key:'noboss'
+            firstname: e.target.value, phonenumber: addvalue.phonenumber, key: false
           })
         }} />
-          {error && addvalue.firstname.trim().length===0 && <ErrorMessage error={error} />}
+        {error && addvalue.firstname.trim().length === 0 && <ErrorMessage error={error} />}
 
         <label>Ներքին հեռախոսահամարը</label>
-        <input className='td1' value={addvalue.phonenumber} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+        <input className='td1' type={'tel'} pattern='[0-9]' value={addvalue.phonenumber} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setAddvalue({
             name: addvalue.name, lastname: addvalue.lastname,
-            firstname: addvalue.firstname, phonenumber: e.target.value, key:'noboss'
+            firstname: addvalue.firstname, phonenumber: e.target.value, key: false
           })
         }} />
+        <label className='label5' >
+          <span className='span'>Նահագահ կամ տեղակալ ?</span>
+          <input type='checkbox' className='input' value={addvalue.phonenumber} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setAddvalue({
+              name: addvalue.name, lastname: addvalue.lastname,
+              firstname: addvalue.firstname, phonenumber: addvalue.phonenumber, key: !addvalue.key
+            })
+          }} />
+        </label>
+
         <div className='button'>
-         <button className='button1' onClick={(e) => Add(e)} >Ավելացնել</button>
-         <button className='button2' onClick={()=>{setAdd(false); setError('')}}>Չեղարկել</button>
+          <button className='button1' onClick={(e) => Add(e)} >Ավելացնել</button>
+          <button className='button2' onClick={() => { setAdd(false); setError('') }}>Չեղարկել</button>
         </div>
-      </form> : <div className='Mps'>
+      </form> : <>
 
         <table className='table1'>
           <thead>
@@ -148,10 +165,11 @@ export const MPsPage = () => {
             </tr>
           </thead>
 
-          <tbody>
             {
               bos.map((item, index) =>
-                <> {edit === item.id ? <tr >
+                  <tbody>
+                <> {edit === item.id ? 
+                <tr key={index}>
 
                   <td>{index + 1}</td>
                   <td><input className='td1_input' value={value.name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -193,29 +211,31 @@ export const MPsPage = () => {
                     })
                   }} className="fa-solid fa-pen"></i></button>
 
-                    <button><i onClick={(e) => Delete(item.id, e)} className="fa-regular fa-trash-can"></i></button></>
+                    <button onClick={(e) => setRemoveitem([item.id, e])}><i className="fa-regular fa-trash-can"></i></button></>
                   }</td>
                 </tr>
                 }
-                </>)
+                </>
+          </tbody>)
             }
-          </tbody>
         </table>
 
-        <div>
+        <>
           {
             newsortnobos.map((item: string, index: number) =>
               item !== item + 1 &&
-              <div key={index}><div>
-                <div className='alfa'> <p>{item}</p></div>
-              </div>
+              <div>
+                <div>
+                  <div className='alfa'> <p>{item}</p></div>
+                </div>
+                <table className='table0'  key={index} >
 
-                <table className='table0'>
-                  <tbody>
+                  <>
                     {nobos.map((iteme, index) =>
                       iteme.lastname[0] === item &&
-                      <>
-                        {edit === iteme.id ? <tr >
+                      <tbody key={index}>
+                        {edit === iteme.id ? 
+                        <tr >
 
                           <td className='td1'>{index + 1}</td>
                           <td><input className='td1_input' value={value.name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -252,33 +272,38 @@ export const MPsPage = () => {
                             <td className='td2'>{iteme.lastname}  {iteme.name}   {iteme.firstname}</td>
                             <td className='td4'>{iteme.phonenumber}</td>
 
-                            <td>  {auth.roles && <td><button onClick={() => {
+                            <>  {auth.roles && <td><button onClick={() => {
                               setEdit(iteme.id); setValue({
                                 name: iteme.name,
                                 lastname: iteme.lastname, firstname: iteme.firstname, phonenumber: iteme.phonenumber
                               })
                             }}><i className="fa-solid fa-pen"></i></button>
 
-                              <button onClick={(e) => Delete(iteme.id, e)}><i className="fa-regular fa-trash-can"></i></button></td>
-                            }</td>
+                              <button onClick={(e) => {setRemoveitem([iteme.id,e]);e.preventDefault()}}><i className="fa-regular fa-trash-can"></i></button></td>
+                            }</>
+
                           </tr>
                         </>
                         }
-                      </>
+                      </tbody>
 
                     )}
 
-                  </tbody>
+                  </>
                 </table>
+
               </div>
             )
           }
-        </div>
-       {auth.roles && <i onClick={() => {setAdd(!add); setAddvalue({
-    name: '',  lastname: '',    firstname: '',
-    phonenumber: '',    key: 'noboss'
-  })}} className="fa-solid fa-plus"></i>}
-      </div>}
+        </>
+        {auth.roles && <i onClick={() => {
+          setAdd(!add); setAddvalue({
+            name: '', lastname: '', firstname: '',
+            phonenumber: '', key: false
+          })
+        }} className="fa-solid fa-plus"></i>}
+      </>}
+      {removeitem[0] !== -1 && <DeleteText removeitem={removeitem} setRemoveitem={setRemoveitem} deleteItem={Delete} />}
 
     </>
   )

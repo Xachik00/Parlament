@@ -7,26 +7,37 @@
   align-items: center;
   margin: auto;
 }
-
 .Header .header_box {
   display: flex;
-  width: 51%;
+  width: 60%;
   justify-content: space-between;
   padding-left: 40px;
-  align-items: flex-end;
+  align-items: center;
 }
-
 .Header .header_box a {
   text-decoration: none;
-  font-family: 'GHEA Grapalat';
+  font-family: "GHEA Grapalat";
   font-style: normal;
   font-weight: 700;
-  font-size: 0.8125rem;
-  line-height: 1.5rem;
+  font-size: 13px;
+  line-height: 24px;
   color: white;
+  margin-top: 72px;
 }
-
-.Header .header_box img {
-  width: 7.92rem;
-  height: 5.06rem;
+.Header .header_box .logo {
+  text-align: center;
 }
+.Header .header_box .logo img {
+  width: 127px;
+  height: 51px;
+}
+.Header .header_box .logo h2 {
+  font-family: "GHEA Grapalat";
+  font-style: normal;
+  font-weight: 700;
+  width: 127px;
+  font-size: 8px;
+}
+.Header .header_box .logo h2 p {
+  font-size: 16px;
+}/*# sourceMappingURL=HeaderStyle.css.map */

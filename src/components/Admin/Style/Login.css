@@ -7,34 +7,23 @@
 }
 
 .Login_section {
-  width: 100%;
-  height: 100vh;
-  position: absolute;
-  left: 0;
+  width: 45rem;
+  margin: 0;
+  height: 710px;
   display: flex;
-  font-family: 'GHEA Grapalat';
+  font-family: "GHEA Grapalat";
   font-style: normal;
 }
-
 .Login_section .Login_logo {
-  width: 30%;
+  width: 50%;
   background-color: #263849;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: 30px;
 }
-
-.Login_section .Login_logo img {
-  padding-bottom: 16px;
-}
-
-.Login_section .Login_logo h2 {
-  font-size: 35px;
-  color: white;
-}
-
-.Login_section .Login_gerb {
+.Login_section .Login_logo .Login_gerb {
   width: 100px;
   height: 100px;
   background-color: #263849;
@@ -43,15 +32,15 @@
   align-items: center;
   justify-content: center;
   border: 10px solid #fff;
-  position: absolute;
-  left: 27%;
-  top: 45%;
+  margin-bottom: 150px;
 }
-
-.Login_section .Login_gerb img {
+.Login_section .Login_logo .Login_gerb img {
   width: 80%;
 }
-
+.Login_section .Login_logo h2 {
+  font-size: 35px;
+  color: white;
+}
 .Login_section .Login_head {
   width: 70%;
   display: flex;
@@ -60,47 +49,70 @@
   background-image: url(../../../../public/images/bild.jpg);
   background-size: cover;
 }
-
 .Login_section .Login_head .Login_body {
-  width: 30%;
+  width: 60%;
   height: 350px;
   box-shadow: 0px 0px 10px gray;
-  background-color: #263849;
+  background-color: rgba(38, 56, 73, 0.5882352941);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: .5rem;
+  padding: 0.5rem;
+  color: white;
 }
-
+.Login_section .Login_head .Login_body .errmsg {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #c0d2e3;
+}
+.Login_section .Login_head .Login_body h1 {
+  margin-top: 40px;
+}
 .Login_section .Login_head .Login_body form {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 200px;
   justify-content: space-around;
 }
-
-.Login_section .Login_head .Login_body form input {
+.Login_section .Login_head .Login_body form #username, .Login_section .Login_head .Login_body form #password {
   width: 220px;
-  padding: .3rem;
-  border: 1px solid #263849;
-}
-
-.Login_section .Login_head .Login_body form button {
-  width: 100%;
   height: 30px;
-  cursor: pointer;
-  border-radius: 5px;
-  background-color: #263849;
-  color: white;
+  padding: 0.3rem;
+  border-radius: 7px;
+  box-shadow: 0 0 10px gold;
+  color: #263849;
+  font-size: 16px;
+  background-color: rgb(255, 255, 255);
 }
-
+.Login_section .Login_head .Login_body form .button {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  height: 52px;
+  width: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #263849;
+  box-sizing: border-box;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 19px;
+}
+.Login_section .Login_head .Login_body form .button:hover {
+  background: rgba(38, 56, 73, 0.3568627451);
+  font-size: 22px;
+}
 .Login_section .Login_head .Login_body form .persistCheck {
   width: 100%;
   display: flex;
   justify-content: left;
 }
-
 .Login_section .Login_head .Login_body form .persistCheck input {
-  width: 10px;
+  width: 15px;
 }
+.Login_section .Login_head .Login_body form .persistCheck label {
+  margin-left: 15px;
+}/*# sourceMappingURL=Login.css.map */

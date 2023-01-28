@@ -24,7 +24,7 @@ export interface IMPs {
     lastname: string,
     firstname: string,
     phonenumber: string,
-    key: string
+    key: boolean
 }
 
 export interface ICommittee {

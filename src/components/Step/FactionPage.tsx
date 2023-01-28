@@ -5,6 +5,7 @@ import { fetchFraction } from "../../store/action/NumbersAction";
 import useAuth from '../../hooks/AdminHooks/useAuth';
 import './StepStyle.scss'
 import { ErrorMessage } from '../Error/Error';
+import DeleteText from '../Delete/DeleteText';
 
 
 export const FactionPage = () => {
@@ -13,6 +14,7 @@ export const FactionPage = () => {
   const dispatch = useAppDispatch()
   const { auth }: any = useAuth()
   const [edit, setEdit] = useState<number>(-1)
+  const [removeitem, setRemoveitem] = useState<any>([-1, {}])
   const [error, setError]=useState('')
   const [add, setAdd] = useState<boolean>(false)
   const [value, setValue] = useState({
@@ -67,7 +69,6 @@ export const FactionPage = () => {
     await axios.delete('fraction/' + id,)
     dispatch(fetchFraction())
     setAdd(false)
-
   }
 
   return (
@@ -105,10 +106,10 @@ export const FactionPage = () => {
 
       <label>Քաղաքային հեռախոսահամարը</label>
       <input className='td1' value={addvalue.cityphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-        setValue({
+        setAddvalue({
           name: addvalue.name,
-          leader: addvalue.leader, member: addvalue.member, cityphone: e.target.value,
-          internalphone: addvalue.internalphone
+          leader: addvalue.leader, member: addvalue.member,
+          cityphone: e.target.value, internalphone: addvalue.internalphone
         },)
       }} />
 
@@ -164,8 +165,9 @@ export const FactionPage = () => {
 
                   {auth.roles && <td><button onClick={() => { setEdit(index); setValue({ name: item.name, leader: item.leader, 
                     member: item.member, cityphone: item.cityphone, internalphone: item.internalphone }) }}><i className="fa-solid fa-pen"></i></button>
-                    <button onClick={(e) => Delete(item.id, e)}><i className="fa-regular fa-trash-can"></i></button></td>}
-                </tr>
+
+                    <button onClick={(e) => {setRemoveitem([item.id, e]);e.preventDefault()}}><i className="fa-regular fa-trash-can"></i></button></td>}
+                 </tr>
               } </>)}
 
         </tbody>
@@ -176,6 +178,8 @@ export const FactionPage = () => {
      className="fa-solid fa-plus"></i>}
     </form>
     }
+      {removeitem[0] !== -1 && <DeleteText removeitem={removeitem} setRemoveitem={setRemoveitem} deleteItem={Delete} />}
+
     </>
   )
 }

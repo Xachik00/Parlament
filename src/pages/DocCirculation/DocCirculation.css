@@ -1,0 +1,142 @@
+.DocCirculation {
+  margin: 0 auto;
+  width: 45rem;
+}
+.DocCirculation .DocCirculationBody {
+  width: 40rem;
+  background: #FFFFFF;
+  color: #263849;
+  border: 0.5px solid #94A3BA;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  border-radius: 5px;
+  margin-top: 40px;
+  margin-bottom: 200px;
+  text-align: center;
+  font-family: "GHEA Grapalat";
+  font-style: normal;
+}
+.DocCirculation .DocCirculationBody button {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+.DocCirculation .DocCirculationBody .addDiv {
+  width: 100%;
+  margin-top: 30px;
+  margin: 0 auto;
+  color: #263849;
+}
+.DocCirculation .DocCirculationBody .addDiv span {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+.DocCirculation .DocCirculationBody .addDiv textarea {
+  width: 75%;
+  height: 150px;
+  margin-right: 30px;
+  resize: none;
+  border: 2px solid #E1AA5A;
+}
+.DocCirculation .DocCirculationBody .addDiv button {
+  margin-top: 20px;
+  width: 30%;
+  height: 50px;
+  border-radius: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.DocCirculation .DocCirculationBody .addDiv .back {
+  background-color: #263849;
+  color: #fff;
+}
+.DocCirculation .DocCirculationBody .addDiv .save {
+  background-color: #E1AA5A;
+}
+.DocCirculation .DocCirculationBody .addDiv p {
+  background-color: #E1AA5A;
+  text-align: left;
+  margin-top: 40px;
+}
+.DocCirculation .DocCirculationBody .addDiv .erorrText {
+  border: 2px solid red;
+}
+.DocCirculation .DocCirculationBody .addDiv .text {
+  border: 2px solid #E1AA5A;
+}
+.DocCirculation .DocCirculationBody .DocCirculation_title {
+  display: flex;
+  padding: 16px;
+  text-align: left;
+  align-items: center;
+}
+.DocCirculation .DocCirculationBody .DocCirculation_title img {
+  width: 35px;
+  height: 30px;
+}
+.DocCirculation .DocCirculationBody .DocCirculation_title h2 {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  max-width: 500px;
+  margin-left: 20px;
+}
+.DocCirculation .DocCirculationBody hr {
+  width: 97%;
+  height: 1px;
+  background-color: #94A3BA;
+  margin: auto;
+}
+.DocCirculation .DocCirculationBody .DocCirculation_main h2 {
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 24px;
+}
+.DocCirculation .DocCirculationBody .DocCirculation_main .DocCirculation_main_page textarea {
+  font-family: "GHEA Grapalat";
+  font-style: normal;
+  width: 100%;
+  height: 110px;
+  resize: none;
+  border: 1px solid gray;
+  padding: 0.5rem;
+}
+.DocCirculation .DocCirculationBody .DocCirculation_main .DocCirculation_main_page h3 {
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 24px;
+}
+.DocCirculation .DocCirculationBody .DocCirculation_main .DocCirculation_main_page ul {
+  padding: 10px 10px 10px 36px;
+  text-align: left;
+  list-style: none;
+}
+.DocCirculation .DocCirculationBody .DocCirculation_main .DocCirculation_main_page ul li {
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 24px;
+}
+.DocCirculation .DocCirculationBody .DocCirculation_main .DocCirculation_main_page ul li p {
+  margin-left: 20px;
+}
+.DocCirculation .DocCirculationBody .DocCirculation_main .DocCirculation_main_page ul li p::before {
+  content: " ";
+  width: 8px;
+  height: 2px;
+  background: #E1AA5A;
+  display: inline-block;
+  border-radius: 1px;
+  margin-right: 10px;
+  margin-left: -18px;
+}
+.DocCirculation .DocCirculationBody .DocCirculation_main .DocCirculation_main_page ul li::before {
+  content: " ";
+  width: 6px;
+  height: 6px;
+  background: #E1AA5A;
+  border-radius: 1px;
+  display: inline-block;
+  margin-right: 10px;
+  margin-left: -16px;
+}/*# sourceMappingURL=DocCirculation.css.map */

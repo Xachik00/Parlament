@@ -6,12 +6,12 @@ import { HomePage } from "./pages/HomePage/HomePage";
 import { MeetingsSchedulePage } from './pages/MeetingsSchedule/MeetingsSchedulePage';
 import { MPNumbersPage } from "./pages/MPnumbers/MPNumbersPage";
 import { TimeTablePage } from './pages/timeTable/TimeTablePage';
-import  Admin from "../src/pages/Admin/Admin";
 import  AdminHomepage  from "./components/Admin/components/AdminHomepage";
 import Login from './components/Admin/components/Login';
 import useAuth from "./hooks/AdminHooks/useAuth";
 import RequireAuth from './components/Admin/components/RequireAuth';
 import PersistLogin from './components/Admin/components/PersistLogin';
+import NotFaundPage from "./pages/NotFaund/NotFaundPage";
 
 
 const ROLES = {
@@ -56,6 +56,7 @@ function App() {
             <Route path="admindepNumbers" element={<DepNumbersPage />} />
           </Route>
         </Route>
+        <Route path="*" element={<NotFaundPage/>} />
       </Routes>
     </div>
   );

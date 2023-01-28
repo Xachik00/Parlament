@@ -4,7 +4,9 @@ import { useAppSelector, useAppDispatch } from '../../hooks/redux'
 import { fetchTimeTable } from "../../store/action/timeTableActions";
 import { useNavigate } from 'react-router-dom';
 import axios from '../../axios/index';
-import useAuth from '../../hooks/AdminHooks/useAuth'
+import { ErrorMessage } from '../../components/Error/Error';
+import useAuth from '../../hooks/AdminHooks/useAuth';
+import DeleteText from '../../components/Delete/DeleteText';
 import "./timeTable.scss"
 
 
@@ -16,6 +18,7 @@ export const TimeTablePage = () => {
   const navigate = useNavigate()
 
   const { auth }: any = useAuth()
+  const [error, setError] = useState("")
 
   const [edit, setEdit] = useState(-1)
   const [value, setValue] = useState('')
@@ -29,13 +32,16 @@ export const TimeTablePage = () => {
 
   const [add, setAdd] = useState(false)
   const [add1, setAdd1] = useState(false)
+  const [removeitem,setRemoveitem]=useState([-1,'',{}])
+
 
 
   useEffect(() => {
     dispatch(fetchTimeTable())
-  }, [])
+  }, [dispatch])
 
-  async function adminSave1(id: any, valueCitizen: any, valueCitizen1: any, valueCitizen2: any, page: string) {
+  async function adminSave1(id: any, valueCitizen: any, valueCitizen1: any, valueCitizen2: any, page: string, e:any) {
+    e.preventDefault()
     const newInfo = {
       id: id,
       name: valueCitizen,
@@ -43,10 +49,12 @@ export const TimeTablePage = () => {
       time: valueCitizen2
     }
     await axios.patch(page + "/" + id, newInfo);
-    navigate(0)
+    dispatch(fetchTimeTable())
+    seteditCitizen(-1)
   }
 
-  async function adminSave(id: any, value: any, value1: any, value2: any, page: string) {
+  async function adminSave(id: any, value: any, value1: any, value2: any, page: string, e:any) {
+    e.preventDefault()
     const newInfo = {
       id: id,
       name: value,
@@ -54,41 +62,75 @@ export const TimeTablePage = () => {
       time: value2
     }
     await axios.patch(page + "/" + id, newInfo);
-    navigate(0)
+    dispatch(fetchTimeTable())
+    setEdit(-1)
   }
 
-  async function adminDelete(id: any, page: string) {
+  async function adminDelete(id: any, page: string, e:any) {
+    e.preventDefault()
     await axios.delete(page + "/" + id);
-    navigate(0)
+    dispatch(fetchTimeTable())
+  }
+
+  async function adminDeleteCitizen(id: any, page: string, e:any) {
+    e.preventDefault()
+    await axios.delete(page + "/" + id);
+    dispatch(fetchTimeTable())
   }
 
   async function adminAdd() {
+    setValue("")
+    setValue1("")
+    setValue2("")
     setAdd(!add)
+    setEdit(-1)
+    setError("")
+  }
+  
+  async function adminAdd1() {
+    setValueCitizen("")
+    setValueCitizen1("")
+    setValueCitizen2("")
+    setAdd1(!add1)
+    seteditCitizen(-1)
+    setError("")
   }
 
-  async function adminsSave(value: any, value1: any, value2: any) {
+  async function adminsSave(value: any, value1: any, value2: any, e:any) {
+    e.preventDefault()
+    setError('');
+    if(value.trim().length=== 0 || value.trim().length=== 0){
+      setError('Անհրաժեշտ է լրացնել');
+      return
+    }
     const newInfo = {
       name: value,
       day: value1,
       time: value2,
     }
     await axios.post("admission/", newInfo);
-    navigate(0)
+    dispatch(fetchTimeTable())
+    setAdd(!add)
   }
 
-  async function adminAdd1() {
-    setAdd1(!add1)
-  }
-
-  async function adminsSave1(valueCitizen: any, valueCitizen1: any, valueCitizen2: any) {
+  async function adminsSave1(valueCitizen: any, valueCitizen1: any, valueCitizen2: any, e:any) {
+    e.preventDefault()
+    setError('');
+    if(valueCitizen.trim().length=== 0 || valueCitizen1.trim().length=== 0){
+      setError('Անհրաժեշտ է լրացնել');
+      return
+    }
     const newInfo = {
       name: valueCitizen,
       day: valueCitizen1,
       time: valueCitizen2,
     }
     await axios.post("citizenAdmission/", newInfo);
-    navigate(0)
+    dispatch(fetchTimeTable())
+    setAdd1(!add1)
   }
+  
+
 
   return (
     <div className='timeTable'>
@@ -104,31 +146,37 @@ export const TimeTablePage = () => {
 
             <label>Ստորաբաժանման անվանումը</label>
             <textarea className='td1' value={value} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setValue(e.target.value) }}></textarea>
+            {error &&  value.trim().length===0 && <ErrorMessage error={error} />}
 
             <label>Օրը</label>
             <textarea  className='td1' value={value1} onChange={(e: any) => { setValue1(e.target.value) }}></textarea>
+            {error &&  value1.trim().length===0 && <ErrorMessage error={error} />}
           
             <label>Ժամը</label>
             <textarea  className='td1' value={value2} onChange={(e: any) => { setValue2(e.target.value) }}></textarea>
           
           <div className='form_div'>
-            <button onClick={() => adminsSave(value, value1, value2)} >Ավելացնել</button>
+            <button onClick={(e) => adminsSave(value, value1, value2, e)} >Ավելացնել</button>
             <button onClick={()=> setAdd(!add)} >Չեղարկել</button>
           </div>
 
         </form> : add1 ? <form>
           <label>Ստորաբաժանման անվանումը</label>
           <textarea value={valueCitizen} onChange={(e: any) => { setValueCitizen(e.target.value) }} style={{ resize: "none" }}></textarea>
+          {error &&  valueCitizen.trim().length===0 && <ErrorMessage error={error} />}
+
 
           <label>Օրը</label>
           <textarea value={valueCitizen1} onChange={(e: any) => { setValueCitizen1(e.target.value) }} style={{ resize: "none" }}></textarea>
+          {error &&  valueCitizen1.trim().length===0 && <ErrorMessage error={error} />}
+
 
           <label>Ժամը</label>
           <textarea value={valueCitizen2} onChange={(e: any) => { setValueCitizen2(e.target.value) }} style={{ resize: "none" }}></textarea>
 
           <div className='form_div'>
-            <button onClick={() => adminsSave1(valueCitizen, valueCitizen1, valueCitizen2)} >Ավելացնել</button>
-            <button onClick={()=> setAdd(!add)} >Չեղարկել</button>
+            <button onClick={(e) => adminsSave1(valueCitizen, valueCitizen1, valueCitizen2, e)} >Ավելացնել</button>
+            <button onClick={()=> setAdd1(!add1)} >Չեղարկել</button>
           </div>
 
         </form> :
@@ -156,7 +204,7 @@ export const TimeTablePage = () => {
                       <textarea value={value2} onChange={(e: any) => { setValue2(e.target.value) }} style={{ resize: "none" }}></textarea>
                     </td>
                     <td>
-                      <button className='save'> <i onClick={() => adminSave(item.id, value, value1, value2, 'admission')} className="fa-regular fa-square-check"></i></button>
+                      <button className='save'> <i onClick={(e) => adminSave(item.id, value, value1, value2, 'admission', e)} className="fa-regular fa-square-check"></i></button>
                       <button onClick={() => setEdit(-1)} ><i className="fa-solid fa-xmark"></i></button>
                     </td>
                   </tr> : <tr>
@@ -170,18 +218,18 @@ export const TimeTablePage = () => {
                       setValue2(item.time)
                     }}><i className="fa-solid fa-pen"></i></button>
 
-                      {auth.roles && <button onClick={() => {
-                        adminDelete(item.id, "admission")
+                      {auth.roles && <button onClick={(e) => {
+                        setRemoveitem([item.id, "admission", e])
                       }}><i className="fa-regular fa-trash-can"></i></button>}
                     </td>}
                   </tr>}
                 </tbody>
                 )}
-
-              {auth.roles && <i onClick={() => adminAdd()} className="fa-solid fa-plus ADD"></i>}
+              {auth.roles && <i onClick={() => adminAdd()} className="fa-solid fa-plus ADD">   Ավելացնել</i>}
 
             </table>
           </div>
+          {removeitem[0]!==-1&&<DeleteText removeitem={removeitem} setRemoveitem={setRemoveitem} deleteItem={adminDelete} />}
         
 
         {/* -----------------------------Next----------------------------- */}
@@ -209,7 +257,7 @@ export const TimeTablePage = () => {
                     <textarea value={valueCitizen2} onChange={(e: any) => { setValueCitizen2(e.target.value) }} style={{ resize: "none" }}></textarea>
                   </td>
                   <td>
-                    <button className='save'> <i onClick={() => adminSave1(item.id, valueCitizen, valueCitizen1, valueCitizen2, 'citizenAdmission')} className="fa-regular fa-square-check"></i></button>
+                    <button className='save'> <i onClick={(e) => adminSave1(item.id, valueCitizen, valueCitizen1, valueCitizen2, 'citizenAdmission', e)} className="fa-regular fa-square-check"></i></button>
                     <button onClick={() => seteditCitizen(-1)} ><i className="fa-solid fa-xmark"></i></button>
                   </td>
                 </tr> 
@@ -225,8 +273,8 @@ export const TimeTablePage = () => {
                       setValueCitizen2(item.time)
                     }}><i className="fa-solid fa-pen"></i></button>
 
-                      {auth.roles && <button onClick={() => {
-                        adminDelete(item.id, "citizenAdmission")
+                      {auth.roles && <button onClick={(e) => {
+                        setRemoveitem([item.id, "citizenAdmission", e]) 
                       }}><i className="fa-regular fa-trash-can"></i></button>}
                     </td>}
                   </tr>}
@@ -235,13 +283,14 @@ export const TimeTablePage = () => {
               </tbody>
               )
             }
-            {auth.roles && <i onClick={() => adminAdd1()} className="fa-solid fa-plus ADD"></i>}
+
+            {auth.roles && <i onClick={() => adminAdd1()} className="fa-solid fa-plus ADD">   Ավելացնել</i>}
           </table>
         </div>
       </div>
     }
     </div>
-
+    {removeitem[0]!==-1&&<DeleteText removeitem={removeitem} setRemoveitem={setRemoveitem} deleteItem={adminDeleteCitizen} />}
     </div >
   )
 }
