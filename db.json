@@ -118,7 +118,7 @@
     {
       "id": 2,
       "title": " Առողջապահության հարցերի մշտական հանձնաժողով՝",
-      "text": "առողջապահություն, մայրություն, մանկություն, դեղերի արտադրություն, ներմուծում եւ անվտանգություն, սանիտարահամաճարակային անվտանգություն եւ այդ ոլորտները կարգավորող օրենքներ "
+      "text": "առողջապահություն, մայրություն, մանկություն, դեղերի արտադրություն, ներմուծում եւ անվտանգություն, սանիտարահամաճարակային անվտանգություն եւ այդ ոլորտները կարգավորող օրենքներ wefewg"
     },
     {
       "id": 3,
@@ -251,6 +251,30 @@
       "firstname": "Սերգեյի",
       "phonenumber": "13-88",
       "key": false
+    },
+    {
+      "name": "lekrjjhg n.,sfdbg.sdf;lfkgs;ldfkjgskdlkjigklmmenjuyikmehji mnblsi.kdnbvpoixpkl;smkfjh asfkl,g mnflv,m nfejkmrdfjvn",
+      "lastname": "sldkjfjnsdlkfjnslkdjfsfdlkjjgh;ksdfnghlkjsdjfg;j;ldfkjg;lsdjfg;lksfdglkjsdff;lkgjsdf;lgjsdf;lkgjsdf;flkgjsdf;lkgjsdf;lkgjsdf;flkgjsdf;lkgjsdf;flgkjksdf;lgjksdf;lgljsdff;lgkjsdff;gkjsdf;gllkjksdfg;llkjsdfg;ljsdf;lgkjsdf;lgjksdf;lkgjsdf;lgjsdf;flgkjsdf;flgkjsdf;flkgs;dflkjgsdf;lkg",
+      "firstname": "123343",
+      "phonenumber": "",
+      "key": false,
+      "id": 11
+    },
+    {
+      "name": "Saqweejkfhgebwnm,.l;dkfjmn",
+      "lastname": "Slkdjfbhnkmsd,lcxkmnj",
+      "firstname": "l;kjdiowkl,;e mdkjoikpl;.",
+      "phonenumber": "5678sdpoiuyguhdjik09873265478",
+      "key": true,
+      "id": 12
+    },
+    {
+      "name": "5643789t8hyufhujidknajhruiseoakldms",
+      "lastname": "S234385749er0ofdkjidklcx",
+      "firstname": "HEBWFKDMKJML",
+      "phonenumber": "6137284950983KJHFNMV,NJHIOIKLF,DM ",
+      "key": false,
+      "id": 13
     }
   ],
   "committee": [
@@ -587,6 +611,10 @@
     {
       "id": "2023-1-14",
       "day": "2023-1-14"
+    },
+    {
+      "id": "2023-11-29",
+      "day": "2023-11-29"
     }
   ]
 }

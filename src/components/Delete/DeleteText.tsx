@@ -3,7 +3,6 @@ import './DeleteText.scss'
 
 const DeleteText = ({ removeitem, setRemoveitem, deleteItem, }: any) => {
 
-  // removeitem[2].preventDefault()
   return (
     <div className='DeleteHeader'>
       <div className='DeleteText'>

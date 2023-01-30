@@ -19,9 +19,6 @@ export const Header = () => {
               </p></h2>
             </div>
         </div>
-       
-         
-
     </div>
   )
 }

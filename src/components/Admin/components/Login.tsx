@@ -3,19 +3,18 @@ import useAuth from '../../../hooks/AdminHooks/useAuth'
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import useInput from '../../../hooks/AdminHooks/useInput';
 import useToggle from '../../../hooks/AdminHooks/useToggle';
-
 import axios from '../../../axios/axios';
 import '../Style/Login.scss'
 const LOGIN_URL = '/auth';
 
 const Login = () => {
 
-    const { setAuth }:any = useAuth();
+    const { setAuth }: any = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/Admin";
-    const userRef:any = useRef();
-    const errRef:any = useRef();
+    const userRef: any = useRef();
+    const errRef: any = useRef();
     const [user, resetUser, userAttribs] = useInput('user', '')
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
@@ -29,7 +28,7 @@ const Login = () => {
         setErrMsg('');
     }, [user, pwd])
 
-    const handleSubmit = async (e:any) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
         try {
             const response = await axios.post(LOGIN_URL,
@@ -45,7 +44,7 @@ const Login = () => {
             resetUser();
             setPwd('');
             navigate(from, { replace: true });
-        } catch (err : any) {
+        } catch (err: any) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
             } else if (err.response?.status === 400) {
@@ -64,12 +63,12 @@ const Login = () => {
             <div className='Login_logo'>
                 <div className='Login_gerb'><img src='./images/gerb.png' /></div>
                 <div>
-                    <img  src='./images/Logo.png' />
+                    <img src='./images/Logo.png' />
                     <h2>Ազգային Ժողով</h2>
                 </div>
-                
+
             </div>
-            
+
             <div className='Login_head'>
                 <div className='Login_body'>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
@@ -94,7 +93,7 @@ const Login = () => {
                             required
                         />
                         <div className="persistCheck">
-                            
+
                             <input
                                 type="checkbox"
                                 id="persist"
@@ -102,14 +101,13 @@ const Login = () => {
                                 checked={check}
                             />
                             <label htmlFor="persist">Հիշել</label>
-                            </div>
-                           <button className='button'>Մուտք </button> 
-                        
+                        </div>
+                        <button className='button'>Մուտք </button>
+
                     </form>
                 </div>
             </div>
         </section>
-
     )
 }
 

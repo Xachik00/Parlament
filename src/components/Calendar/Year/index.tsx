@@ -18,137 +18,129 @@ const Year = ({
 }: IYear): JSX.Element => {
   const _year = dayjs().year()
 
- const {auth}:any = useAuth()
- const navigate = useNavigate()
+  const { auth }: any = useAuth()
+  const navigate = useNavigate()
   const { Calendar } = useAppSelector(state => state.Calendar)
   const dispatch = useAppDispatch()
-  
-  const item = Calendar.map(item=> item.id)
+
+  const item = Calendar.map(item => item.id)
   const [select, setSelect] = useState<any>(item)
   const [disabled, setDisabled] = useState(true)
-  localStorage.setItem('data',JSON.stringify(item))
- 
-  console.log(select);
-useEffect(()=>{
-   const data:any = localStorage.getItem('data');
-   const datas = JSON.parse(data)
-   setSelect(datas)
-},[localStorage.getItem('data')?.length])
+  localStorage.setItem('data', JSON.stringify(item))
 
-
+  useEffect(() => {
+    const data: any = localStorage.getItem('data');
+    const datas = JSON.parse(data)
+    setSelect(datas)
+  }, [localStorage.getItem('data')?.length])
 
   useEffect(() => {
     dispatch(fetchCalendar())
   }, [select])
 
-  const  calendarSave = async() => {
-    
-    if(Calendar.length>0){
-    const item = Calendar.map(el => el.id)
-    for (let i = 0; i < item.length; i++) {
-      await fetch('http://localhost:3000/Calendar/'+ item[i], {
-      
-    method: "DELETE",
+  const calendarSave = async () => {
 
-  })
-      
+    if (Calendar.length > 0) {
+      const item = Calendar.map(el => el.id)
+      for (let i = 0; i < item.length; i++) {
+        await fetch('http://localhost:3000/Calendar/' + item[i], {
+
+          method: "DELETE",
+
+        })
+
+      }
+
     }
-   
+    for (let i = 0; i < select.length; i++) {
+
+
+      await fetch('http://localhost:3000/Calendar', {
+
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: select[i], day: select[i] })
+      })
     }
-    for  (let i = 0; i < select.length; i++) {
-          
-    
-          await fetch('http://localhost:3000/Calendar', {
-      
-            method: "POST",
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ id:select[i],day:select[i]} )
-          })
-        }
     navigate("/admin")
   }
 
 
   return (
     <>
-    <div className='year' data-testid='year'>
-      {new Array(showNumberOfMonths).fill('').map((_, pos) => {
-        const arrOffset = 1
-        const month = monthsFrom + pos
-        const date = `${_year}-${month}`
-        const monthName = getMonthName(month)
-        const totalDays = dayjs(date).daysInMonth()
-        const firstDayOfWeek = dayjs(`${date}-01`).day()
+      <div className='year' data-testid='year'>
+        {new Array(showNumberOfMonths).fill('').map((_, pos) => {
+          const arrOffset = 1
+          const month = monthsFrom + pos
+          const date = `${_year}-${month}`
+          const monthName = getMonthName(month)
+          const totalDays = dayjs(date).daysInMonth()
+          const firstDayOfWeek = dayjs(`${date}-01`).day()
 
-        const offsetDays =
-          firstDayOfWeek !== 0
-            ? new Array(firstDayOfWeek - arrOffset).fill('')
-            : new Array(Number(daysOfTheWeekOffset[firstDayOfWeek])).fill('')
+          const offsetDays =
+            firstDayOfWeek !== 0
+              ? new Array(firstDayOfWeek - arrOffset).fill('')
+              : new Array(Number(daysOfTheWeekOffset[firstDayOfWeek])).fill('')
 
-        const daysArr = new Array(totalDays).fill('')
-        return (
-          <div key={pos} className='month' data-testid='month'>
-            <div className='month_box'>
-              <h3 className='monthName'>{monthName}</h3>
-            </div>
-            <div className='dayOfTheWeek'>
-              {daysOfTheWeek.map((dayOfTheWeek, pos) => {
-                return (
-                  <div key={pos} className='days'>
-                    {dayOfTheWeek}
-                  </div>
-                )
-              })}
-            </div>
-
-            <div className='content'>
-              {offsetDays.map((_, pos) => {
-                return <div key={pos} className='day' />
-              })}
-
-              {daysArr.map((_, pos) => {
-                const day = pos + arrOffset;
-                const id: any = `${dayjs().year()}` + "-" + month + "-" + day;
-
-
-
-                return ( 
-                 auth?.accessToken ? <div  onClick={async () => {
-                        setDisabled(false)
-                        if (select.indexOf(id) >= 0) {
-                     
-                          setSelect(select.filter((el: string) => {
-                            
-                            return el !== id
-                          }));
-                          console.log(select);
-
-                        } if (select.indexOf(id) < 0) {
-                          setSelect([...select,id])
-                          console.log(select);
-                      
-                    
-                    }}}
-                    key={pos}
-                    className={select.map((item:any)=> item).indexOf(id) >= 0 ? `checkday` : `day`}
-                  >
-                    <p className={select.map((item:any)=> item).indexOf(id) >= 0 ? `checkday` : `day`}>{day}</p>
-                  </div> : <div   key={pos}
-                    className={select.map((item:any)=> item).indexOf(id) >= 0 ? `checkday` : `dayus`}
-                  >
-                    <p className={select.map((item:any)=> item).indexOf(id) >= 0 ? `checkday` : `dayus`}>{day}</p>
-                  </div>
+          const daysArr = new Array(totalDays).fill('')
+          return (
+            <div key={pos} className='month' data-testid='month'>
+              <div className='month_box'>
+                <h3 className='monthName'>{monthName}</h3>
+              </div>
+              <div className='dayOfTheWeek'>
+                {daysOfTheWeek.map((dayOfTheWeek, pos) => {
+                  return (
+                    <div key={pos} className='days'>
+                      {dayOfTheWeek}
+                    </div>
                   )
-              })}
+                })}
+              </div>
+
+              <div className='content'>
+                {offsetDays.map((_, pos) => {
+                  return <div key={pos} className='day' />
+                })}
+
+                {daysArr.map((_, pos) => {
+                  const day = pos + arrOffset;
+                  const id: any = `${dayjs().year()}` + "-" + month + "-" + day;
+
+                  return (
+                    auth?.accessToken ? <div onClick={async () => {
+                      setDisabled(false)
+                      if (select.indexOf(id) >= 0) {
+
+                        setSelect(select.filter((el: string) => {
+
+                          return el !== id
+                        }));
+
+                      } if (select.indexOf(id) < 0) {
+                        setSelect([...select, id])
+                      }
+                    }}
+                      key={pos}
+                      className={select.map((item: any) => item).indexOf(id) >= 0 ? `checkday` : `day`}
+                    >
+                      <p className={select.map((item: any) => item).indexOf(id) >= 0 ? `checkday` : `day`}>{day}</p>
+                    </div> : <div key={pos}
+                      className={select.map((item: any) => item).indexOf(id) >= 0 ? `checkday` : `dayus`}
+                    >
+                      <p className={select.map((item: any) => item).indexOf(id) >= 0 ? `checkday` : `dayus`}>{day}</p>
+                    </div>
+                  )
+                })}
+              </div>
             </div>
-          </div>
-        )
-      })}
-    </div>
-    <div>{auth?.accessToken && <button className={disabled ? "disables" : "nodisables" } onClick={()=>calendarSave()}>Պահպանել</button>}</div>
+          )
+        })}
+      </div>
+      <div>{auth?.accessToken && <button className={disabled ? "disables" : "nodisables"} onClick={() => calendarSave()}>Պահպանել</button>}</div>
     </>
   )
 }

@@ -16,12 +16,12 @@ export const DocCirculationPage = () => {
   const [add1, setAdd1] = useState(false);
   const [edit, setEdit] = useState('')
   const [erorr, setErorr] = useState(false)
-  const [removeitem, setRemoveitem] = useState([-1,{},''])
   const [value, setValue] = useState('');
-  const [value2, setValue2] = useState<string[] | undefined[]>(['', '']);
   const [addValue, setaddValue] = useState('');
-  const [addValue1, setaddValue1] = useState<string[] | undefined[]>(['', '', '']);
   const [pageName, setPageName] = useState('');
+  const [removeitem, setRemoveitem] = useState([-1,{},''])
+  const [value2, setValue2] = useState<string[] | undefined[]>(['', '']);
+  const [addValue1, setaddValue1] = useState<string[] | undefined[]>(['', '', '']);
   const { DocCirculation_1, DocCirculation_2, DocCirculation_3 } = useAppSelector(state => state.DocCirculation);
   const dispatch = useAppDispatch();
 
@@ -55,7 +55,6 @@ export const DocCirculationPage = () => {
 
   async function deleteItem(id: number, e: any,pageName: string ) {
     e.preventDefault()
-    console.log(typeof e)
     await axios.delete(pageName + '/' + id)
     dispatch(fetchDocCirculation())
   }
@@ -97,14 +96,14 @@ export const DocCirculationPage = () => {
         <hr />
         {add ? <div className='addDiv'>
           <span>Տեղեկություն *։<textarea className={erorr ? 'erorrText' : 'text'} value={addValue} onChange={(e: any) => setaddValue(e.target.value)} /></span>
-          <button onClick={() => navigate(0)} className='back'>Չեղարկել</button>
+          <button onClick={() => {setAdd(false);setaddValue('')}} className='back'>Չեղարկել</button>
           <button onClick={() => addText(addValue, pageName)} className='save' >Հաստատել</button>
           <p>* : Դաշտը պետք է լրացվի!!!</p>
         </div> : add1 ? <div className='addDiv'>
           <span>Տեղեկություն *։<textarea className={erorr ? 'erorrText' : 'text'} value={addValue1[0]} onChange={(e: any) => setaddValue1([e.target.value, addValue1[1], addValue1[2]])} /></span>
           <span>Կետ 1։<textarea value={addValue1[1]} onChange={(e: any) => setaddValue1([addValue1[0], e.target.value, addValue1[2]])} /></span>
           <span>Կետ 2։<textarea value={addValue1[2]} onChange={(e: any) => setaddValue1([addValue1[0], addValue1[1], e.target.value])} /></span>
-          <button onClick={() => navigate(0)} className='back'>Չեղարկել</button>
+          <button onClick={() => {setAdd1(false);setaddValue1(['','',''])}} className='back'>Չեղարկել</button>
           <button onClick={() => addText1(addValue1, pageName)} className='save'>Հաստատել</button>
           <p>* : Դաշտը պետք է լրացվի!!!</p>
         </div> :
@@ -119,7 +118,7 @@ export const DocCirculationPage = () => {
                       <li>
                         <textarea value={value === '' ? item.text : value} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setValue(e.target.value) }} />
                         <button onClick={() => saveDate(item.id, value, pageName)}><i className="fa-regular fa-square-check"></i></button>
-                        <button onClick={() => navigate(0)} ><i className="fa-solid fa-xmark"></i></button>
+                        <button onClick={() => setEdit('')} ><i className="fa-solid fa-xmark"></i></button>
                       </li> :
                       <li>{item.text}<br />{auth.accessToken && <>
                       <button onClick={() => { setEdit(item.text); setValue(item.text); setPageName('DocCirculation_1') }} ><i className="fa-solid fa-pen"></i></button>
@@ -138,7 +137,7 @@ export const DocCirculationPage = () => {
                         {item?.text_A && <textarea value={value2[0]} onChange={(e: any) => { setValue2([e.target.value, value2[1]]) }} />}
                         {item?.text_B && <textarea value={value2[1]} onChange={(e: any) => { setValue2([value2[0], e.target.value]) }} />}
                         <button onClick={() => saveDate(item.id, value, pageName, value2)}><i className="fa-regular fa-square-check"></i></button>
-                        <button onClick={() => navigate(0)} ><i className="fa-solid fa-xmark"></i></button>
+                        <button onClick={() => setEdit('')} ><i className="fa-solid fa-xmark"></i></button>
 
                       </li> :
 
@@ -161,7 +160,7 @@ export const DocCirculationPage = () => {
                       <li>
                         <textarea value={value} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setValue(e.target.value) }} />
                         <button onClick={() => saveDate(item.id, value, pageName)}><i className="fa-regular fa-square-check"></i></button>
-                        <button onClick={() => navigate(0)} ><i className="fa-solid fa-xmark"></i></button>
+                        <button onClick={() => setEdit('')} ><i className="fa-solid fa-xmark"></i></button>
                       </li> :
                       <li>{item.text}<br />{auth.accessToken && <>
                       <button onClick={() => { setEdit(item.text); setValue(item.text); setPageName('DocCirculation_3') }} ><i className="fa-solid fa-pen"></i></button>
