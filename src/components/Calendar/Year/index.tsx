@@ -31,7 +31,7 @@ const Year = ({
     const data: any = localStorage.getItem('data');
     const datas = JSON.parse(data)
     setSelect(datas)
-  }, [Calendar])
+  }, [dispatching])
 
   useEffect(() => {
     dispatch(fetchCalendar())
@@ -77,7 +77,7 @@ const Year = ({
                 <h3 className='monthName'>{monthName}</h3>
               </div>
               <div className='dayOfTheWeek'>
-                {daysOfTheWeek.map((dayOfTheWeek, pos) => {
+                {daysOfTheWeek?.map((dayOfTheWeek, pos) => {
                   return (
                     <div key={pos} className='days'>
                       {dayOfTheWeek}
@@ -87,11 +87,11 @@ const Year = ({
               </div>
 
               <div className='content'>
-                {offsetDays.map((_, pos) => {
+                {offsetDays?.map((_, pos) => {
                   return <div key={pos} className='day' />
                 })}
 
-                {daysArr.map((_, pos) => {
+                {daysArr?.map((_, pos) => {
                   const day = pos + arrOffset;
                   const id: string = `${dayjs().year()}` + "-" + month + "-" + day;
                   
@@ -111,13 +111,13 @@ const Year = ({
                       }
                     }}
                       key={pos}
-                      className={select.map((item: any) => item).indexOf(id) >= 0 ? `checkday` : `day`}
+                      className={select?.map((item: any) => item).indexOf(id) >= 0 ? `checkday` : `day`}
                     >
-                      <p className={select.map((item: any) => item).indexOf(id) >= 0 ? `checkday` : `day`}>{day}</p>
+                      <p className={select?.map((item: any) => item).indexOf(id) >= 0 ? `checkday` : `day`}>{day}</p>
                     </div> : <div key={pos}
-                      className={select.map((item: any) => item).indexOf(id) >= 0 ? `checkday` : `dayus`}
+                      className={select?.map((item: any) => item).indexOf(id) >= 0 ? `checkday` : `dayus`}
                     >
-                      <p className={select.map((item: any) => item).indexOf(id) >= 0 ? `checkday` : `dayus`}>{day}</p>
+                      <p className={select?.map((item: any) => item).indexOf(id) >= 0 ? `checkday` : `dayus`}>{day}</p>
                     </div>
                   )
                 })}
