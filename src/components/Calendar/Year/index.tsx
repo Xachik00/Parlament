@@ -31,7 +31,7 @@ const Year = ({
     const data: any = localStorage.getItem('data');
     const datas = JSON.parse(data)
     setSelect(datas)
-  }, [dispatching])
+  }, [Calendar])
 
   useEffect(() => {
     dispatch(fetchCalendar())
@@ -99,25 +99,25 @@ const Year = ({
                   return (
                     auth.role ? <div onClick={async () => {
                       setDisabled(false)
-                      if (select.indexOf(id) >= 0) {
+                      if (select?.indexOf(id) >= 0) {
 
-                        setSelect(select.filter((el: string) => {
+                        setSelect(select?.filter((el: string) => {
 
                           return el !== id
                         }));
 
-                      } if (select.indexOf(id) < 0) {
+                      } if (select?.indexOf(id) < 0) {
                         setSelect([...select, id])
                       }
                     }}
                       key={pos}
-                      className={select?.map((item: any) => item).indexOf(id) >= 0 ? `checkday` : `day`}
+                      className={select?.map((item: any) => item)?.indexOf(id) >= 0 ? `checkday` : `day`}
                     >
-                      <p className={select?.map((item: any) => item).indexOf(id) >= 0 ? `checkday` : `day`}>{day}</p>
+                      <p className={select?.map((item: any) => item)?.indexOf(id) >= 0 ? `checkday` : `day`}>{day}</p>
                     </div> : <div key={pos}
-                      className={select?.map((item: any) => item).indexOf(id) >= 0 ? `checkday` : `dayus`}
+                      className={select?.map((item: any) => item)?.indexOf(id) >= 0 ? `checkday` : `dayus`}
                     >
-                      <p className={select?.map((item: any) => item).indexOf(id) >= 0 ? `checkday` : `dayus`}>{day}</p>
+                      <p className={select?.map((item: any) => item)?.indexOf(id) >= 0 ? `checkday` : `dayus`}>{day}</p>
                     </div>
                   )
                 })}
