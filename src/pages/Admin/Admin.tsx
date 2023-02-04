@@ -1,23 +1,19 @@
 import { NavLink, useNavigate} from "react-router-dom";
-import useLogout from "../../hooks/AdminHooks/useLogout";
 import useAuth from "../../hooks/AdminHooks/useAuth";
 import "./Admin.scss"
 
 const Admin = () => {
 
     const navigate = useNavigate();
-    const { setAuth }:any = useAuth();
-
-    
+    const { setAuth }:any = useAuth();    
     const signOut = async () => {
         setAuth({});
         localStorage.removeItem('token')
         localStorage.removeItem('response')
         localStorage.removeItem('data')
-
         navigate('/admin');
-
     }
+    
     return (
         <>
         <section className="section">

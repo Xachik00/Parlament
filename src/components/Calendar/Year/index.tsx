@@ -1,13 +1,13 @@
 import dayjs from 'dayjs'
-import isBetween from 'dayjs/plugin/isBetween'
 import { IYear } from '../types'
-import { daysOfTheWeek, daysOfTheWeekOffset, getMonthName } from '../Utils'
+import axios from '../../../axios'
 import { useState, useEffect } from 'react'
+import isBetween from 'dayjs/plugin/isBetween'
+import { useNavigate } from 'react-router-dom';
+import useAuth from '../../../hooks/AdminHooks/useAuth';
 import { fetchCalendar } from '../../../store/action/CalendarActions';
 import { useAppSelector, useAppDispatch } from '../../../hooks/redux';
-import useAuth from '../../../hooks/AdminHooks/useAuth';
-import { useNavigate } from 'react-router-dom';
-import axios from '../../../axios'
+import { daysOfTheWeek, daysOfTheWeekOffset, getMonthName } from '../Utils'
 
 dayjs.extend(isBetween)
 
@@ -21,7 +21,7 @@ const Year = ({
   const navigate = useNavigate()
   const { Calendar } = useAppSelector(state => state.Calendar)
   const dispatch = useAppDispatch()
-
+  const dispatching=localStorage.getItem('data')?.length
   const item = Calendar.map(item => item.date)
   const [select, setSelect] = useState<any>(item)
   const [disabled, setDisabled] = useState(true)
@@ -31,11 +31,11 @@ const Year = ({
     const data: any = localStorage.getItem('data');
     const datas = JSON.parse(data)
     setSelect(datas)
-  }, [localStorage.getItem('data')?.length])
+  }, [dispatching])
 
   useEffect(() => {
     dispatch(fetchCalendar())
-  }, [select])
+  }, [dispatch])
 
   const calendarSave = async () => {
 
@@ -93,7 +93,7 @@ const Year = ({
 
                 {daysArr.map((_, pos) => {
                   const day = pos + arrOffset;
-                  const id: any = `${dayjs().year()}` + "-" + month + "-" + day;
+                  const id: string = `${dayjs().year()}` + "-" + month + "-" + day;
                   
                   
                   return (

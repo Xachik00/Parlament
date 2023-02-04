@@ -1,15 +1,15 @@
 import { useRef, useState, useEffect } from 'react';
 import useAuth from '../../../hooks/AdminHooks/useAuth'
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import useInput from '../../../hooks/AdminHooks/useInput';
 import useToggle from '../../../hooks/AdminHooks/useToggle';
 import axios from '../../../axios/axios';
 import '../Style/Login.scss'
+
 const LOGIN_URL = '/login';
 
 const Login = () => {
 
-    const {auth}:any=useAuth()
     const { setAuth }: any = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
@@ -39,10 +39,7 @@ const Login = () => {
                     withCredentials: true
                 }
             );
-
-            const accessToken = response?.data?.accessToken; 
             const res=JSON.stringify(response.data)
-            
             localStorage.setItem('response',res);
             resetUser();
             setPwd('');
@@ -69,9 +66,9 @@ const Login = () => {
 
         <section className='Login_section'>
             <div className='Login_logo'>
-                <div className='Login_gerb'><img src='./images/gerb.png' /></div>
+                <div className='Login_gerb'><img src='./images/gerb.png' alt='' /></div>
                 <div>
-                    <img src='./images/Logo.png' />
+                    <img src='./images/Logo.png' alt='' />
                     <h2>Ազգային Ժողով</h2>
                 </div>
             </div>

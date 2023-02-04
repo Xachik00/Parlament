@@ -17,7 +17,6 @@ export const DocCirculationPage = () => {
   const [edit, setEdit] = useState(-1)
   const [titlea, setTitle] = useState('')
   const [value, setValue] = useState('');
-  const [add, setAdd] = useState(false);
   const [add1, setAdd1] = useState(false);
   const [erorr, setErorr] = useState(false)
   const [removeitem, setRemoveitem] = useState([-1, {}])
