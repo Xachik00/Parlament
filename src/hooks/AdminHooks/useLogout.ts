@@ -1,4 +1,3 @@
-import axios from "../../axios/axios";
 import useAuth from "./useAuth";
 
 const useLogout = () => {
@@ -7,14 +6,13 @@ const useLogout = () => {
     const logout = async () => {
         setAuth({});
         try {
-            const response = await axios('/logout', {
-                withCredentials: true
-            });
+            // const response = await axios('/logout', {
+            //     withCredentials: true
+            // });
         } catch (err) {
             console.error(err);
         }
     }
-
     return logout;
 }
 

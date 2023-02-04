@@ -14,16 +14,15 @@ import PersistLogin from './components/Admin/components/PersistLogin';
 import NotFaundPage from "./pages/NotFaund/NotFaundPage";
 
 
-const ROLES = {
-  'User': 2001,
-  'Editor': 1984,
-  'Admin': 5150
+const ROLE = {
+  'Admin': 'admin'
 }
+
 
 function App() {
   const { auth }: any = useAuth();
   return (
-    <div className={auth.roles ? "admin" :' App'}>
+    <div className={auth.role ? "admin" :' App'}>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path='/DocCirculation' element={<DocCirculationPage />} />
@@ -34,25 +33,25 @@ function App() {
         <Route path='/DepNumbers' element={<DepNumbersPage />} />
         <Route path="/" element={<PersistLogin />} >
           <Route path="/admin" element={!auth?.accessToken ? <Login /> :< AdminHomepage /> } />
-          {/* <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+          {/* <Route element={<RequireAuth allowedRole={[ROLE.Admin]} />}>
             <Route path="/Admin" element={< AdminHomepage />} />
           </Route> */}
-          <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+          <Route element={<RequireAuth allowedRole={[ROLE.Admin]} />}>
             <Route path="/admindocCirculation" element={<DocCirculationPage />} />
           </Route>
-          <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+          <Route element={<RequireAuth allowedRole={[ROLE.Admin]} />}>
             <Route path="admintimeTable" element={<TimeTablePage />} />
           </Route>
-          <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+          <Route element={<RequireAuth allowedRole={[ROLE.Admin]} />}>
             <Route path="admincommittees" element={<CommitteesPage />} />
           </Route>
-          <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+          <Route element={<RequireAuth allowedRole={[ROLE.Admin]} />}>
             <Route path="adminmeetingsSchedule" element={<MeetingsSchedulePage />} />
           </Route>
-          <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+          <Route element={<RequireAuth allowedRole={[ROLE.Admin]} />}>
             <Route path="adminmPNumbers" element={<MPNumbersPage />} />
           </Route>
-          <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+          <Route element={<RequireAuth allowedRole={[ROLE.Admin]} />}>
             <Route path="admindepNumbers" element={<DepNumbersPage />} />
           </Route>
         </Route>

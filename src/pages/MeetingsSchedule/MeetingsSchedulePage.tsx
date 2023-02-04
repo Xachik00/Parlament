@@ -11,7 +11,7 @@ export const MeetingsSchedulePage = () => {
           <img src="./images/Meet.png" alt="" />
           <h2>ԱԺ նիստերի ժամանակացույց</h2>
         </div>
-        <div className='line'></div>
+        <div className='lines'></div>
         <Calendar />     
       </div>
     </div>

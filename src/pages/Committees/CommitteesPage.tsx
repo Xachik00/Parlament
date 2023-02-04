@@ -2,7 +2,6 @@ import { fetchCommittees } from "../../store/action/CommitteesActions";
 import { useAppSelector, useAppDispatch } from '../../hooks/redux'
 import { Header } from '../../components/Header/Header'
 import useAuth from '../../hooks/AdminHooks/useAuth';
-import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import axios from '../../axios';
@@ -11,9 +10,7 @@ import DeleteText from "../../components/Delete/DeleteText";
 
 export const CommitteesPage = () => {
 
-  const navigate = useNavigate()
   const dispatch = useAppDispatch()
-
   const { auth }: any = useAuth();
   const [add, setAdd] = useState(false)
   const [edit, setEdit] = useState(0)
@@ -41,11 +38,10 @@ export const CommitteesPage = () => {
       }
     } else {
       const newCommites = {
-        id,
         title:value[0],
         text: value[1]
       }
-      await axios.patch('Committees/' + id, newCommites)
+      await axios.put('meets/' + id, newCommites)
       dispatch(fetchCommittees())
       setEdit(0)
     }
@@ -53,7 +49,7 @@ export const CommitteesPage = () => {
 
   async function deleteItem(id: Number,e:any) {
     e.preventDefault()
-    await axios.delete('Committees/' + id)
+    await axios.delete('meets/' + id)
     dispatch(fetchCommittees())
   }
 
@@ -72,7 +68,7 @@ export const CommitteesPage = () => {
         title,
         text
       }
-      await axios.post('Committees/', newCommites)
+      await axios.post('meets/', newCommites)
       dispatch(fetchCommittees())
       setAdd(false)
     }
@@ -112,7 +108,7 @@ export const CommitteesPage = () => {
                       </div> : <div>
                         <h3><span>{item.id}.</span>{item.title}</h3>
                         <p>{item?.text}</p>
-                        {auth.roles && <>
+                        { auth.role && <>
                         <button onClick={() => { setValue([item.title,item.text]); setEdit(item.id) }}><i className="fa-solid fa-pen"></i></button>
                         <button onClick={(e) => setRemoveitem([item.id,e])}><i className="fa-regular fa-trash-can"></i></button>
                         </>}</div>
@@ -120,7 +116,7 @@ export const CommitteesPage = () => {
 
                   </div>)
                 }
-                {auth.roles && <button onClick={() => {setAdd(true)}}><i className="fa-solid fa-plus ADD"></i></button>}
+                { auth.role && <button onClick={() => {setAdd(true)}}><i className="fa-solid fa-plus ADD">   Ավելացնել </i></button>}
               </div>
             </div>}
             {removeitem[0]!==-1 && <DeleteText removeitem={removeitem} setRemoveitem={setRemoveitem} deleteItem={deleteItem} />}

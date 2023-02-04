@@ -27,12 +27,12 @@
     "web-vitals": "^3.1.1"
   },
  "scripts": {
-    "start": "set PORT=3006 && react-scripts start",
+  "kim":"set PORT=3006 && react-scripts start",
+   "start": "concurrently  \"set PORT=3006 && react-scripts start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",   
-    "server": "json-server --watch db.json  3000",
-    "admin": "concurrently \"npm run server\" \"npm run start\""
+    "server": "json-server --watch db.json  3000"
   },
   "eslintConfig": {
     "extends": [

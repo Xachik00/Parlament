@@ -6,7 +6,7 @@ export const fetchCalendar = ()=>{
     return async (dispatch:Dispatch)=>{
         try{
             dispatch(fetchingCal());
-            const response =await axios.get('Calendar');
+            const response =await axios.get('timestamp');
             dispatch(fetchSuccessCal(response.data));
         }
         catch(error){

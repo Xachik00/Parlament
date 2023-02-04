@@ -1,4 +1,3 @@
-
 import dayjs from 'dayjs'
 import isBetween from 'dayjs/plugin/isBetween'
 import { IYear } from '../types'
@@ -8,6 +7,7 @@ import { fetchCalendar } from '../../../store/action/CalendarActions';
 import { useAppSelector, useAppDispatch } from '../../../hooks/redux';
 import useAuth from '../../../hooks/AdminHooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import axios from '../../../axios'
 
 dayjs.extend(isBetween)
 
@@ -17,13 +17,12 @@ const Year = ({
   monthsFrom = 1,
 }: IYear): JSX.Element => {
   const _year = dayjs().year()
-
   const { auth }: any = useAuth()
   const navigate = useNavigate()
   const { Calendar } = useAppSelector(state => state.Calendar)
   const dispatch = useAppDispatch()
 
-  const item = Calendar.map(item => item.id)
+  const item = Calendar.map(item => item.date)
   const [select, setSelect] = useState<any>(item)
   const [disabled, setDisabled] = useState(true)
   localStorage.setItem('data', JSON.stringify(item))
@@ -40,31 +39,17 @@ const Year = ({
 
   const calendarSave = async () => {
 
-    if (Calendar.length > 0) {
-      const item = Calendar.map(el => el.id)
-      for (let i = 0; i < item.length; i++) {
-        await fetch('http://localhost:3000/Calendar/' + item[i], {
-
-          method: "DELETE",
-
-        })
-
-      }
-
-    }
+    const select1=[]
     for (let i = 0; i < select.length; i++) {
-
-
-      await fetch('http://localhost:3000/Calendar', {
-
-        method: "POST",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ id: select[i], day: select[i] })
-      })
+        let obj={
+          date:select[i]
+        }
+        select1.push(obj)
     }
+
+
+      await axios.post('timestamp/', select1)
+    
     navigate("/admin")
   }
 
@@ -109,9 +94,10 @@ const Year = ({
                 {daysArr.map((_, pos) => {
                   const day = pos + arrOffset;
                   const id: any = `${dayjs().year()}` + "-" + month + "-" + day;
-
+                  
+                  
                   return (
-                    auth?.accessToken ? <div onClick={async () => {
+                    auth.role ? <div onClick={async () => {
                       setDisabled(false)
                       if (select.indexOf(id) >= 0) {
 
@@ -140,7 +126,7 @@ const Year = ({
           )
         })}
       </div>
-      <div>{auth?.accessToken && <button className={disabled ? "disables" : "nodisables"} onClick={() => calendarSave()}>Պահպանել</button>}</div>
+      <div>{auth.role && <button className={disabled ? "disables" : "nodisables"} onClick={() => calendarSave()}>Պահպանել</button>}</div>
     </>
   )
 }

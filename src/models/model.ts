@@ -7,9 +7,10 @@ export interface IParlament {
 
 export interface IDocCirculation {
     id: number,
+    title:string,
     text: string,
-    text_A?: string,
-    text_B?: string,
+    subtitle1?: string,
+    subtitle2?: string,
 }
 
 export interface ICommittees {
@@ -20,12 +21,13 @@ export interface ICommittees {
 
 export interface IMPs {
     id: number,
-    name: string,
-    lastname: string,
     firstname: string,
+    lastname: string,
+    surname: string,
     phonenumber: string,
     key: boolean
 }
+        
 
 export interface ICommittee {
     id: number,
@@ -40,14 +42,15 @@ export interface ICommittee {
 export interface IFraction {
     id: number,
     name: string,
-    leader: string,
-    member: string,
+    member1: string,
+    member2: string,
     cityphone: string,
     internalphone: string,
 }
 
 export interface ITime {
     id: number;
+    title?:string;
     name: string;
     day: string;
     time: string;
@@ -55,11 +58,11 @@ export interface ITime {
 
 export interface IDepnumbers {
     id: number;
-    title: string;
-    tel: string;
+    name: string;
+    internalphone: string;
 }
 export interface ICalendar {
     id:number;
-    day: string;
+    date: string;
     
 }

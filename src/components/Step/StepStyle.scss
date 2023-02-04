@@ -16,9 +16,6 @@ $darkgray:#E1E1E1;
 
     .label5 {
         display: flex;
-
-   
-
         .input {
             width: 20px;
             height: 20px;
@@ -73,8 +70,9 @@ $darkgray:#E1E1E1;
 
 
 .table3 {
-    margin: 1.5rem;
+    margin: 1.5rem 1.5rem .5rem .3rem;;
     font-weight: 700;
+    width: 98%;
 
     thead {
         border: solid 1px;
@@ -114,6 +112,7 @@ $darkgray:#E1E1E1;
             background: $litegray;
             text-align: left;
             padding-left: 0.8rem;
+        
         }
 
         .td2 {
@@ -121,6 +120,9 @@ $darkgray:#E1E1E1;
             background-color: $litegray;
             text-align: left;
             padding-left: 0.7rem;
+        }
+        .up{
+            text-transform: capitalize;
         }
 
         .td3 {
@@ -164,7 +166,8 @@ $darkgray:#E1E1E1;
 }
 
 .table2 {
-    margin: 1.5rem;
+    margin: 1.5rem 1.5rem .5rem .3rem;;
+    width: 98%;
 
     thead {
         border: solid 1px;
@@ -233,6 +236,8 @@ $darkgray:#E1E1E1;
             box-shadow: 0.5px 0.5px 5px $orange;
             border-radius: 5px;
             margin: 5px 0;
+            display: flex;
+            flex-direction: column;
 
         }
 
@@ -260,7 +265,7 @@ $darkgray:#E1E1E1;
     margin: 1.5rem 1.5rem .5rem .3rem;
     font-size: .7rem;
     line-height: 1.5rem;
-    width: 37.1rem;
+    width: 98%;
 
     thead {
         border: solid 1px;
@@ -309,7 +314,10 @@ $darkgray:#E1E1E1;
             background-color: $litegray;
             text-align: left;
             padding-left: 0.8rem;
+            text-transform: capitalize;
         }
+     
+     
 
         .td4 {
             height: 28px;
@@ -346,9 +354,8 @@ $darkgray:#E1E1E1;
 }
 
 .table0 {
-    margin: 1.5rem 1.5rem .5rem .3rem;
-    width: 37.1rem;
-    border-top: solid 4px $orange;
+    margin: 0rem 1.5rem .5rem .2rem;
+    width: 98%;
 
     tbody {
         font-weight: 400;
@@ -369,6 +376,8 @@ $darkgray:#E1E1E1;
             background-color: $litegray;
             text-align: left;
             padding-left: 0.8rem;
+            text-transform: capitalize;
+
         }
 
         .td4 {
@@ -404,23 +413,34 @@ $darkgray:#E1E1E1;
     }
 }
 
-.alfa {
-    margin-left: .3rem;
-    margin-top: 20px;
-    margin-bottom: -28px;
-    display: flex;
-    background: $orange;
-    font-size: 13px;
-    font-weight: 700;
-    width: 2.2rem;
+.line {
+    width: 94.6%;
     height: 28px;
-    justify-content: center;
-    align-items: center;
+    margin-left: 5px;
+    border-bottom: solid 4px $orange;
+
+    .alfa {
+        margin-top: 20px;
+        margin-bottom: -28px;
+        display: flex;
+        background: $orange;
+        font-size: 13px;
+        font-weight: 700;
+        width: 2.2rem;
+        height: 28px;
+        justify-content: center;
+        align-items: center;
+    }
 }
+
+
 
 .Error {
     color: #F3593F;
     font-weight: 400;
     font-size: 15px;
 
+}
+.icon{
+    cursor: pointer;
 }

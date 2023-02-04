@@ -5,10 +5,11 @@ import useInput from '../../../hooks/AdminHooks/useInput';
 import useToggle from '../../../hooks/AdminHooks/useToggle';
 import axios from '../../../axios/axios';
 import '../Style/Login.scss'
-const LOGIN_URL = '/auth';
+const LOGIN_URL = '/login';
 
 const Login = () => {
 
+    const {auth}:any=useAuth()
     const { setAuth }: any = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
@@ -31,19 +32,26 @@ const Login = () => {
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         try {
-            const response = await axios.post(LOGIN_URL,
+            const response:any = await axios.post(LOGIN_URL,
                 JSON.stringify({ user, pwd }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
                 }
             );
-            const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.roles;
-            setAuth({ user, pwd, roles, accessToken });
+
+            const accessToken = response?.data?.accessToken; 
+            const res=JSON.stringify(response.data)
+            
+            localStorage.setItem('response',res);
             resetUser();
             setPwd('');
             navigate(from, { replace: true });
+            const resp:any=localStorage.getItem('response')
+            const respons=JSON.parse(resp)
+            setAuth(respons );
+            
+            
         } catch (err: any) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
@@ -66,9 +74,7 @@ const Login = () => {
                     <img src='./images/Logo.png' />
                     <h2>Ազգային Ժողով</h2>
                 </div>
-
             </div>
-
             <div className='Login_head'>
                 <div className='Login_body'>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
@@ -103,7 +109,6 @@ const Login = () => {
                             <label htmlFor="persist">Հիշել</label>
                         </div>
                         <button className='button'>Մուտք </button>
-
                     </form>
                 </div>
             </div>

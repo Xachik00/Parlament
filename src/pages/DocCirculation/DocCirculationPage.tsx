@@ -10,77 +10,122 @@ import DeleteText from '../../components/Delete/DeleteText';
 
 export const DocCirculationPage = () => {
 
+  const title = [];
+  const newtitle = [];
   const { auth }: any = useAuth();
   const navigate = useNavigate();
+  const [edit, setEdit] = useState(-1)
+  const [titlea, setTitle] = useState('')
+  const [value, setValue] = useState('');
   const [add, setAdd] = useState(false);
   const [add1, setAdd1] = useState(false);
-  const [edit, setEdit] = useState('')
   const [erorr, setErorr] = useState(false)
-  const [value, setValue] = useState('');
-  const [addValue, setaddValue] = useState('');
-  const [pageName, setPageName] = useState('');
-  const [removeitem, setRemoveitem] = useState([-1,{},''])
+  const [removeitem, setRemoveitem] = useState([-1, {}])
   const [value2, setValue2] = useState<string[] | undefined[]>(['', '']);
   const [addValue1, setaddValue1] = useState<string[] | undefined[]>(['', '', '']);
-  const { DocCirculation_1, DocCirculation_2, DocCirculation_3 } = useAppSelector(state => state.DocCirculation);
+  const { DocCirculation } = useAppSelector(state => state.DocCirculation);
   const dispatch = useAppDispatch();
+
+
 
   useEffect(() => {
     dispatch(fetchDocCirculation())
   }, [dispatch])
 
-  async function saveDate(id: number, text: string, pageName: string, value2?: string[] | undefined[]) {
-    if (value2 === undefined) {
-      const newDocCirculation = {
-        id,
-        text,
-      }
-      await axios.patch(pageName + '/' + id, newDocCirculation)
-      navigate(0)
-      setValue('')
-      setValue2(['', ''])
-    } else {
-      const newDocCirculation = {
-        id,
-        text,
-        text_A: value2[0],
-        text_B: value2[1]
-      }
-      await axios.patch(pageName + '/' + id, newDocCirculation);
-      navigate(0)
-      setValue('')
-      setValue2(['', ''])
+  const title1 = (DocCirculation.map(el => el.title))
+  const sorttitle = title1.sort((a, b) => (a > b) ? 1 : -1)
+  title.push(...sorttitle)
+
+  for (let i = 0; i < title.length; i++) {
+    if (title[i] !== title[i + 1]) {
+      newtitle.push(title[i])
     }
   }
 
-  async function deleteItem(id: number, e: any,pageName: string ) {
+
+  async function saveDate(id: number, text: string, e: any, title?: any) {
+    if (value2[0] === '' && value2[1] === '') {
+      const newDocCirculation = {
+        title,
+        text
+      }
+      await axios.put('citizen/' + id, newDocCirculation)
+      setValue('')
+      setValue2(['', '']);
+    } else if (value2[0] !== '' && value[1] === '') {
+      const newnewDocCirculation = {
+        title,
+        text,
+        subtitle1: value[0]
+      }
+      await axios.put('citizen/' + id, newnewDocCirculation)
+      setValue('')
+      setValue2(['', ''])
+    } else if (value2[0] === '' && value2[1] !== '') {
+      const newnewDocCirculation = {
+        title,
+        text,
+        subtitle2: value2[1]
+      }
+      await axios.put('citizen/' + id, newnewDocCirculation)
+      navigate(0)
+    }
+    else {
+      const newDocCirculation = {
+        title,
+        text,
+        subtitle1: value2[0],
+        subtitle2: value2[1]
+      }
+      await axios.put('citizen/' + id, newDocCirculation);
+      setValue('')
+      setValue2(['', ''])
+    }
+
+    dispatch(fetchDocCirculation())
+    setEdit(-1)
+  }
+
+  async function deleteItem(id: number, e: any) {
     e.preventDefault()
-    await axios.delete(pageName + '/' + id)
+    await axios.delete('citizen/' + id)
     dispatch(fetchDocCirculation())
   }
 
-  async function addText(text: string, pageName: string) {
-    if (text.trim() === '') {
-      setErorr(true)
-    } else {
-      const newnewDocCirculation = {
-        text
-      }
-      await axios.post(pageName, newnewDocCirculation)
-      navigate(0)
-    }
-  }
-
-  async function addText1(value: string[] | undefined[], pageName: string) {
+  async function addText1(value: string[] | undefined[]) {
     if (value[0]?.trim() === '') {
       setErorr(true)
-    } else {
-      const newnewDocCirculation = {
-        text: value[0],
-        text_A: value[1],
-        text_B: value[2],
+    } else if (value[1] === '' && value[2] === '') {
+      const newDocCirculation = {
+        title: titlea,
+        text: value[0]
       }
-      await axios.post(pageName, newnewDocCirculation)
+      await axios.post('citizen', newDocCirculation)
+      navigate(0)
+    } else if (value[1] !== '' && value[2] === '') {
+      const newDocCirculation = {
+        title: titlea,
+        text: value[0],
+        subtitle1: value[1]
+      }
+      await axios.post('citizen', newDocCirculation)
+      navigate(0)
+    } else if (value[1] === '' && value[2] !== '') {
+      const newDocCirculation = {
+        title: titlea,
+        text: value[0],
+        subtitle2: value[2]
+      }
+      await axios.post('citizen', newDocCirculation)
+      navigate(0)
+    } else {
+      const newDocCirculation = {
+        title: titlea,
+        text: value[0],
+        subtitle1: value[1],
+        subtitle2: value[2],
+      }
+      await axios.post('citizen', newDocCirculation)
       navigate(0)
     }
   }
@@ -94,84 +139,49 @@ export const DocCirculationPage = () => {
           <h2>Քաղաքացիների ընդունելության և  փաստաթղթաշրջանառության կարգը</h2>
         </div>
         <hr />
-        {add ? <div className='addDiv'>
-          <span>Տեղեկություն *։<textarea className={erorr ? 'erorrText' : 'text'} value={addValue} onChange={(e: any) => setaddValue(e.target.value)} /></span>
-          <button onClick={() => {setAdd(false);setaddValue('')}} className='back'>Չեղարկել</button>
-          <button onClick={() => addText(addValue, pageName)} className='save' >Հաստատել</button>
-          <p>* : Դաշտը պետք է լրացվի!!!</p>
-        </div> : add1 ? <div className='addDiv'>
+        {add1 ? <div className='addDiv'>
           <span>Տեղեկություն *։<textarea className={erorr ? 'erorrText' : 'text'} value={addValue1[0]} onChange={(e: any) => setaddValue1([e.target.value, addValue1[1], addValue1[2]])} /></span>
           <span>Կետ 1։<textarea value={addValue1[1]} onChange={(e: any) => setaddValue1([addValue1[0], e.target.value, addValue1[2]])} /></span>
           <span>Կետ 2։<textarea value={addValue1[2]} onChange={(e: any) => setaddValue1([addValue1[0], addValue1[1], e.target.value])} /></span>
-          <button onClick={() => {setAdd1(false);setaddValue1(['','',''])}} className='back'>Չեղարկել</button>
-          <button onClick={() => addText1(addValue1, pageName)} className='save'>Հաստատել</button>
+          <button onClick={() => { setAdd1(false); setaddValue1(['', '', '']) }} className='back'>Չեղարկել</button>
+          <button onClick={() => addText1(addValue1)} className='save'>Հաստատել</button>
           <p>* : Դաշտը պետք է լրացվի!!!</p>
         </div> :
           <div className='DocCirculation_main'>
             <h2>ԿԱՐԳ</h2>
             <div className='DocCirculation_main_page'>
-              <h3>I.	Ընդհանուր դրույթներ</h3>
               {
-                DocCirculation_1.map(item => <ul key={item.id}>
-                  {
-                    edit === item.text ?
-                      <li>
-                        <textarea value={value === '' ? item.text : value} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setValue(e.target.value) }} />
-                        <button onClick={() => saveDate(item.id, value, pageName)}><i className="fa-regular fa-square-check"></i></button>
-                        <button onClick={() => setEdit('')} ><i className="fa-solid fa-xmark"></i></button>
-                      </li> :
-                      <li>{item.text}<br />{auth.accessToken && <>
-                      <button onClick={() => { setEdit(item.text); setValue(item.text); setPageName('DocCirculation_1') }} ><i className="fa-solid fa-pen"></i></button>
-                      <button onClick={(e) => setRemoveitem([item.id, e,'DocCirculation_1'])}><i className="fa-regular fa-trash-can"></i></button></>}</li>
-                  }
-                </ul>)
+                newtitle?.map((el, index) =>
+                  <div key={index}><h3>{el}</h3>
+                    {
+                      DocCirculation.map(item => item.title === el && <ul key={item.id}>
+                        {
+                          edit === item.id ?
+                            <li>
+                              <textarea value={value} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setValue(e.target.value) }} />
+                              {item?.subtitle1 && <textarea value={value2[0]} onChange={(e: any) => { setValue2([e.target.value, value2[1]]) }} />}
+                              {item?.subtitle2 && <textarea value={value2[1]} onChange={(e: any) => { setValue2([value2[0], e.target.value]) }} />}
+                              <button onClick={(e: any) => saveDate(item.id, value, e, item.title)}><i className="fa-regular fa-square-check"></i></button>
+                              <button onClick={() => setEdit(-1)} ><i className="fa-solid fa-xmark"></i></button>
+                            </li> :
+                            <li>{item.text}
+                              {item.subtitle1 && <p>{item?.subtitle1}</p>}
+                              {item.subtitle2 && <p>{item?.subtitle2}</p>}
+                              <br />
+                              {auth.role && <>
+                                <button onClick={() => { setEdit(item.id); setValue(item.text); item.subtitle1 && item.subtitle2 ? setValue2([item.subtitle1, item.subtitle2]) : item.subtitle1 ? setValue2([item.subtitle1, '']) : item.subtitle2 && setValue2(['', item.subtitle2]) }} ><i className="fa-solid fa-pen"></i></button>
+                                <button onClick={(e: any) => setRemoveitem([item.id, e])}><i className="fa-regular fa-trash-can"></i></button></>}
+                            </li>
+                        }
+                      </ul>)
+                    }
+                    {auth.role && <button onClick={() => { setAdd1(true); setTitle(el) }}><i className="fa-solid fa-plus ADD">   Ավելացնել</i></button>}
+                  </div>
+                )
               }
-              {auth.roles && <button onClick={() => { setAdd(true); setPageName('DocCirculation_1') }}><i className="fa-solid fa-plus ADD"></i></button>}
-              <h3>I.	Ընդհանուր դրույթներ</h3>
-              {
-                DocCirculation_2.map(item => <ul key={item.id}>
-                  {
-                    edit === item.text ?
-                      <li>
-                        <textarea value={value} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setValue(e.target.value) }} />
-                        {item?.text_A && <textarea value={value2[0]} onChange={(e: any) => { setValue2([e.target.value, value2[1]]) }} />}
-                        {item?.text_B && <textarea value={value2[1]} onChange={(e: any) => { setValue2([value2[0], e.target.value]) }} />}
-                        <button onClick={() => saveDate(item.id, value, pageName, value2)}><i className="fa-regular fa-square-check"></i></button>
-                        <button onClick={() => setEdit('')} ><i className="fa-solid fa-xmark"></i></button>
-
-                      </li> :
-
-                      <li>{item.text}
-                        {item.text_A && <p>{item?.text_A}</p>}
-                        {item.text_B && <p>{item?.text_B}</p>}
-                        <br />
-                        {auth.roles && <>
-                        <button onClick={() => { setEdit(item.text); setValue(item.text); item.text_A && item.text_B ? setValue2([item.text_A, item.text_B]) : item.text_A ? setValue2([item.text_A, '']) : item.text_B && setValue2(['', item.text_B]); setPageName('DocCirculation_2') }} ><i className="fa-solid fa-pen"></i></button>
-                        <button onClick={(e: any) => setRemoveitem([item.id,  e,'DocCirculation_2'])}><i className="fa-regular fa-trash-can"></i></button></>}
-                      </li>}
-                </ul>)
-              }
-              {auth.roles && <button onClick={() => { setAdd1(true); setPageName('DocCirculation_2') }}><i className="fa-solid fa-plus ADD"></i></button>}
-              <h3>III.	Պաշտոնատար անձանց կողմից իրականացված ընդունելության ժամանակ քաղաքացու կողմից ներկայացված գրավոր դիմումների գրանցում  և հաշվետվողականության ապահովում</h3>
-              {
-                DocCirculation_3.map(item => <ul key={item.id}>
-                  {
-                    edit === item.text ?
-                      <li>
-                        <textarea value={value} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setValue(e.target.value) }} />
-                        <button onClick={() => saveDate(item.id, value, pageName)}><i className="fa-regular fa-square-check"></i></button>
-                        <button onClick={() => setEdit('')} ><i className="fa-solid fa-xmark"></i></button>
-                      </li> :
-                      <li>{item.text}<br />{auth.accessToken && <>
-                      <button onClick={() => { setEdit(item.text); setValue(item.text); setPageName('DocCirculation_3') }} ><i className="fa-solid fa-pen"></i></button>
-                      <button onClick={(e: any) => setRemoveitem([item.id,  e,'DocCirculation_3'])}><i className="fa-regular fa-trash-can"></i></button></>}</li>
-                  }
-                </ul>)
-              }
-              {auth.roles && <button onClick={() => { setAdd(true); setPageName('DocCirculation_3') }}><i className="fa-solid fa-plus ADD"></i></button>}
             </div>
           </div>}
-          {removeitem[0]!==-1&&<DeleteText removeitem={removeitem} setRemoveitem={setRemoveitem}  deleteItem={deleteItem}/>}
+        {removeitem[0] !== -1 && <DeleteText removeitem={removeitem} setRemoveitem={setRemoveitem} deleteItem={deleteItem} />}
       </div>
     </div>
   )

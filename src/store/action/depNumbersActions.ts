@@ -6,7 +6,8 @@ export const fetchDepNum = () => {
     return async (dispatch:Dispatch)=>{
         try{
             dispatch(fetching());
-            const response =await axios.get('depnum');
+            const response =await axios.get('units');
+            
             dispatch(fetchSuccess(response.data));
         }
         catch(error){

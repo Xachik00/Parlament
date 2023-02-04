@@ -93,7 +93,7 @@
                     margin-top: 10px;
                     padding-top: 10px;
                     resize: none;
-                }   
+                }  
 
                 td:nth-child(2){
                     font-family: 'GHEA Grapalat';
@@ -117,15 +117,18 @@
                     padding: 2px;
                 }
 
-                .ADD{
-                    margin: 20px 0;
-                    cursor: pointer;
-                }
-
+                
             }
             
-        }
-        form{
+        
+    }
+    .ADD{
+        margin: 20px 0;
+        margin-left: 20px;
+        background-color: none;
+        cursor: pointer;
+    }
+        .form{
             display: flex;
             text-align: center;
             flex-direction: column;
@@ -146,6 +149,14 @@
                 padding-left: 3px;
             }
 
+            .input_num{
+                width: 80%;
+                height: 25px;
+                padding-top: 5px;
+                padding-left: 3px;
+                border-radius: 0;
+            }
+
             .form_div{
                 margin-top: 20px;
                 width: 200px;
@@ -153,12 +164,6 @@
                 justify-content: space-between;
             }
 
-           input{
-                margin-top: 3px;
-                width: 280px;
-                height: 30px;
-                border-radius: 5px;
-            }
             label{
                margin-top: 15px;
                margin-bottom: 10px;

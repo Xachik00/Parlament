@@ -6,7 +6,7 @@ export const fetchCommittees = ()=>{
     return async (dispatch:Dispatch)=>{
         try{
             dispatch(fetching_3());
-            const response =await axios.get('Committees');
+            const response =await axios.get('meets');
             dispatch(fetchSuccess_3(response.data));
         }
         catch(error){

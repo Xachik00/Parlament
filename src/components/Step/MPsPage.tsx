@@ -11,9 +11,9 @@ import DeleteText from '../Delete/DeleteText';
 
 interface Ibos {
   id: number,
-  name: string,
-  lastname: string,
   firstname: string,
+  lastname: string,
+  surname: string,
   phonenumber: string,
   key: boolean
 }
@@ -31,19 +31,20 @@ export const MPsPage = () => {
   const [error, setError] = useState('')
   const [add, setAdd] = useState<boolean>(false)
   const [value, setValue] = useState({
-    name: '',
-    lastname: '',
     firstname: '',
+    lastname: '',
+    surname: '',
     phonenumber: '',
 
   })
-  const [addvalue, setAddvalue] = useState<any>({
-    name: '',
-    lastname: '',
+  const [addvalue, setAddvalue] = useState({
     firstname: '',
+    lastname: '',
+    surname: '',
     phonenumber: '',
     key: false,
   })
+  
   useEffect(() => {
     dispatch(fetchMpsnumber())
   }, [dispatch])
@@ -51,15 +52,15 @@ export const MPsPage = () => {
   const newMOs: any = MPs.filter(item => item.key === true)
   bos.push(...newMOs)
 
-  const newnobos = MPs.filter(item => (item.key) === false)
+  const newnobos = MPs.filter(item => item.key === false)
 
-  const sortnobos = newnobos.sort((a, b) => (a.lastname > b.lastname) ? 1 : -1)
+  const sortnobos = newnobos.sort((a, b) => (a.lastname.toUpperCase() > b.lastname.toUpperCase()) ? 1 : -1)
   nobos.push(...sortnobos)
-
+  
   for (let i = 0; i < nobos.length; i++) {
-    aybub.push(nobos[i].lastname[0])
-
+    aybub.push(nobos[i].lastname[0].toUpperCase())
   }
+  
 
   for (let i = 0; i < aybub.length; i++) {
     if (aybub[i] !== aybub[i + 1]) {
@@ -69,10 +70,10 @@ export const MPsPage = () => {
 
   async function Save(id: number) {
     const EditMPs = {
-      id, name: value.name, lastname: value.lastname,
-      firstname: value.firstname, phonenumber: value.phonenumber,
+       firstname: value.firstname, lastname: value.lastname,
+      surname: value.surname, phonenumber: value.phonenumber,
     }
-    await axios.patch('MPs/' + id, EditMPs)
+    await axios.put('parlament/' + id, EditMPs)
     dispatch(fetchMpsnumber())
     setEdit(-1)
   }
@@ -80,22 +81,31 @@ export const MPsPage = () => {
   async function Add(e: React.FormEvent) {
     e.preventDefault()
     setError('');
-    if (addvalue.name.trim().length === 0 || addvalue.lastname.trim().length === 0 || addvalue.firstname.trim().length === 0) {
+    if (addvalue.firstname.trim().length === 0 || addvalue.lastname.trim().length === 0 || addvalue.surname.trim().length === 0) {
       setError('Անհրաժեշտ է լրացնել');
       return
+    }else if(addvalue.phonenumber===''){
+      
+      const newMPs = {
+        firstname: addvalue.firstname, lastname: addvalue.lastname,
+        surname: addvalue.surname,  key: addvalue.key
+      }
+      await axios.post('parlament/', newMPs)
+    }else{
+      
+      const newMPs = {
+      firstname: addvalue.firstname, lastname: addvalue.lastname,
+      surname: addvalue.surname, phonenumber: addvalue.phonenumber, key: addvalue.key
     }
-    const newMPs = {
-      name: addvalue.name, lastname: addvalue.lastname,
-      firstname: addvalue.firstname, phonenumber: addvalue.phonenumber, key: addvalue.key
+    await axios.post('parlament/', newMPs)
     }
-    await axios.post('MPs/', newMPs)
     dispatch(fetchMpsnumber())
     setAdd(false)
   }
 
-  async function Delete(id: number, e: any) {
+  async function Delete(id: number, e: React.FormEvent) {
     e.preventDefault()
-    await axios.delete('MPs/' + id,)
+    await axios.delete('parlament/' + id,)
     dispatch(fetchMpsnumber())
     setAdd(false)
   }
@@ -103,59 +113,53 @@ export const MPsPage = () => {
 
   return (
     <>
-      {add ? 
-      <form className='form' onSubmit={(e) => Add(e)} >
-
+      {add ? <form className='form' onSubmit={(e) => Add(e)} >
         <label>Անուն</label>
-        <input className='td1' value={addvalue.name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+        <input className='td1' maxLength={20} value={addvalue.firstname} onChange={(e: any) => {
           setAddvalue({
-            name: e.target.value, lastname: addvalue.lastname,
-            firstname: addvalue.firstname, phonenumber: addvalue.phonenumber, key: false
-          })
-        }} />
-        {error && addvalue.name.trim().length === 0 && <ErrorMessage error={error} />}
-
-        <label>Ազգանուն</label>
-        <input className='td1' value={addvalue.lastname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setAddvalue({
-            name: addvalue.name, lastname: e.target.value,
-            firstname: addvalue.firstname, phonenumber: addvalue.phonenumber, key: false
-          })
-        }} />
-        {error && addvalue.lastname.trim().length === 0 && <ErrorMessage error={error} />}
-
-        <label>Հայրանուն</label>
-        <input className='td1' value={addvalue.firstname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setAddvalue({
-            name: addvalue.name, lastname: addvalue.lastname,
-            firstname: e.target.value, phonenumber: addvalue.phonenumber, key: false
+            firstname: e.target.value, lastname: addvalue.lastname,
+            surname: addvalue.surname, phonenumber: addvalue.phonenumber, key: addvalue.key
           })
         }} />
         {error && addvalue.firstname.trim().length === 0 && <ErrorMessage error={error} />}
-
-        <label>Ներքին հեռախոսահամարը</label>
-        <input className='td1' type={'tel'} pattern='[0-9]' value={addvalue.phonenumber} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+        <label>Ազգանուն</label>
+        <input className='td1' maxLength={20} value={addvalue.lastname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setAddvalue({
-            name: addvalue.name, lastname: addvalue.lastname,
-            firstname: addvalue.firstname, phonenumber: e.target.value, key: false
+            firstname: addvalue.firstname, lastname: e.target.value,
+            surname: addvalue.surname, phonenumber: addvalue.phonenumber, key: addvalue.key
+          })
+        }} />
+        {error && addvalue.lastname.trim().length === 0 && <ErrorMessage error={error} />}
+        <label>Հայրանուն</label>
+        <input className='td1'maxLength={20} value={addvalue.surname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          setAddvalue({
+            firstname: addvalue.firstname, lastname: addvalue.lastname,
+            surname: e.target.value, phonenumber: addvalue.phonenumber, key: addvalue.key
+          })
+        }} />
+        {error && addvalue.surname.trim().length === 0 && <ErrorMessage error={error} />}
+        <label>Ներքին հեռախոսահամարը</label>
+        <input className='td1' maxLength={8} type={'tel'} pattern='[0-9]' value={addvalue.phonenumber} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          setAddvalue({
+            firstname: addvalue.firstname, lastname: addvalue.lastname,
+            surname: addvalue.surname, phonenumber: e.target.value, key: addvalue.key
           })
         }} />
         <label className='label5' >
           <span className='span'>Նահագահ կամ տեղակալ ?</span>
-          <input type='checkbox' className='input' value={addvalue.phonenumber} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          <input type='checkbox' className='input'  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setAddvalue({
-              name: addvalue.name, lastname: addvalue.lastname,
-              firstname: addvalue.firstname, phonenumber: addvalue.phonenumber, key: !addvalue.key
-            })
+              firstname: addvalue.firstname, lastname: addvalue.lastname,
+              surname: addvalue.surname, phonenumber: addvalue.phonenumber, key: !addvalue.key
+            });
+            
           }} />
         </label>
-
         <div className='button'>
           <button className='button1' onClick={(e) => Add(e)} >Ավելացնել</button>
           <button className='button2' onClick={() => { setAdd(false); setError('') }}>Չեղարկել</button>
         </div>
       </form> : <>
-
         <table className='table1'>
           <thead>
             <tr>
@@ -164,54 +168,50 @@ export const MPsPage = () => {
               <th className='th4'>Ներքին  Հեռ․</th>
             </tr>
           </thead>
-
-            {
-              bos.map((item, index) =>
-                  <tbody>
-                <> {edit === item.id ? 
-                <tr key={index}>
-
+            {bos.map((item, index) =>
+                <tbody key={index}>
+                <>{edit === item.id ? <tr key={index}>
                   <td>{index + 1}</td>
-                  <td><input className='td1_input' value={value.name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setValue({
-                      name: e.target.value,
-                      lastname: value.lastname, firstname: value.firstname, phonenumber: value.phonenumber
-                    })
-                  }} />
-                    <input className='td1_input gg' value={value.lastname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  <td>
+                    <input className='td1_input' maxLength={20} value={value.firstname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       setValue({
-                        name: value.name,
-                        lastname: e.target.value, firstname: value.firstname, phonenumber: value.phonenumber,
+                        firstname: e.target.value,
+                        lastname: value.lastname, surname: value.surname, phonenumber: value.phonenumber
                       })
-                    }} />
-                    <input className='td1_input gg' value={value.firstname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    }}/>
+                    <input className='td1_input gg' maxLength={20} value={value.lastname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       setValue({
-                        name: value.name,
-                        lastname: value.lastname, firstname: e.target.value, phonenumber: value.phonenumber
+                        firstname: value.firstname,
+                        lastname: e.target.value, surname: value.surname, phonenumber: value.phonenumber,
                       })
-                    }} /></td>
-                  <td><input className='td1_input' value={value.phonenumber} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    setValue({
-                      name: value.name,
-                      lastname: value.lastname, firstname: value.firstname, phonenumber: e.target.value
-                    })
-                  }} /></td>
-
+                    }}/>
+                    <input className='td1_input gg' maxLength={20} value={value.surname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setValue({
+                        firstname: value.firstname,
+                        lastname: value.lastname, surname: e.target.value, phonenumber: value.phonenumber
+                      })
+                    }}/>
+                    </td>
+                    <td>
+                      <input className='td1_input' maxLength={8} value={value.phonenumber} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setValue({
+                        firstname: value.firstname,
+                        lastname: value.lastname, surname: value.surname, phonenumber: e.target.value
+                      })
+                      }}/>
+                    </td>
                   <button className='save'> <i onClick={() => Save(item.id)} className="fa-regular fa-square-check"></i></button>
-
                 </tr> : <tr key={item.id}>
-
                   <td className='td1'>{index + 1}</td>
-                  <td className='td2'>{item.name} {item.firstname} {item.lastname}</td>
+                  <td className='td2'>{item.lastname} {item.firstname} {item.surname} </td>
                   <td className='td4'>{item.phonenumber}</td>
-                  <td className='button' >{auth.roles && <><button><i onClick={() => {
+                  <td className='button' >{auth.role && <><button><i onClick={() => {
                     setEdit(item.id); setValue({
-                      name: item.name,
-                      lastname: item.lastname, firstname: item.firstname, phonenumber: item.phonenumber
+                      firstname: item.firstname,
+                      lastname: item.lastname, surname: item.surname, phonenumber: item.phonenumber
                     })
                   }} className="fa-solid fa-pen"></i></button>
-
-                    <button onClick={(e) => setRemoveitem([item.id, e])}><i className="fa-regular fa-trash-can"></i></button></>
+                    <button onClick={(e) => {setRemoveitem([item.id, e]);e.preventDefault()}}><i className="fa-regular fa-trash-can"></i></button></>
                   }</td>
                 </tr>
                 }
@@ -219,92 +219,82 @@ export const MPsPage = () => {
           </tbody>)
             }
         </table>
-
         <>
           {
             newsortnobos.map((item: string, index: number) =>
               item !== item + 1 &&
-              <div>
-                <div>
+              <div key={index}>
+                <div className='line'>
                   <div className='alfa'> <p>{item}</p></div>
                 </div>
                 <table className='table0'  key={index} >
-
                   <>
                     {nobos.map((iteme, index) =>
-                      iteme.lastname[0] === item &&
+                      iteme.lastname[0].toUpperCase() === item &&
                       <tbody key={index}>
-                        {edit === iteme.id ? 
-                        <tr >
-
+                        {edit === iteme.id ? <tr>
                           <td className='td1'>{index + 1}</td>
-                          <td><input className='td1_input' value={value.name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                          <td>
+                            <input className='td1_input' maxLength={20} value={value.firstname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                             setValue({
-                              name: e.target.value,
-                              lastname: value.lastname, firstname: value.firstname, phonenumber: value.phonenumber
+                              firstname: e.target.value,
+                              lastname: value.lastname, surname: value.surname, phonenumber: value.phonenumber
                             })
-                          }} />
-                            <input className='td1_input gg' value={value.lastname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            }} />
+                            <input className='td1_input gg' maxLength={20} value={value.lastname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                               setValue({
-                                name: value.name,
-                                lastname: e.target.value, firstname: value.firstname, phonenumber: value.phonenumber,
+                                firstname: value.firstname,
+                                lastname: e.target.value, surname: value.surname, phonenumber: value.phonenumber,
                               })
                             }} />
-                            <input className='td1_input gg' value={value.firstname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            <input className='td1_input gg' maxLength={20} value={value.surname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                               setValue({
-                                name: value.name,
-                                lastname: value.lastname, firstname: e.target.value, phonenumber: value.phonenumber
+                                firstname: value.firstname,
+                                lastname: value.lastname, surname: e.target.value, phonenumber: value.phonenumber
                               })
-                            }} /></td>
-                          <td><input className='td1_input' value={value.phonenumber} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            }} />
+                          </td>
+                          <td>
+                            <input className='td1_input' maxLength={8} value={value.phonenumber} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                             setValue({
-                              name: value.name,
-                              lastname: value.lastname, firstname: value.firstname, phonenumber: e.target.value
+                              firstname: value.firstname,
+                              lastname: value.lastname, surname: value.surname, phonenumber: e.target.value
                             })
-                          }} /></td>
-
+                            }} />
+                          </td>
                           <button className='save'> <i onClick={() => Save(iteme.id)} className="fa-regular fa-square-check"></i></button>
-
                         </tr> : <>
-
                           <tr key={iteme.id}>
                             <td className='td1'>{index + 4}</td>
-                            <td className='td2'>{iteme.lastname}  {iteme.name}   {iteme.firstname}</td>
+                            <td className='td2 '>{iteme.lastname}  {iteme.firstname}   {iteme.surname}</td>
                             <td className='td4'>{iteme.phonenumber}</td>
-
-                            <>  {auth.roles && <td><button onClick={() => {
+                            <>{auth.role && <td><button onClick={() => {
                               setEdit(iteme.id); setValue({
-                                name: iteme.name,
-                                lastname: iteme.lastname, firstname: iteme.firstname, phonenumber: iteme.phonenumber
+                                firstname: iteme.firstname,
+                                lastname: iteme.lastname, surname: iteme.surname, phonenumber: iteme.phonenumber
                               })
                             }}><i className="fa-solid fa-pen"></i></button>
-
-                              <button onClick={(e) => {setRemoveitem([iteme.id,e]);e.preventDefault()}}><i className="fa-regular fa-trash-can"></i></button></td>
+                              <button onClick={(e) => setRemoveitem([iteme.id, e])}><i className="fa-regular fa-trash-can"></i></button></td>
                             }</>
-
                           </tr>
                         </>
                         }
                       </tbody>
-
                     )}
-
                   </>
                 </table>
-
               </div>
             )
           }
         </>
-        {auth.roles && <i onClick={() => {
+        {auth.role && <i onClick={() => {
           setAdd(!add); setAddvalue({
-            name: '', lastname: '', firstname: '',
+            firstname: '', lastname: '', surname: '',
             phonenumber: '', key: false
           })
-        }} className="fa-solid fa-plus"></i>}
+        }} className="fa-solid fa-plus icon">   Ավելացնել</i>}
       </>}
       {removeitem[0] !== -1 && <DeleteText removeitem={removeitem} setRemoveitem={setRemoveitem} deleteItem={Delete} />}
-
     </>
   )
 }

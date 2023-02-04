@@ -10,7 +10,7 @@ export const Header = () => {
   return (
     <div className='Header'>
         <div className="header_box">
-          {auth.roles ?   <a href="/admin"><FontAwesomeIcon icon={faAngleLeft} />&nbsp;&nbsp;Հետ</a> :
+          {auth.role ?   <a href="/admin"><FontAwesomeIcon icon={faAngleLeft} />&nbsp;&nbsp;Հետ</a> :
           <a href="/"><FontAwesomeIcon icon={faAngleLeft} />&nbsp;&nbsp;Հետ</a>}
             <div className='logo'> 
               <img src="./images/Logo.png" alt="" />

@@ -8,7 +8,7 @@ export const fetchMpsnumber = ()=>{
     return async (dispatch:Dispatch)=>{
         try{
             dispatch(fetching6());
-            const response =await axios.get('MPs');
+            const response =await axios.get('parlament');            
             dispatch(fetchSuccess6(response.data));
         }
         catch(error){
@@ -21,7 +21,7 @@ export const fetchCommitte = ()=>{
     return async (dispatch:Dispatch)=>{
         try{
             dispatch(fetching7());
-            const response =await axios.get('Committee');
+            const response =await axios.get('committee');
             dispatch(fetchSuccess7(response.data));
         }
         catch(error){
@@ -34,7 +34,7 @@ export const fetchFraction = ()=>{
     return async (dispatch:Dispatch)=>{
         try{
             dispatch(fetching8());
-            const response =await axios.get('Fraction');
+            const response =await axios.get('faction');
             dispatch(fetchSuccess8(response.data));
         }
         catch(error){

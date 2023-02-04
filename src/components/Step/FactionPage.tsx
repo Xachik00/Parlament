@@ -19,15 +19,15 @@ export const FactionPage = () => {
   const [add, setAdd] = useState<boolean>(false)
   const [value, setValue] = useState({
     name: '',
-    leader: '',
-    member: '',
+    member1: '',
+    member2: '',
     cityphone: '',
     internalphone: '',
   })
   const [addvalue, setAddvalue] = useState({
     name: '',
-    leader: '',
-    member: '',
+    member1: '',
+    member2: '',
     cityphone: '',
     internalphone: '',
   })
@@ -38,11 +38,11 @@ export const FactionPage = () => {
   async function Save(id: number, e: React.FormEvent) {
     e.preventDefault()
     const Editfraction = {
-      id, name: value.name, leader: value.leader,
-      member: value.member, cityphone: value.cityphone,
+      name: value.name, member1: value.member1,
+      member2: value.member2, cityphone: value.cityphone,
       internalphone: value.internalphone
     }
-    await axios.patch('fraction/' + id, Editfraction)
+    await axios.put('faction/' + id, Editfraction)
     dispatch(fetchFraction())
     setEdit(-1)
   }
@@ -50,74 +50,68 @@ export const FactionPage = () => {
   async function Add(e: React.FormEvent) {
     e.preventDefault()
     setError('');
-    if(addvalue.leader.trim().length=== 0 || addvalue.member.trim().length=== 0){
+    if(addvalue.member1.trim().length=== 0 || addvalue.member2.trim().length=== 0){
     setError('Անհրաժեշտ է լրացնել');
       return
     }
     const newFraction = {
-      name: addvalue.name, member: addvalue.member,
-      leader: addvalue.leader, cityphone: addvalue.cityphone,
+      name: addvalue.name, member2: addvalue.member2,
+      member1: addvalue.member1, cityphone: addvalue.cityphone,
       internalphone: addvalue.internalphone
     }
-    await axios.post('fraction/', newFraction)
+    await axios.post('faction/', newFraction)
     dispatch(fetchFraction())
     setAdd(false)
   }
 
   async function Delete(id: number, e: React.FormEvent) {
     e.preventDefault()
-    await axios.delete('fraction/' + id,)
+    await axios.delete('faction/' + id,)
     dispatch(fetchFraction())
     setAdd(false)
   }
 
   return (
-    <>    
-    {add ? <form className='form' onSubmit={(e) => Add(e)}>
-
+    <>{add ? <form className='form' onSubmit={(e) => Add(e)}>
       <label >Կուսակցության Անվանումը</label>
-      <input className='td1' value={addvalue.name} onChange={(e: any) => {
+      <input className='td1' maxLength={20} value={addvalue.name} onChange={(e: any) => {
         setAddvalue({
           name: e.target.value,
-          leader: addvalue.leader, member: addvalue.member,
+          member1: addvalue.member1, member2: addvalue.member2,
           cityphone: addvalue.cityphone, internalphone: addvalue.internalphone
         })
       }} />
-
       <label>Կուսակցության Ղեկավարը</label>
-      <input className='td1' value={addvalue.leader} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+      <input className='td1 up' maxLength={20} value={addvalue.member1} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
         setAddvalue({
           name: addvalue.name,
-          leader: e.target.value, member: addvalue.member,
+          member1: e.target.value, member2: addvalue.member2,
           cityphone: addvalue.cityphone, internalphone: addvalue.internalphone
         })
       }}/>
-          {error && addvalue.leader.trim().length===0 && <ErrorMessage error={error} />} 
-
+          {error && addvalue.member1.trim().length===0 && <ErrorMessage error={error} />} 
       <label>Կուսակցության քարտուղար</label>
-      <input className='td1' value={addvalue.member} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+      <input className='td1 up' maxLength={20} value={addvalue.member2} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
         setAddvalue({
           name: addvalue.name,
-          leader: addvalue.leader, member: e.target.value,
+          member1: addvalue.member1, member2: e.target.value,
           cityphone: addvalue.cityphone, internalphone: addvalue.internalphone
         },)
       }} />
-      {error && addvalue.member.trim().length===0 && <ErrorMessage error={error} />} 
-
+      {error && addvalue.member2.trim().length===0 && <ErrorMessage error={error} />} 
       <label>Քաղաքային հեռախոսահամարը</label>
-      <input className='td1' value={addvalue.cityphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+      <input className='td1' maxLength={9} value={addvalue.cityphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
         setAddvalue({
           name: addvalue.name,
-          leader: addvalue.leader, member: addvalue.member,
+          member1: addvalue.member1, member2: addvalue.member2,
           cityphone: e.target.value, internalphone: addvalue.internalphone
         },)
       }} />
-
       <label>Ներքին հեռախոսահամարը</label>
-      <input className='td1' value={addvalue.internalphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+      <input className='td1' maxLength={8} value={addvalue.internalphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
         setAddvalue({
           name: addvalue.name,
-          leader: addvalue.leader, member: addvalue.member,
+          member1: addvalue.member1, member2: addvalue.member2,
           cityphone: addvalue.cityphone, internalphone: e.target.value
         },)
       }} />
@@ -125,11 +119,8 @@ export const FactionPage = () => {
          <button className='button1' onClick={(e) => Add(e)} >Ավելացնել</button>
          <button className='button2' onClick={()=>{setAdd(false); setError('')}}>Չեղարկել</button>
         </div>
-
-    </form> : <form>
-
+    </form>:<form>
       <table className='table3'>
-
         <thead>  
           <tr>
             <th className='th1'>Կուսակցության&nbsp; Անվանումը</th>
@@ -138,48 +129,41 @@ export const FactionPage = () => {
             <th className='th4'>Ներքին  Հեռ․</th>
           </tr>
         </thead>
-        <tbody>
+        <>
           {
-            Fraction.map((item, index) => <>
-              {edit === index ?
+            Fraction.map((item, index) => 
+            <tbody key={index}>{edit === index ?
                 <tr key={item.id} >
-                  <td><input className='td3_input jj' value={value.name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setValue({ name: e.target.value, 
-                    leader: value.leader, member: value.member, cityphone: value.cityphone, internalphone: value.internalphone }) }} /></td>
-                  <td><input className='td3_input jj' value={value.leader} onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setValue({ name: value.name, 
-                    leader: e.target.value, member: value.member, cityphone: value.cityphone, internalphone: value.internalphone }) }} />
-                    <input className='td3_input jj' value={value.member} onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setValue({ name: value.name, 
-                      leader: value.leader, member: e.target.value, cityphone: value.cityphone, internalphone: value.internalphone }) }} /></td>
-                  <td><input className='td3_input' value={value.cityphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setValue({ name: value.name, 
-                    leader: value.leader, member: value.member, cityphone: e.target.value, internalphone: value.internalphone }) }} /></td>
-                  <td><input className='td3_input' value={value.internalphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setValue({ name: value.name, 
-                    leader: value.leader, member: value.member, cityphone: value.cityphone, internalphone: e.target.value }) }} /></td>
-
+                  <td><input className='td3_input jj' maxLength={20} value={value.name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setValue({ name: e.target.value, 
+                    member1: value.member1, member2: value.member2, cityphone: value.cityphone, internalphone: value.internalphone }) }} /></td>
+                  <td><input className='td3_input jj' maxLength={20} value={value.member1} onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setValue({ name: value.name, 
+                    member1: e.target.value, member2: value.member2, cityphone: value.cityphone, internalphone: value.internalphone }) }} />
+                    <input className='td3_input jj' maxLength={20} value={value.member2} onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setValue({ name: value.name, 
+                      member1: value.member1, member2: e.target.value, cityphone: value.cityphone, internalphone: value.internalphone }) }} /></td>
+                  <td><input className='td3_input' maxLength={9} value={value.cityphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setValue({ name: value.name, 
+                    member1: value.member1, member2: value.member2, cityphone: e.target.value, internalphone: value.internalphone }) }} /></td>
+                  <td><input className='td3_input' maxLength={8} value={value.internalphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setValue({ name: value.name, 
+                    member1: value.member1, member2: value.member2, cityphone: value.cityphone, internalphone: e.target.value }) }} /></td>
                   <button className='save'> <i onClick={(e) => Save(item.id, e)} className="fa-regular fa-square-check"></i></button>
-
                 </tr> : <tr key={item.id}>
-
                   <td className='td1'>{item.name}</td>
-                  <td className='td2'>{item.leader}<br /><span>քարտուղար </span>{item.member}</td>
+                  <td className='td2 up'>{item.member1}<br /><span>քարտուղար </span>{item.member2}</td>
                   <td className='td3'>{item.cityphone}</td>
                   <td className='td4'>{item.internalphone}</td>
-
-                  {auth.roles && <td><button onClick={() => { setEdit(index); setValue({ name: item.name, leader: item.leader, 
-                    member: item.member, cityphone: item.cityphone, internalphone: item.internalphone }) }}><i className="fa-solid fa-pen"></i></button>
-
+                  {auth.role && <td><button onClick={() => { setEdit(index); setValue({ name: item.name, member1: item.member1, 
+                    member2: item.member2, cityphone: item.cityphone, internalphone: item.internalphone }) }}><i className="fa-solid fa-pen"></i></button>
                     <button onClick={(e) => {setRemoveitem([item.id, e]);e.preventDefault()}}><i className="fa-regular fa-trash-can"></i></button></td>}
                  </tr>
-              } </>)}
-
-        </tbody>
+              }</tbody>)}
+        </>
       </table>
-      {auth.roles &&<i onClick={() => { setAdd(!add) ; setAddvalue({
-    name: '',   leader: '',    member: '',
+      {auth.role &&<i onClick={() =>{ setAdd(!add) ; setAddvalue({
+    name: '',   member1: '',    member2: '',
     cityphone: '',    internalphone: '',  })}}
-     className="fa-solid fa-plus"></i>}
+     className="fa-solid fa-plus icon">   Ավելացնել</i>}
     </form>
     }
       {removeitem[0] !== -1 && <DeleteText removeitem={removeitem} setRemoveitem={setRemoveitem} deleteItem={Delete} />}
-
     </>
   )
 }
