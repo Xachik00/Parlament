@@ -31,7 +31,7 @@ const Year = ({
     const data: any = localStorage.getItem('data');
     const datas = JSON.parse(data)
     setSelect(datas)
-  }, [dispatching])
+  }, [Calendar])
 
   useEffect(() => {
     dispatch(fetchCalendar())
