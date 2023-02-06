@@ -50,7 +50,7 @@ const Year = ({
 
       await axios.post('timestamp/', select1)
     
-    navigate("/admin")
+    navigate(0)
   }
 
 
