@@ -156,7 +156,7 @@ export const DocCirculationPage = () => {
                       DocCirculation.map(item => item.title === el && <ul key={item.id}>
                         {
                           edit === item.id ?
-                            <li>
+                            <li className='edit_docCirculation'>
                               <textarea value={value} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setValue(e.target.value) }} />
                               {item?.subtitle1 && <textarea value={value2[0]} onChange={(e: any) => { setValue2([e.target.value, value2[1]]) }} />}
                               {item?.subtitle2 && <textarea value={value2[1]} onChange={(e: any) => { setValue2([value2[0], e.target.value]) }} />}

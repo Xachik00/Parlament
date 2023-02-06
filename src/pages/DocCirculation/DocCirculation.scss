@@ -128,6 +128,31 @@
                     font-size: 13px;
                     line-height: 24px;
                 }
+                .edit_docCirculation{
+                    textarea {
+                        font-family: 'GHEA Grapalat';
+                        font-style: normal;
+                        width: 100%;
+                        height: 110px;
+                        resize: none;
+                        border: 1px solid gray;
+                        padding: .5rem;
+                        border-radius: 7px;
+                    }
+        
+                    button {
+                        margin-left: 20px;
+                    }
+        
+                    .erorrText {
+                        box-shadow: 0px 0px 5px 2px red;
+        
+                    }
+        
+                    .text {
+                        box-shadow: 0px 0px 5px 2px #E1AA5A;
+                    }
+                }
 
                 ul {
                     padding: 10px 10px 10px 36px;
