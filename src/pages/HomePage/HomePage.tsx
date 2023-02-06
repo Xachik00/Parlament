@@ -42,13 +42,6 @@ export const HomePage = () => {
       "img": "./images/Frame6.png"
     }
   ]
-  // const dispatch = useAppDispatch()
-
-  // useEffect(() => {
-  //   dispatch(fetchParlament())
-  // },[])
-  
-
 
   return (
 
@@ -56,7 +49,7 @@ export const HomePage = () => {
       <header >
         <img src="./images/Logo.png" alt="" />
         <div className='hello-text'>
-          <h1>Բարի Գալուստ <br /> Հայաստանի Հանրապետության ազգային ժողով</h1>
+          <h1>Բարի Գալուստ <br /> ՀՀ Ազգային ժողով</h1>
         </div>
       </header>
       <p>Հարգելի քաղաքացի ընտրեք ձեզ հետաքրքրող բաժինը ինֆորմացիա ստանալու համար</p>
