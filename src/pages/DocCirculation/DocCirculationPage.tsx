@@ -52,7 +52,9 @@ export const DocCirculationPage = () => {
       }
       await axios.put('citizen/' + id, newDocCirculation)
       setValue('')
-      setValue2(['', '']);
+      setValue2(['', ''])
+      dispatch(fetchDocCirculation())
+      setEdit(-1)
     } else if (value2[0] !== '' && value[1] === '') {
       const newnewDocCirculation = {
         title,
@@ -62,6 +64,8 @@ export const DocCirculationPage = () => {
       await axios.put('citizen/' + id, newnewDocCirculation)
       setValue('')
       setValue2(['', ''])
+      dispatch(fetchDocCirculation())
+      setEdit(-1)
     } else if (value2[0] === '' && value2[1] !== '') {
       const newnewDocCirculation = {
         title,
@@ -69,9 +73,11 @@ export const DocCirculationPage = () => {
         subtitle2: value2[1]
       }
       await axios.put('citizen/' + id, newnewDocCirculation)
-      navigate(0)
-    }
-    else {
+      setValue('')
+      setValue2(['', ''])
+      dispatch(fetchDocCirculation())
+      setEdit(-1)
+    }else {
       const newDocCirculation = {
         title,
         text,
@@ -81,10 +87,11 @@ export const DocCirculationPage = () => {
       await axios.put('citizen/' + id, newDocCirculation);
       setValue('')
       setValue2(['', ''])
+      dispatch(fetchDocCirculation())
+      setEdit(-1)
     }
 
-    dispatch(fetchDocCirculation())
-    setEdit(-1)
+    
   }
 
   async function deleteItem(id: number, e: any) {
