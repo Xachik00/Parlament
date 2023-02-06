@@ -157,9 +157,9 @@ export const DocCirculationPage = () => {
                         {
                           edit === item.id ?
                             <li className='edit_docCirculation'>
-                              <textarea value={value} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setValue(e.target.value) }} />
-                              {item?.subtitle1 && <textarea value={value2[0]} onChange={(e: any) => { setValue2([e.target.value, value2[1]]) }} />}
-                              {item?.subtitle2 && <textarea value={value2[1]} onChange={(e: any) => { setValue2([value2[0], e.target.value]) }} />}
+                              <textarea className={erorr ? 'erorrText' : 'text'} value={value} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setValue(e.target.value) }} />
+                              {item?.subtitle1 && <textarea className={erorr ? 'erorrText' : 'text'} value={value2[0]} onChange={(e: any) => { setValue2([e.target.value, value2[1]]) }} />}
+                              {item?.subtitle2 && <textarea className={erorr ? 'erorrText' : 'text'} value={value2[1]} onChange={(e: any) => { setValue2([value2[0], e.target.value]) }} />}
                               <button onClick={(e: any) => saveDate(item.id, value, e, item.title)}><i className="fa-regular fa-square-check"></i></button>
                               <button onClick={() => setEdit(-1)} ><i className="fa-solid fa-xmark"></i></button>
                             </li> :
