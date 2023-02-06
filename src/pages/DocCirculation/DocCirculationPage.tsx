@@ -43,7 +43,9 @@ export const DocCirculationPage = () => {
 
 
   async function saveDate(id: number, text: string, e: any, title?: any) {
-    if (value2[0] === '' && value2[1] === '') {
+    if (value[0]?.trim() === '') {
+      setErorr(true)
+    }else if (value2[0] === '' && value2[1] === '') {
       const newDocCirculation = {
         title,
         text
