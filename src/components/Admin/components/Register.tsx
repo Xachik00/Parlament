@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import axios from '../../../axios/axios';
 import { Link } from "react-router-dom";
-
+import '../Style/Register.scss'
 const USER_REGEX = /^[A-z][A-z0-9-_]{4,20}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{4,20}$/;
 const REGISTER_URL = '/register';
@@ -78,7 +78,7 @@ const Register = () => {
 
     return (
         <>
-             (
+             
                 <section className="Register_page">
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <h1>Գրանցել նոր ադմինիստրատոր</h1>
@@ -157,7 +157,7 @@ const Register = () => {
                         <button disabled={!validName || !validPwd || !validMatch ? true : false} >Հաստատել</button>
                     </form>
                 </section>
-            )
+            
         </>
     )
 }
