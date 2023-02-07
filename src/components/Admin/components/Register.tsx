@@ -78,20 +78,13 @@ const Register = () => {
 
     return (
         <>
-            {success ? (
-                <section>
-                    <h1>Success!</h1>
-                    <p>
-                        <a href="/Admin">Sign In</a>
-                    </p>
-                </section>
-            ) : (
-                <section>
+             (
+                <section className="Register_page">
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <h1>Register</h1>
+                    <h1>Գրանցել նոր ադմինիստրատոր</h1>
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="username">
-                            Username:
+                            Մուտքանուն:
                             {/* <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} /> */}
                             {/* <FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"} /> */}
                         </label>
@@ -110,14 +103,14 @@ const Register = () => {
                         />
                         <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
                             {/* <FontAwesomeIcon icon={faInfoCircle} /> */}
-                            4 to 24 characters.<br />
+                            Դաշտը պետք է պարունակի 4-ից 20 նիշ<br />
                             Must begin with a letter.<br />
                             Letters, numbers, underscores, hyphens allowed.
                         </p>
 
 
                         <label htmlFor="password">
-                            Password:
+                            Գաղտնաբառ:
                             {/* <FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"} /> */}
                             {/* <FontAwesomeIcon icon={faTimes} className={validPwd || !pwd ? "hide" : "invalid"} /> */}
                         </label>
@@ -141,7 +134,7 @@ const Register = () => {
 
 
                         <label htmlFor="confirm_pwd">
-                            Confirm Password:
+                            Կրկնել գախնաբառը:
                             {/* <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} /> */}
                             {/* <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"} /> */}
                         </label>
@@ -161,16 +154,10 @@ const Register = () => {
                             Must match the first password input field.
                         </p>
 
-                        <button disabled={!validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
+                        <button disabled={!validName || !validPwd || !validMatch ? true : false} >Հաստատել</button>
                     </form>
-                    <p>
-                        Already registered?<br />
-                        <span className="line">
-                            <Link to="/login">Sign In</Link>
-                        </span>
-                    </p>
                 </section>
-            )}
+            )
         </>
     )
 }

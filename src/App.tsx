@@ -35,9 +35,6 @@ function App() {
         <Route path='/DepNumbers' element={<DepNumbersPage />} />
         <Route path="/" element={<PersistLogin />} >
           <Route path="/admin" element={!auth?.accessToken ? <Login /> :< AdminHomepage /> } />
-          {/* <Route element={<RequireAuth allowedRole={[ROLE.Admin]} />}>
-            <Route path="/Admin" element={< AdminHomepage />} />
-          </Route> */}
           <Route element={<RequireAuth allowedRole={[ROLE.Admin]} />}>
             <Route path="/admindocCirculation" element={<DocCirculationPage />} />
           </Route>

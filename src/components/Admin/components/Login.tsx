@@ -13,13 +13,13 @@ const Login = () => {
     const { setAuth }: any = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from?.pathname || "/Admin";
     const userRef: any = useRef();
     const errRef: any = useRef();
-    const [user, resetUser, userAttribs] = useInput('user', '')
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [check, toggleCheck] = useToggle('persist', true);
+    const from = location.state?.from?.pathname || "/Admin";
+    const [user, resetUser, userAttribs] = useInput('user', '')
 
     useEffect(() => {
         userRef.current.focus();
@@ -33,7 +33,7 @@ const Login = () => {
         e.preventDefault();
         try {
             const response:any = await axios.post(LOGIN_URL,
-                JSON.stringify({ user, pwd }),
+                JSON.stringify({ user , pwd }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
@@ -46,9 +46,7 @@ const Login = () => {
             navigate(from, { replace: true });
             const resp:any=localStorage.getItem('response')
             const respons=JSON.parse(resp)
-            setAuth(respons );
-            
-            
+            setAuth(respons );    
         } catch (err: any) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
