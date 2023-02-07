@@ -44,7 +44,6 @@ const Register = () => {
 
     const handleSubmit = async (e:any) => {
         e.preventDefault();
-        // if button enabled with JS hack
         const v1 = USER_REGEX.test(user);
         const v2 = PWD_REGEX.test(pwd);
         if (!v1 || !v2) {
@@ -154,7 +153,7 @@ const Register = () => {
                             Must match the first password input field.
                         </p>
 
-                        <button disabled={!validName || !validPwd || !validMatch ? true : false} >Հաստատել</button>
+                        <button disabled={!validName || !validPwd || !validMatch ? true : false} onClick={()=>handleSubmit} >Հաստատել</button>
                     </form>
                 </section>
             
