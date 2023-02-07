@@ -39,9 +39,9 @@ export const MPNumbersPage = () => {
       <div className='container6'>
         <div className='container7'>
           <img src='./images/Phone.png' alt='' />
-          { step &&<span>Պատգամավորների աշխատանքային հեռախոսահամարները</span>}
-          { step1 &&   <span>Հանձնաժողովների հեռախոսահամարները</span>}
-          { step2 && <span>Խմբակցությունների հեռախոսահամարները</span>}
+          { step &&<h2>Պատգամավորների աշխատանքային հեռախոսահամարները</h2>}
+          { step1 &&   <h2>Հանձնաժողովների հեռախոսահամարները</h2>}
+          { step2 && <h2>Խմբակցությունների հեռախոսահամարները</h2>}
         </div>
         <div className='buttons'>
         <button className={step? 'active':'pasive'} onClick={()=> changestep2()}>Պատգամավորներ</button>
