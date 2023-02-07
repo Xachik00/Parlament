@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Header } from '../../components/Header/Header'
 import Register from '../../components/Admin/components/Register';
+import './SuperAdmin.scss'
 
 const SuperAdmin = () => {
 
