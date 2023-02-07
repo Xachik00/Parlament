@@ -171,7 +171,7 @@ const SuperAdmin = () => {
                                             </p>
                                         </form>
                                         :
-                                        <div>
+                                        <div className='SuperAdmin_main'>
                                             <p>Ադմին{index + 1}</p>
                                             <p>{el.login}</p>
                                             <button onClick={() => setEdit(el.id)}><i className="fa-solid fa-pen"></i></button>
