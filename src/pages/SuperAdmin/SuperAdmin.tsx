@@ -26,23 +26,20 @@ const SuperAdmin = () => {
     const [add, setAdd] = useState(false)
     const [value, setValue] = useState('')
     const [removeitem, setRemoveitem] = useState([-1, {}])
-    // const userRef: any = useRef();
     const errRef: any = useRef();
-
-    // const [user, setUser] = useState('');
-    // const [validName, setValidName] = useState(false);
-    // const [userFocus, setUserFocus] = useState(false);
-
     const [pwd, setPwd] = useState('');
     const [validPwd, setValidPwd] = useState(false);
     const [pwdFocus, setPwdFocus] = useState(false);
-
     const [matchPwd, setMatchPwd] = useState('');
-    // const [matchFocus, setMatchFocus] = useState(false);
     const [validMatch, setValidMatch] = useState(false);
-
     const [errMsg, setErrMsg] = useState('');
 
+    useEffect( ()=>{
+        const response = axios.get('superAdmin')
+        console.log(response);
+       //  setAdmin(response)
+        
+   },[])
     useEffect(() => {
         setValidPwd(PWD_REGEX.test(pwd));
         setValidMatch(pwd === matchPwd);
