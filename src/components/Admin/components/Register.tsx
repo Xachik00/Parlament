@@ -97,6 +97,7 @@ const Register = () => {
                             required
                             aria-invalid={validName ? "false" : "true"}
                             aria-describedby="uidnote"
+                            placeholder="Մուտքանուն"
                             onFocus={() => setUserFocus(true)}
                             onBlur={() => setUserFocus(false)}
                         />
@@ -121,6 +122,7 @@ const Register = () => {
                             required
                             aria-invalid={validPwd ? "false" : "true"}
                             aria-describedby="pwdnote"
+                            placeholder="Գաղտնաբառ"
                             onFocus={() => setPwdFocus(true)}
                             onBlur={() => setPwdFocus(false)}
                         />
@@ -145,6 +147,7 @@ const Register = () => {
                             required
                             aria-invalid={validMatch ? "false" : "true"}
                             aria-describedby="confirmnote"
+                            placeholder="Կրկնել գաղտնաբառ"
                             onFocus={() => setMatchFocus(true)}
                             onBlur={() => setMatchFocus(false)}
                         />
