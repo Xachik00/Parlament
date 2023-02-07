@@ -2,8 +2,8 @@ import { useRef, useState, useEffect } from "react";
 import axios from '../../../axios/axios';
 import { Link } from "react-router-dom";
 
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+const USER_REGEX = /^[A-z][A-z0-9-_]{4,20}$/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{4,20}$/;
 const REGISTER_URL = '/register';
 
 const Register = () => {
@@ -59,11 +59,8 @@ const Register = () => {
                     withCredentials: true
                 }
             );
-            // TODO: remove console.logs before deployment
             console.log(JSON.stringify(response?.data));
-            //console.log(JSON.stringify(response))
             setSuccess(true);
-            //clear state and controlled inputs
             setUser('');
             setPwd('');
             setMatchPwd('');
