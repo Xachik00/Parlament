@@ -76,7 +76,7 @@ const SuperAdmin = () => {
             <Header />
             <div className='SuperAdminBody'>
                 <div className='SuperAdmin_title'>
-                    <i className="fa-light fa-users-gear"></i>
+                    <i className="fa-solid fa-users-gear"></i>
                     <h2>Ադմինների Ցուցակ</h2>
                 </div>
                 <hr />
