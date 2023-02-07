@@ -139,50 +139,61 @@ const SuperAdmin = () => {
                 <hr />
                 {
                     add ? <Register /> :
-                        <div>
-                            {
-                                admin?.map((el, index) =>
-                                    edit === el.id ?
-                                        <form onSubmit={handleSubmit} className='SuperAdmin_edit'>
-                                            <p>{el.login}</p>
-                                            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                                            <label htmlFor="password">
-                                                Գաղտնաբառ:
-                                                {/* <FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"} /> */}
-                                                {/* <FontAwesomeIcon icon={faTimes} className={validPwd || !pwd ? "hide" : "invalid"} /> */}
-                                            </label>
-                                            <input
-                                                type="password"
-                                                id="password"
-                                                onChange={(e) => setPwd(e.target.value)}
-                                                value={pwd}
-                                                required
-                                                aria-invalid={validPwd ? "false" : "true"}
-                                                aria-describedby="pwdnote"
-                                                placeholder="Գաղտնաբառ"
-                                                onFocus={() => setPwdFocus(true)}
-                                                onBlur={() => setPwdFocus(false)}
-                                            />
-                                            <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
-                                                {/* <FontAwesomeIcon icon={faInfoCircle} /> */}
-                                                8 to 24 characters.<br />
-                                                Must include uppercase and lowercase letters, a number and a special character.<br />
-                                                Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
-                                            </p>
-                                        </form>
-                                        :
-                                        <div className='SuperAdmin_main'>
-                                            <p>Ադմին{index + 1}</p>
-                                            <p>{el.login}</p>
-                                            <button onClick={() => setEdit(el.id)}><i className="fa-solid fa-pen"></i></button>
-                                            <button onClick={(e) => setRemoveitem([el.id, e])}><i className="fa-regular fa-trash-can"></i></button>
-                                        </div>)
-                            }
-                            <button onClick={() => setAdd(true)}>Ավելացնել Ադմին</button>
-                        </div>
-                }
+                        <table className='SuperAdmin_main'>
+                            <thead>
+                                <th>Հ․Հ․</th>
+                                <th>Մուտքանուն</th>
+                                <th>Փոփոխել</th>
+                            </thead>
+                                {
+                                    admin?.map((el, index) =>
+                                    <tbody>
+                                        {edit === el.id ?
+                                            <form onSubmit={handleSubmit} className='SuperAdmin_edit'>
+                                                <p>{el.login}</p>
+                                                <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                                                <label htmlFor="password">
+                                                    Գաղտնաբառ:
+                                                    {/* <FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"} /> */}
+                                                    {/* <FontAwesomeIcon icon={faTimes} className={validPwd || !pwd ? "hide" : "invalid"} /> */}
+                                                </label>
+                                                <input
+                                                    type="password"
+                                                    id="password"
+                                                    onChange={(e) => setPwd(e.target.value)}
+                                                    value={pwd}
+                                                    required
+                                                    aria-invalid={validPwd ? "false" : "true"}
+                                                    aria-describedby="pwdnote"
+                                                    placeholder="Գաղտնաբառ"
+                                                    onFocus={() => setPwdFocus(true)}
+                                                    onBlur={() => setPwdFocus(false)}
+                                                />
+                                                <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
+                                                    {/* <FontAwesomeIcon icon={faInfoCircle} /> */}
+                                                    8 to 24 characters. <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
+                                                </p>
+                                                <button><i className="fa-regular fa-square-check"></i></button>
+                                                <button onClick={() => setEdit(0)} ><i className="fa-solid fa-xmark"></i></button>
+
+                                            </form>
+                                            :
+
+                                            <tr>
+                                               <td>Ադմին{index + 1}</td>
+                                                <td>{el.login}</td>
+                                                <td><button onClick={() => setEdit(el.id)}><i className="fa-solid fa-pen"></i></button>
+                                                <button onClick={(e) => setRemoveitem([el.id, e])}><i className="fa-regular fa-trash-can"></i></button></td>
+                                            </tr>
+                            
+                        }
+                        </tbody>)}
+        </table>
+        }
+        <button onClick={() => setAdd(true)}>Ավելացնել Ադմին</button>
             </div>
-        </div>
+            
+        </div >
     )
 }
 
