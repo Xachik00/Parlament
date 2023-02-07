@@ -1,7 +1,4 @@
-import React from 'react'
 import './HeaderStyle.scss'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import  useAuth from '../../hooks/AdminHooks/useAuth'
 export const Header = () => {
 

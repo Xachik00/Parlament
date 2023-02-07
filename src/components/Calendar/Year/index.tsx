@@ -93,7 +93,7 @@ const Year = ({
 
                 {daysArr?.map((_, pos) => {
                   const day = pos + arrOffset;
-                  const id: string = `${dayjs().year()}` + "-" + month + "-" + day;
+                  const id: any = `${dayjs().year()}` + "-" + month + "-" + day;
                   
                   
                   return (

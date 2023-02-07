@@ -56,7 +56,7 @@ function App() {
           <Route element={<RequireAuth allowedRole={[ROLE.Admin]} />}>
             <Route path="admindepNumbers" element={<DepNumbersPage />} />
           </Route>
-          <Route element={<RequireAuth allowedRole={[ROLE.SuperAdmin]} />}>
+          <Route element={<RequireAuth allowedRole={[ROLE.Admin]} />}>
             <Route path="SuperAdmin" element={<SuperAdmin />} />
           </Route>
         </Route>
