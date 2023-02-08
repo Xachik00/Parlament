@@ -20,8 +20,8 @@ const SuperAdmin = () => {
     const [pwd, setPwd] = useState('');
     const [validPwd, setValidPwd] = useState(false);
     const [pwdFocus, setPwdFocus] = useState(false);
-    const [matchPwd, setMatchPwd] = useState('');
-    const [validMatch, setValidMatch] = useState(false);
+    // const [matchPwd, setMatchPwd] = useState('');
+    // const [validMatch, setValidMatch] = useState(false);
     const [errMsg, setErrMsg] = useState('');
     console.log(SuperAdmin)
 
@@ -31,12 +31,11 @@ const SuperAdmin = () => {
 
     useEffect(() => {
         setValidPwd(PWD_REGEX.test(pwd));
-        setValidMatch(pwd === matchPwd);
-    }, [pwd, matchPwd])
+    }, [pwd])
 
     useEffect(() => {
         setErrMsg('');
-    }, [pwd, matchPwd])
+    }, [pwd])
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
@@ -55,7 +54,6 @@ const SuperAdmin = () => {
             );
             console.log(JSON.stringify(response?.data));
             setPwd('');
-            setMatchPwd('');
         } catch (err: any) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
@@ -158,9 +156,9 @@ const SuperAdmin = () => {
                                                 <button onClick={() => setEdit(0)} ><i className="fa-solid fa-xmark"></i></button></td>
 
                                             </tr>
-                                             <tr id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
+                                            {pwdFocus && !validPwd&& <tr id="pwdnote" className={ "instructions" }>
                                              8 to 24 characters. <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
-                                                </tr>
+                                                </tr>}
                                          </>
                                             :
 
