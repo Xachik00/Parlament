@@ -65,26 +65,16 @@ const SuperAdmin = () => {
             errRef.current.focus();
         }
     }
-    // async function editAdmin(value: string[], id: number) {
-    //     setErorr(false)
-    //     setErorr1(false)
-    //     if (value[0].trim() === '' || value[1].trim() === '') {
-    //         if (value[0].trim() === '') {
-    //             setErorr(true)
-    //         }
-    //         if (value[1].trim() === '') {
-    //             setErorr1(true)
-    //         }
-    //     } else {
-    //         const newCommites = {
-    //             title: value[0],
-    //             text: value[1]
-    //         }
-    //         await axios.put('meets/' + id, newCommites)
-    //         dispatch(fetchCommittees())
-    //         setEdit(0)
-    //     }
-    // }
+    async function editAdmin(value: string, id: number) {
+        if (!pwdFocus && validPwd) {
+            const newAdmin = {
+                pwd:value
+            }
+            await axios.put('superAdmin/' + id, newAdmin)
+            dispatch(fetchSuperAdmin())
+            setEdit(0)
+        }
+    }
 
     // async function deleteAdmin(id: Number, e: any) {
     //     e.preventDefault()
@@ -151,11 +141,13 @@ const SuperAdmin = () => {
                                                     onFocus={() => setPwdFocus(true)}
                                                     onBlur={() => setPwdFocus(false)}
                                                 />{pwdFocus && !validPwd && <p id="pwdnote" className={ "instructions" }>
-                                                8 to 24 characters. <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
+                                                 <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
                                                    </p>}</td>
                                                
-                                                <td className='btn'><button><i className="fa-regular fa-square-check"></i></button>
-                                                <button onClick={() => setEdit(0)} ><i className="fa-solid fa-xmark"></i></button></td>
+                                                <td className='btn'>
+                                                    <i className="fa-regular fa-square-check" onClick={()=>editAdmin(pwd,el.id)} ></i>
+                                                    <i className="fa-solid fa-xmark" onClick={()=>setEdit(-1)}></i>
+                                                    </td>
 
                                             </tr>
                                             

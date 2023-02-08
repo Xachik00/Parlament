@@ -1,12 +1,14 @@
 import { useRef, useState, useEffect } from "react";
 import axios from '../../../axios';
-import { Link } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import '../Style/Register.scss'
 const USER_REGEX = /^[A-z][A-z0-9-_]{4,20}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{4,20}$/;
 const REGISTER_URL = '/superAdmin';
 
 const Register = () => {
+
+    const navigate=useNavigate()
     const userRef:any = useRef();
     const errRef:any = useRef();
 
@@ -63,6 +65,7 @@ const Register = () => {
             setUser('');
             setPwd('');
             setMatchPwd('');
+            navigate(0)
         } catch (err:any) {
             if (!err?.response) {
                 setErrMsg('Սերվերից պատասխան չկա');
@@ -95,12 +98,11 @@ const Register = () => {
                             required
                             aria-invalid={validName ? "false" : "true"}
                             aria-describedby="uidnote"
-                            placeholder="Մուտքանուն"
                             onFocus={() => setUserFocus(true)}
                             onBlur={() => setUserFocus(false)}
                         />
                         <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
-                            Դաշտը պետք է պարունակի 4-ից 20 նիշ<br />
+                            Դաշտը պետք է պարունակի 5-ից 20 նիշ<br />
                             Բացառությամբ նմանատիպ նիշերից՝ ! @ # $ %․․․
                         </p>
 
@@ -116,12 +118,11 @@ const Register = () => {
                             required
                             aria-invalid={validPwd ? "false" : "true"}
                             aria-describedby="pwdnote"
-                            placeholder="Գաղտնաբառ"
                             onFocus={() => setPwdFocus(true)}
                             onBlur={() => setPwdFocus(false)}
                         />
                         <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
-                            Դաշտը պետք է պարունակի 4-ից 20 նիշ,<br />
+                            Դաշտը պետք է պարունակի 5-ից 20 նիշ,<br />
                             մեծատառ, փոքրատառ և հետևյալ նիշերից՝ ! @ # $ %
                             </p>
 
@@ -137,7 +138,6 @@ const Register = () => {
                             required
                             aria-invalid={validMatch ? "false" : "true"}
                             aria-describedby="confirmnote"
-                            placeholder="Կրկնել գաղտնաբառ"
                             onFocus={() => setMatchFocus(true)}
                             onBlur={() => setMatchFocus(false)}
                         />
@@ -146,6 +146,7 @@ const Register = () => {
                         </p>
 
                         <button disabled={!validName || !validPwd || !validMatch ? true : false} onClick={handleSubmit} >Հաստատել</button>
+                        <button onClick={()=>navigate(0)}> Չեղարկել</button>
                     </form>
                 </section>
             
