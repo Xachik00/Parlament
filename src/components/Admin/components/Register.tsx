@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import axios from '../../../axios';
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import '../Style/Register.scss'
 const USER_REGEX = /^[A-z][A-z0-9-_]{4,20}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{4,20}$/;
@@ -8,9 +8,9 @@ const REGISTER_URL = '/superAdmin';
 
 const Register = () => {
 
-    const navigate=useNavigate()
-    const userRef:any = useRef();
-    const errRef:any = useRef();
+    const navigate = useNavigate()
+    const userRef: any = useRef();
+    const errRef: any = useRef();
 
     const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
@@ -44,7 +44,7 @@ const Register = () => {
         setErrMsg('');
     }, [user, pwd, matchPwd])
 
-    const handleSubmit = async (e:any) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
         const v1 = USER_REGEX.test(user);
         const v2 = PWD_REGEX.test(pwd);
@@ -66,7 +66,7 @@ const Register = () => {
             setPwd('');
             setMatchPwd('');
             navigate(0)
-        } catch (err:any) {
+        } catch (err: any) {
             if (!err?.response) {
                 setErrMsg('Սերվերից պատասխան չկա');
             } else if (err.response?.status === 409) {
@@ -80,76 +80,76 @@ const Register = () => {
 
     return (
         <>
-             
-                <section className="Register_page">
-                    <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <h1>Գրանցել նոր ադմինիստրատոր</h1>
-                    <form onSubmit={handleSubmit}>
-                        <label htmlFor="username">
-                            Մուտքանուն
-                        </label>
-                        <input
-                            type="text"
-                            id="username"
-                            ref={userRef}
-                            autoComplete="off"
-                            onChange={(e) => setUser(e.target.value)}
-                            value={user}
-                            required
-                            aria-invalid={validName ? "false" : "true"}
-                            aria-describedby="uidnote"
-                            onFocus={() => setUserFocus(true)}
-                            onBlur={() => setUserFocus(false)}
-                        />
-                        <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
-                            Դաշտը պետք է պարունակի 5-ից 20 նիշ<br />
-                            Բացառությամբ նմանատիպ նիշերից՝ ! @ # $ %․․․
-                        </p>
+            <section className="Register_page">
+                <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+                <h1>Գրանցել նոր ադմինիստրատոր</h1>
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="username">
+                        Մուտքանուն
+                    </label>
+                    <input
+                        type="text"
+                        id="username"
+                        ref={userRef}
+                        autoComplete="off"
+                        onChange={(e) => setUser(e.target.value)}
+                        value={user}
+                        required
+                        aria-invalid={validName ? "false" : "true"}
+                        aria-describedby="uidnote"
+                        onFocus={() => setUserFocus(true)}
+                        onBlur={() => setUserFocus(false)}
+                    />
+                    <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
+                        Դաշտը պետք է պարունակի 5-ից 20 նիշ<br />
+                        Բացառությամբ նմանատիպ նիշերից՝ ! @ # $ %․․․
+                    </p>
 
 
-                        <label htmlFor="password">
-                            Գաղտնաբառ
-                        </label>
-                        <input
-                            type="password"
-                            id="password"
-                            onChange={(e) => setPwd(e.target.value)}
-                            value={pwd}
-                            required
-                            aria-invalid={validPwd ? "false" : "true"}
-                            aria-describedby="pwdnote"
-                            onFocus={() => setPwdFocus(true)}
-                            onBlur={() => setPwdFocus(false)}
-                        />
-                        <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
-                            Դաշտը պետք է պարունակի 5-ից 20 նիշ,<br />
-                            մեծատառ, փոքրատառ և հետևյալ նիշերից՝ ! @ # $ %
-                            </p>
+                    <label htmlFor="password">
+                        Գաղտնաբառ
+                    </label>
+                    <input
+                        type="password"
+                        id="password"
+                        onChange={(e) => setPwd(e.target.value)}
+                        value={pwd}
+                        required
+                        aria-invalid={validPwd ? "false" : "true"}
+                        aria-describedby="pwdnote"
+                        onFocus={() => setPwdFocus(true)}
+                        onBlur={() => setPwdFocus(false)}
+                    />
+                    <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
+                        Դաշտը պետք է պարունակի 5-ից 20 նիշ,<br />
+                        մեծատառ, փոքրատառ և հետևյալ նիշերից՝ ! @ # $ %
+                    </p>
 
 
-                        <label htmlFor="confirm_pwd">
-                            Կրկնել գաղտնաբառը
-                        </label>
-                        <input
-                            type="password"
-                            id="confirm_pwd"
-                            onChange={(e) => setMatchPwd(e.target.value)}
-                            value={matchPwd}
-                            required
-                            aria-invalid={validMatch ? "false" : "true"}
-                            aria-describedby="confirmnote"
-                            onFocus={() => setMatchFocus(true)}
-                            onBlur={() => setMatchFocus(false)}
-                        />
-                        <p id="confirmnote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
-                            Գաղտնաբառը չի համընկնում!
-                        </p>
+                    <label htmlFor="confirm_pwd">
+                        Կրկնել գաղտնաբառը
+                    </label>
+                    <input
+                        type="password"
+                        id="confirm_pwd"
+                        onChange={(e) => setMatchPwd(e.target.value)}
+                        value={matchPwd}
+                        required
+                        aria-invalid={validMatch ? "false" : "true"}
+                        aria-describedby="confirmnote"
+                        onFocus={() => setMatchFocus(true)}
+                        onBlur={() => setMatchFocus(false)}
+                    />
+                    <p id="confirmnote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
+                        Գաղտնաբառը չի համընկնում!
+                    </p>
+                    <div className="buts">
+                    <button disabled={!validName || !validPwd || !validMatch ? true : false} onClick={handleSubmit} >Հաստատել</button>
+                    <button onClick={() => navigate(0)}> Չեղարկել</button>
+                    </div>
+                </form>
+            </section>
 
-                        <button disabled={!validName || !validPwd || !validMatch ? true : false} onClick={handleSubmit} >Հաստատել</button>
-                        <button onClick={()=>navigate(0)}> Չեղարկել</button>
-                    </form>
-                </section>
-            
         </>
     )
 }

@@ -16,6 +16,11 @@
     .instructions {
         color: red;
     }
+    .buts{
+        display: flex;
+        width: 50%;
+        justify-content: space-around;
+    }
 
     form {
         margin-top: 20px;

@@ -5,6 +5,7 @@ import './SuperAdmin.scss'
 import axios from '../../axios';
 import { useAppSelector,useAppDispatch } from '../../hooks/redux';
 import { fetchSuperAdmin } from '../../store/action/SuperAdmin';
+import DeleteText from '../../components/Delete/DeleteText';
 
 
 const SuperAdmin = () => {
@@ -76,11 +77,11 @@ const SuperAdmin = () => {
         }
     }
 
-    // async function deleteAdmin(id: Number, e: any) {
-    //     e.preventDefault()
-    //     await axios.delete('meets/' + id)
-    //     dispatch(fetchCommittees())
-    // }
+    async function deleteAdmin(id: Number, e: any) {
+        e.preventDefault()
+        await axios.delete('superAdmin/' + id)
+        dispatch(fetchSuperAdmin())
+    }
 
     // async function addAdmin(title: string, text: string) {
     //     setErorr(false)
@@ -168,7 +169,7 @@ const SuperAdmin = () => {
         </table>
         }
             </div>
-            
+            {removeitem[0]!==-1 && <DeleteText removeitem={removeitem} setRemoveitem={setRemoveitem} deleteItem={deleteAdmin} />}
         </div >
     )
 }
