@@ -5,6 +5,7 @@ import { HomePage } from "../../../pages/HomePage/HomePage";
 const RequireAuth = ({ allowedRole }:any) => {
     
     const { auth }:any = useAuth();
+    console.log(allowedRole);
     
     return (
         auth?.role?.find((role:any) => allowedRole?.includes(role))

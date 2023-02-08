@@ -15,15 +15,14 @@ import NotFaundPage from "./pages/NotFaund/NotFaundPage";
 import SuperAdmin from "./pages/SuperAdmin/SuperAdmin";
 
 
-const ROLE = {
-  'Admin': 'admin',
-  'SuperAdmin':'SuperAdmin'
-}
 
 
 
 function App() {
   const { auth }: any = useAuth();
+  const ROLE = {
+    'Admin': auth?.role[0]
+  }
   return (
     <div className={auth.role ? "admin" :' App'}>
       <Routes>
