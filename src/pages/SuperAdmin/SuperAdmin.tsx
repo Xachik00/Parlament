@@ -3,11 +3,13 @@ import { Header } from '../../components/Header/Header'
 import Register from '../../components/Admin/components/Register';
 import './SuperAdmin.scss'
 import axios from '../../axios';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppSelector,useAppDispatch } from '../../hooks/redux';
+import { fetchSuperAdmin } from '../../store/action/SuperAdmin';
 
 
 const SuperAdmin = () => {
 
+    const dispatch=useAppDispatch()
     const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{4,20}$/;
     const {SuperAdmin} =useAppSelector(state => state.SuperAdmin)
     const [edit, setEdit] = useState(0)
@@ -22,6 +24,11 @@ const SuperAdmin = () => {
     const [validMatch, setValidMatch] = useState(false);
     const [errMsg, setErrMsg] = useState('');
     console.log(SuperAdmin)
+
+    useEffect(() => {
+        dispatch(fetchSuperAdmin())
+      }, [dispatch])
+
     useEffect(() => {
         setValidPwd(PWD_REGEX.test(pwd));
         setValidMatch(pwd === matchPwd);

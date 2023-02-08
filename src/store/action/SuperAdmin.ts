@@ -2,7 +2,7 @@ import { Dispatch } from "@reduxjs/toolkit";
 import axios from "../../axios";
 import {  fetchingSuper, fetchSuccessSuper, fetchErrorSuper } from "../slice/SuperAdminSlice";
 
-export const fetchTimeTable = () => {
+export const fetchSuperAdmin = () => {
     return async (dispatch:Dispatch)=>{
         try{
             dispatch(fetchingSuper());
