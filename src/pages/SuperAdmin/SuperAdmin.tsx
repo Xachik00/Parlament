@@ -3,25 +3,13 @@ import { Header } from '../../components/Header/Header'
 import Register from '../../components/Admin/components/Register';
 import './SuperAdmin.scss'
 import axios from '../../axios';
+import { useAppSelector } from '../../hooks/redux';
 
 
 const SuperAdmin = () => {
 
     const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{4,20}$/;
-    const admin = [
-        {
-            id: 1,
-            login: 'Simonyan'
-        },
-        {
-            id: 2,
-            login: 'Simonyan1'
-        },
-        {
-            id: 3,
-            login: 'Simonyan2'
-        }
-    ];
+    const {SuperAdmin} =useAppSelector(state => state.SuperAdmin)
     const [edit, setEdit] = useState(0)
     const [add, setAdd] = useState(false)
     const [value, setValue] = useState('')
@@ -34,12 +22,6 @@ const SuperAdmin = () => {
     const [validMatch, setValidMatch] = useState(false);
     const [errMsg, setErrMsg] = useState('');
 
-//     useEffect( ()=>{
-//         const response = axios.get('superAdmin')
-//         console.log(response);
-//        //  setAdmin(response)
-        
-//    },[])
     useEffect(() => {
         setValidPwd(PWD_REGEX.test(pwd));
         setValidMatch(pwd === matchPwd);
@@ -143,11 +125,11 @@ const SuperAdmin = () => {
                                 <th>Փոփոխել</th>
                             </thead>
                                 {
-                                    admin?.map((el, index) =>
+                                    SuperAdmin?.map((el, index) =>
                                     <tbody>
                                         {edit === el.id ?
                                             <form onSubmit={handleSubmit} className='SuperAdmin_edit'>
-                                                <p>{el.login}</p>
+                                                <p>{el.user}</p>
                                                 <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                                                 <label htmlFor="password">
                                                     Գաղտնաբառ:
@@ -178,7 +160,7 @@ const SuperAdmin = () => {
 
                                             <tr>
                                                <td>Ադմին{index + 1}</td>
-                                                <td>{el.login}</td>
+                                                <td>{el.user}</td>
                                                 <td><button onClick={() => setEdit(el.id)}><i className="fa-solid fa-pen"></i></button>
                                                 <button onClick={(e) => setRemoveitem([el.id, e])}><i className="fa-regular fa-trash-can"></i></button></td>
                                             </tr>

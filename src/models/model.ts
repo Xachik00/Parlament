@@ -7,7 +7,7 @@ export interface IParlament {
 
 export interface IDocCirculation {
     id: number,
-    title:string,
+    title: string,
     text: string,
     subtitle1?: string,
     subtitle2?: string,
@@ -27,7 +27,7 @@ export interface IMPs {
     phonenumber: string,
     key: boolean
 }
-        
+
 
 export interface ICommittee {
     id: number,
@@ -50,7 +50,7 @@ export interface IFraction {
 
 export interface ITime {
     id: number;
-    title?:string;
+    title?: string;
     name: string;
     day: string;
     time: string;
@@ -62,7 +62,14 @@ export interface IDepnumbers {
     internalphone: string;
 }
 export interface ICalendar {
-    id:number;
+    id: number;
     date: string;
-    
+
+}
+export interface ISuperAdmin {
+    created_at:string;
+    id:number;
+    role:string;
+    updated_at:string;
+    user:string
 }

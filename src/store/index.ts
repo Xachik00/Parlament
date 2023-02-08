@@ -8,6 +8,7 @@ import FractionReducer from './slice/FractionSlice'
 import DocCirculationReducer from './slice/DocCirculationSlice';
 import MpsnumberReducer from './slice/MpsnumberSlice';
 import CalendarReducer from './slice/CalendarSlice';
+import SuperAdminReducer from './slice/SuperAdminSlice';
 
 export const store = configureStore({
   reducer: {
@@ -19,7 +20,8 @@ export const store = configureStore({
     Fraction:FractionReducer,
     DocCirculation:DocCirculationReducer,
     Mpsnumber:MpsnumberReducer,
-    Calendar:CalendarReducer
+    Calendar:CalendarReducer,
+    SuperAdmin:SuperAdminReducer
   }
 })
 
