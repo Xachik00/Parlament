@@ -17,7 +17,7 @@ import SuperAdmin from "./pages/SuperAdmin/SuperAdmin";
 
 const ROLE = {
   'Admin': 'admin',
-  'SuperAdmin':'SuperAdmin'
+  'superAdmin':'superAdmin'
 }
 
 
@@ -35,25 +35,25 @@ function App() {
         <Route path='/DepNumbers' element={<DepNumbersPage />} />
         <Route path="/" element={<PersistLogin />} >
           <Route path="/admin" element={!auth?.accessToken ? <Login /> :< AdminHomepage /> } />
-          <Route element={<RequireAuth allowedRole={[ROLE.Admin]} />}>
+          <Route element={<RequireAuth allowedRole={[ROLE.Admin||ROLE.superAdmin]} />}>
             <Route path="/admindocCirculation" element={<DocCirculationPage />} />
           </Route>
-          <Route element={<RequireAuth allowedRole={[ROLE.Admin]} />}>
+          <Route element={<RequireAuth allowedRole={[ROLE.Admin ||ROLE.superAdmin]} />}>
             <Route path="admintimeTable" element={<TimeTablePage />} />
           </Route>
-          <Route element={<RequireAuth allowedRole={[ROLE.Admin]} />}>
+          <Route element={<RequireAuth allowedRole={[ROLE.Admin  ||ROLE.superAdmin]} />}>
             <Route path="admincommittees" element={<CommitteesPage />} />
           </Route>
-          <Route element={<RequireAuth allowedRole={[ROLE.Admin]} />}>
+          <Route element={<RequireAuth allowedRole={[ROLE.Admin ||ROLE.superAdmin]} />}>
             <Route path="adminmeetingsSchedule" element={<MeetingsSchedulePage />} />
           </Route>
-          <Route element={<RequireAuth allowedRole={[ROLE.Admin]} />}>
+          <Route element={<RequireAuth allowedRole={[ROLE.Admin ||ROLE.superAdmin]} />}>
             <Route path="adminmPNumbers" element={<MPNumbersPage />} />
           </Route>
-          <Route element={<RequireAuth allowedRole={[ROLE.Admin]} />}>
+          <Route element={<RequireAuth allowedRole={[ROLE.Admin ||ROLE.superAdmin]} />}>
             <Route path="admindepNumbers" element={<DepNumbersPage />} />
           </Route>
-          <Route element={<RequireAuth allowedRole={[ROLE.Admin]} />}>
+          <Route element={<RequireAuth allowedRole={[ROLE.superAdmin]} />}>
             <Route path="SuperAdmin" element={<SuperAdmin />} />
           </Route>
         </Route>
