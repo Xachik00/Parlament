@@ -49,13 +49,13 @@ const Login = () => {
             setAuth(respons );    
         } catch (err: any) {
             if (!err?.response) {
-                setErrMsg('No Server Response');
+                setErrMsg('Սերվերից պատասխան չկա');
             } else if (err.response?.status === 400) {
-                setErrMsg('Missing Username or Password');
+                setErrMsg('մուտքանունը կամ գաղտնաբառը բացակայում է');
             } else if (err.response?.status === 401) {
-                setErrMsg('Սխալ մուտքանուն կամ գախնաբառ');
+                setErrMsg('Սխալ մուտքանուն կամ գաղտնաբառ');
             } else {
-                setErrMsg('Login Failed');
+                setErrMsg('Անհաջող մուտք');
             }
             errRef.current.focus();
         }

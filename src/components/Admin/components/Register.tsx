@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import '../Style/Register.scss'
 const USER_REGEX = /^[A-z][A-z0-9-_]{4,20}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{4,20}$/;
-const REGISTER_URL = '/register';
+const REGISTER_URL = '/superAdmin';
 
 const Register = () => {
     const userRef:any = useRef();
@@ -47,7 +47,7 @@ const Register = () => {
         const v1 = USER_REGEX.test(user);
         const v2 = PWD_REGEX.test(pwd);
         if (!v1 || !v2) {
-            setErrMsg("Invalid Entry");
+            setErrMsg("Անվավեր մուտք");
             return;
         }
         try {
@@ -65,11 +65,11 @@ const Register = () => {
             setMatchPwd('');
         } catch (err:any) {
             if (!err?.response) {
-                setErrMsg('No Server Response');
+                setErrMsg('Սերվերից պատասխան չկա');
             } else if (err.response?.status === 409) {
-                setErrMsg('Username Taken');
+                setErrMsg('Մուտքանունը զբաղած է');
             } else {
-                setErrMsg('Registration Failed')
+                setErrMsg('Գրանցումը խաբանվեց')
             }
             errRef.current.focus();
         }
@@ -83,9 +83,7 @@ const Register = () => {
                     <h1>Գրանցել նոր ադմինիստրատոր</h1>
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="username">
-                            Մուտքանուն:
-                            {/* <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} /> */}
-                            {/* <FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"} /> */}
+                            Մուտքանուն
                         </label>
                         <input
                             type="text"
@@ -102,17 +100,13 @@ const Register = () => {
                             onBlur={() => setUserFocus(false)}
                         />
                         <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
-                            {/* <FontAwesomeIcon icon={faInfoCircle} /> */}
                             Դաշտը պետք է պարունակի 4-ից 20 նիշ<br />
-                            Must begin with a letter.<br />
-                            Letters, numbers, underscores, hyphens allowed.
+                            Բացառությամբ նմանատիպ նիշերից՝ ! @ # $ %․․․
                         </p>
 
 
                         <label htmlFor="password">
-                            Գաղտնաբառ:
-                            {/* <FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"} /> */}
-                            {/* <FontAwesomeIcon icon={faTimes} className={validPwd || !pwd ? "hide" : "invalid"} /> */}
+                            Գաղտնաբառ
                         </label>
                         <input
                             type="password"
@@ -127,17 +121,13 @@ const Register = () => {
                             onBlur={() => setPwdFocus(false)}
                         />
                         <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
-                            {/* <FontAwesomeIcon icon={faInfoCircle} /> */}
-                            8 to 24 characters.<br />
-                            Must include uppercase and lowercase letters, a number and a special character.<br />
-                            Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
-                        </p>
+                            Դաշտը պետք է պարունակի 4-ից 20 նիշ,<br />
+                            մեծատառ, փոքրատառ և հետևյալ նիշերից՝ ! @ # $ %
+                            </p>
 
 
                         <label htmlFor="confirm_pwd">
-                            Կրկնել գախնաբառը:
-                            {/* <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} /> */}
-                            {/* <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"} /> */}
+                            Կրկնել գաղտնաբառը
                         </label>
                         <input
                             type="password"
@@ -152,8 +142,7 @@ const Register = () => {
                             onBlur={() => setMatchFocus(false)}
                         />
                         <p id="confirmnote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
-                            {/* <FontAwesomeIcon icon={faInfoCircle} /> */}
-                            Must match the first password input field.
+                            Գաղտնաբառը չի համընկնում!
                         </p>
 
                         <button disabled={!validName || !validPwd || !validMatch ? true : false} onClick={handleSubmit} >Հաստատել</button>
