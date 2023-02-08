@@ -70,11 +70,16 @@
         margin: auto;
     }
     table{
-        width: 80%;
+        width: 85%;
         margin: 0 auto;
+        margin-top: 30px;
         thead{
             display: flex;
+            th:nth-child(1){
+                width: 10%;
+            }
             th{
+                width: 25%;
                 background-color: #E1AA5A;
                 border: 1px solid white;
                 display: flex;
@@ -86,12 +91,16 @@
         tbody{
             tr{
                 display: flex;
+                td:nth-child(1){
+                    width: 10%;
+                }
                 td{
+                    width: 25%;
                     padding: .3rem;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    border: 1px solid #E1AA5A;
+                    background-color: #f5f5f5;
                 }
             }            
         }

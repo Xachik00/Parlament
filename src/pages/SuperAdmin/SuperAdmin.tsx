@@ -137,7 +137,7 @@ const SuperAdmin = () => {
                                     <tbody>
                                         {edit === el.id ?
                                             <tr className='SuperAdmin_edit'>
-                                                <td>Ադմին{index+1}</td>
+                                                <td>{index+1}</td>
                                                 <td>{el.user}</td>
                                                 <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                                                 <td><input
@@ -163,7 +163,7 @@ const SuperAdmin = () => {
                                             :
 
                                             <tr>
-                                                <td>Ադմին{index + 1}</td>
+                                                <td>{index + 1}</td>
                                                 <td>{el.user}</td>
                                                 <td>******</td>
                                                 <td className='btn'><button onClick={() => setEdit(el.id)}><i className="fa-solid fa-pen"></i></button>
