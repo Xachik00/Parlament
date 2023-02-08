@@ -62,10 +62,11 @@
                 
                 display: flex;
                 input {
+                    width: 90%;
                     padding: .3rem;
                     border-radius: 7px;
                     color: #263849;
-                    font-size: 16px;
+                    font-size: 14px;
                     background-color: rgb(255, 255, 255);
                 }
                 .errmsg {
