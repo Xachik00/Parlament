@@ -132,14 +132,15 @@ const SuperAdmin = () => {
                                 <th>Գաղտնաբառ</th>
                                 <th>Փոփոխել</th>
                             </thead>
+                            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                                 {
                                     SuperAdmin?.map((el, index) =>
                                     <tbody>
                                         {edit === el.id ?
+                                        <>
                                             <tr className='SuperAdmin_edit'>
                                                 <td>{index+1}</td>
                                                 <td>{el.user}</td>
-                                                <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                                                 <td><input
                                                     type="password"
                                                     id="password"
@@ -152,14 +153,15 @@ const SuperAdmin = () => {
                                                     onFocus={() => setPwdFocus(true)}
                                                     onBlur={() => setPwdFocus(false)}
                                                 /></td>
-                                                <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
-                                                    {/* <FontAwesomeIcon icon={faInfoCircle} /> */}
-                                                    8 to 24 characters. <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
-                                                </p>
+                                               
                                                 <td className='btn'><button><i className="fa-regular fa-square-check"></i></button>
                                                 <button onClick={() => setEdit(0)} ><i className="fa-solid fa-xmark"></i></button></td>
 
                                             </tr>
+                                             <tr id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
+                                             8 to 24 characters. <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
+                                                </tr>
+                                         </>
                                             :
 
                                             <tr>
