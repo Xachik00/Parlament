@@ -8,7 +8,7 @@ export const fetchCommittees = ()=>{
             dispatch(fetching_3());
             const response =await axios.get('meets');
             dispatch(fetchSuccess_3(response.data));
-            const response1=await axios.get('superAdmin')
+            const response1=await axios.get('SuperAdmin')
             console.log(response1);
             
         }
