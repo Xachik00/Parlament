@@ -15,14 +15,15 @@ import NotFaundPage from "./pages/NotFaund/NotFaundPage";
 import SuperAdmin from "./pages/SuperAdmin/SuperAdmin";
 
 
+const ROLE = {
+  'Admin': 'admin',
+  'SuperAdmin':'superAdmin'
+}
 
 
 
 function App() {
   const { auth }: any = useAuth();
-  const ROLE = {
-    'Admin': auth?.role[0]
-  }
   return (
     <div className={auth.role ? "admin" :' App'}>
       <Routes>
@@ -35,13 +36,13 @@ function App() {
         <Route path='/DepNumbers' element={<DepNumbersPage />} />
         <Route path="/" element={<PersistLogin />} >
           <Route path="/admin" element={!auth?.accessToken ? <Login /> :< AdminHomepage /> } />
-          <Route element={<RequireAuth allowedRole={[ROLE.Admin]} />}>
+          <Route element={<RequireAuth allowedRole={[auth?.role===ROLE.Admin?ROLE.Admin:ROLE.SuperAdmin]} />}>
             <Route path="/admindocCirculation" element={<DocCirculationPage />} />
           </Route>
           <Route element={<RequireAuth allowedRole={[ROLE.Admin]} />}>
             <Route path="admintimeTable" element={<TimeTablePage />} />
           </Route>
-          <Route element={<RequireAuth allowedRole={[ROLE.Admin]} />}>
+          <Route element={<RequireAuth allowedRole={[auth?.role===ROLE.Admin?ROLE.Admin:ROLE.SuperAdmin]} />}>
             <Route path="admincommittees" element={<CommitteesPage />} />
           </Route>
           <Route element={<RequireAuth allowedRole={[ROLE.Admin]} />}>
