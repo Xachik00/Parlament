@@ -34,12 +34,12 @@ const SuperAdmin = () => {
     const [validMatch, setValidMatch] = useState(false);
     const [errMsg, setErrMsg] = useState('');
 
-    useEffect( ()=>{
-        const response = axios.get('superAdmin')
-        console.log(response);
-       //  setAdmin(response)
+//     useEffect( ()=>{
+//         const response = axios.get('superAdmin')
+//         console.log(response);
+//        //  setAdmin(response)
         
-   },[])
+//    },[])
     useEffect(() => {
         setValidPwd(PWD_REGEX.test(pwd));
         setValidMatch(pwd === matchPwd);
