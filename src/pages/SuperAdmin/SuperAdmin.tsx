@@ -174,7 +174,7 @@ const SuperAdmin = () => {
                         </tbody>)}
         </table>
         }
-        <i  className="fa-solid fa-plus AddAdmin " >   Ավելացնել Ադմին</i>
+        <i  className="fa-solid fa-plus AddAdmin " onClick={()=>setAdd(true)} >   Ավելացնել Ադմին</i>
             </div>
             
         </div >
