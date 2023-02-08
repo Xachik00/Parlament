@@ -125,7 +125,7 @@ const SuperAdmin = () => {
                 <hr />
                 {
                     add ? <Register /> :
-                        <table className='SuperAdmin_main'>
+                        <table>
                             <thead>
                                 <th>Հ․Հ․</th>
                                 <th>Մուտքանուն</th>
@@ -156,7 +156,7 @@ const SuperAdmin = () => {
                                                     {/* <FontAwesomeIcon icon={faInfoCircle} /> */}
                                                     8 to 24 characters. <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
                                                 </p>
-                                                <td><button><i className="fa-regular fa-square-check"></i></button>
+                                                <td className='btn'><button><i className="fa-regular fa-square-check"></i></button>
                                                 <button onClick={() => setEdit(0)} ><i className="fa-solid fa-xmark"></i></button></td>
 
                                             </tr>
@@ -166,7 +166,7 @@ const SuperAdmin = () => {
                                                 <td>Ադմին{index + 1}</td>
                                                 <td>{el.user}</td>
                                                 <td>******</td>
-                                                <td><button onClick={() => setEdit(el.id)}><i className="fa-solid fa-pen"></i></button>
+                                                <td className='btn'><button onClick={() => setEdit(el.id)}><i className="fa-solid fa-pen"></i></button>
                                                 <button onClick={(e) => setRemoveitem([el.id, e])}><i className="fa-regular fa-trash-can"></i></button></td>
                                             </tr>
                             
@@ -174,7 +174,7 @@ const SuperAdmin = () => {
                         </tbody>)}
         </table>
         }
-        <button onClick={() => setAdd(true)}>Ավելացնել Ադմին</button>
+        <button className='AddAdmin' onClick={() => setAdd(true)}>Ավելացնել Ադմին</button>
             </div>
             
         </div >

@@ -69,24 +69,41 @@
         background-color: #94A3BA;
         margin: auto;
     }
-    .SuperAdmin_main{
+    table{
         width: 80%;
-        display: flex;
-        justify-content: space-around;
+        margin: 0 auto;
         thead{
             display: flex;
             th{
                 background-color: #E1AA5A;
                 border: 1px solid white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: .3rem;
             }
         }
         tbody{
             tr{
                 display: flex;
                 td{
+                    padding: .3rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                     border: 1px solid #E1AA5A;
                 }
             }            
         }
+        .btn{
+            display: flex;
+            button{
+                border: none;
+            }
+        }
+    }
+    .AddAdmin{
+        font-size: 18px;
+        margin: 30px 0;
     }
 }
