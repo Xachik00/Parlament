@@ -6,7 +6,9 @@ export const fetchTimeTable = () => {
     return async (dispatch:Dispatch)=>{
         try{
             dispatch(fetchingSuper());
-            const response =await axios.get('superAdmin');            
+            const response =await axios.get('superAdmin');
+            console.log(response.data);
+                        
             dispatch(fetchSuccessSuper(response.data));
         }
         catch(error){
