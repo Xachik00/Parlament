@@ -52,7 +52,7 @@
             align-items: center;
         i{
             font-size: 25px;
-            color: orange;
+            color: #E1AA5A;
         }
         h2 {
             font-weight: 700;
@@ -70,12 +70,23 @@
         margin: auto;
     }
     .SuperAdmin_main{
-        width: 90%;
+        width: 80%;
         display: flex;
-        justify-content: space-between;
-        p{
-            font-size: 16px;
-            padding: .3rem;
+        justify-content: space-around;
+        thead{
+            display: flex;
+            th{
+                background-color: #E1AA5A;
+                border: 1px solid white;
+            }
+        }
+        tbody{
+            tr{
+                display: flex;
+                td{
+                    border: 1px solid #E1AA5A;
+                }
+            }            
         }
     }
 }
