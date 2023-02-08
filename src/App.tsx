@@ -36,13 +36,13 @@ function App() {
         <Route path='/DepNumbers' element={<DepNumbersPage />} />
         <Route path="/" element={<PersistLogin />} >
           <Route path="/admin" element={!auth?.accessToken ? <Login /> :< AdminHomepage /> } />
-          <Route element={<RequireAuth allowedRole={[auth?.role[0]===ROLE.Admin?ROLE.Admin:ROLE.SuperAdmin]} />}>
+          <Route element={<RequireAuth allowedRole={[auth.role&&auth?.role[0]===ROLE.Admin?ROLE.Admin:ROLE.SuperAdmin]} />}>
             <Route path="/admindocCirculation" element={<DocCirculationPage />} />
           </Route>
           <Route element={<RequireAuth allowedRole={[ROLE.Admin]} />}>
             <Route path="admintimeTable" element={<TimeTablePage />} />
           </Route>
-          <Route element={<RequireAuth allowedRole={[auth?.role[0]===ROLE.Admin?ROLE.Admin:ROLE.SuperAdmin]} />}>
+          <Route element={<RequireAuth allowedRole={[auth.role&&auth?.role===ROLE.Admin?ROLE.Admin:ROLE.SuperAdmin]} />}>
             <Route path="admincommittees" element={<CommitteesPage />} />
           </Route>
           <Route element={<RequireAuth allowedRole={[ROLE.Admin]} />}>
