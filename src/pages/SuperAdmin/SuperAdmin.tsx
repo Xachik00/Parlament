@@ -21,7 +21,7 @@ const SuperAdmin = () => {
     const [matchPwd, setMatchPwd] = useState('');
     const [validMatch, setValidMatch] = useState(false);
     const [errMsg, setErrMsg] = useState('');
-
+    console.log(SuperAdmin)
     useEffect(() => {
         setValidPwd(PWD_REGEX.test(pwd));
         setValidMatch(pwd === matchPwd);
