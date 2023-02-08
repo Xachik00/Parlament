@@ -1,37 +1,6 @@
 .SuperAdmin{
     width: 45rem;
     margin: 0 auto;
-    .SuperAdmin_edit{
-        margin-top: 20px;
-        display: flex;
-        align-items: center;
-        height: 200px;
-        justify-content: space-around;
-
-        input {
-            width: 220px;
-            height: 30px;
-            padding: .3rem;
-            border-radius: 7px;
-            box-shadow: 0 0 10px #263849;
-            color: #263849;
-            font-size: 16px;
-            background-color: rgb(255, 255, 255);
-        }
-        .errmsg {
-            margin-top: 10px;
-            font-size: 16px;
-            color: #c0d2e3
-        }
-    
-        .offscreen {
-            display: none;
-        }
-    
-        .instructions {
-            color: red;
-        }
-    }
     .SuperAdminBody {
         width: 40rem;
         background: #FFFFFF;
@@ -87,10 +56,30 @@
                 justify-content: center;
                 padding: .3rem;
             }
+            input {
+                border-radius: 7px;
+                color: #263849;
+                font-size: 16px;
+                background-color: rgb(255, 255, 255);
+            }
         }
         tbody{
             tr{
+                
                 display: flex;
+                .errmsg {
+                    margin-top: 10px;
+                    font-size: 16px;
+                    color: #c0d2e3
+                }
+            
+                .offscreen {
+                    display: none;
+                }
+            
+                .instructions {
+                    color: red;
+                }
                 td:nth-child(1){
                     width: 10%;
                 }
