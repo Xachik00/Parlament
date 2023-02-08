@@ -150,15 +150,15 @@ const SuperAdmin = () => {
                                                     placeholder="Նոր Գաղտնաբառ"
                                                     onFocus={() => setPwdFocus(true)}
                                                     onBlur={() => setPwdFocus(false)}
-                                                /></td>
+                                                />{pwdFocus && !validPwd && <p id="pwdnote" className={ "instructions" }>
+                                                8 to 24 characters. <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
+                                                   </p>}</td>
                                                
                                                 <td className='btn'><button><i className="fa-regular fa-square-check"></i></button>
                                                 <button onClick={() => setEdit(0)} ><i className="fa-solid fa-xmark"></i></button></td>
 
                                             </tr>
-                                            {pwdFocus && !validPwd&& <tr id="pwdnote" className={ "instructions" }>
-                                             8 to 24 characters. <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
-                                                </tr>}
+                                            
                                          </>
                                             :
 
