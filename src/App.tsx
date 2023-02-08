@@ -34,22 +34,22 @@ function App() {
         <Route path='/DepNumbers' element={<DepNumbersPage />} />
         <Route path="/" element={<PersistLogin />} >
           <Route path="/admin" element={!auth?.accessToken ? <Login /> :< AdminHomepage /> } />
-          <Route element={<RequireAuth allowedRole={[ROLE.superAdmin]} />}>
+          <Route element={<RequireAuth allowedRole={[auth.role]} />}>
             <Route path="/admindocCirculation" element={<DocCirculationPage />} />
           </Route>
-          <Route element={<RequireAuth allowedRole={[ROLE.superAdmin]} />}>
+          <Route element={<RequireAuth allowedRole={[auth.role]} />}>
             <Route path="admintimeTable" element={<TimeTablePage />} />
           </Route>
-          <Route element={<RequireAuth allowedRole={[ROLE.superAdmin]} />}>
+          <Route element={<RequireAuth allowedRole={[auth.role]} />}>
             <Route path="admincommittees" element={<CommitteesPage />} />
           </Route>
-          <Route element={<RequireAuth allowedRole={[ROLE.superAdmin]} />}>
+          <Route element={<RequireAuth allowedRole={[auth.role]} />}>
             <Route path="adminmeetingsSchedule" element={<MeetingsSchedulePage />} />
           </Route>
-          <Route element={<RequireAuth allowedRole={[ROLE.superAdmin]} />}>
+          <Route element={<RequireAuth allowedRole={[auth.role]} />}>
             <Route path="adminmPNumbers" element={<MPNumbersPage />} />
           </Route>
-          <Route element={<RequireAuth allowedRole={[ROLE.superAdmin]} />}>
+          <Route element={<RequireAuth allowedRole={[auth.role]} />}>
             <Route path="admindepNumbers" element={<DepNumbersPage />} />
           </Route>
           <Route element={<RequireAuth allowedRole={[ROLE.superAdmin]} />}>
