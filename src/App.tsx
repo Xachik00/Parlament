@@ -24,7 +24,6 @@ const ROLE = {
 
 function App() {
   const { auth }: any = useAuth();
-  console.log(auth.role);
   return (
     <div className={auth.role ? "admin" :' App'}>
       <Routes>

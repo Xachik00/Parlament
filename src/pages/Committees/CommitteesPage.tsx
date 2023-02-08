@@ -21,6 +21,7 @@ export const CommitteesPage = () => {
   const [addValue, setAddValue] = useState(['', ''])
   const { Committees } = useAppSelector(state => state.Committees)
 
+  console.log(auth.role);
 
   useEffect(() => {
     dispatch(fetchCommittees())
