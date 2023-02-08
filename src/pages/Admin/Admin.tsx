@@ -27,7 +27,7 @@ const Admin = () => {
                 <NavLink to="adminmeetingsSchedule">ԱԺ նիստերի ժամանակացույց</NavLink>
                 <NavLink to="adminmPNumbers">Պատգամավորների աշխատանքային հեռախոսահամարները</NavLink>
                 <NavLink to="admindepNumbers">Կառուցվածքային ստորաբաժանումների հեռախոսահամարներ</NavLink>
-                {auth.role === 'superAdmin' && <NavLink to="SuperAdmin">Ադմինիստրատոր</NavLink>}
+                {auth.role[0] === 'superAdmin' && <NavLink to="SuperAdmin">Ադմինիստրատոր</NavLink>}
                 <div className="flexGrow">
                     <button onClick= {signOut}>Դուրս գալ</button>
                 </div>
