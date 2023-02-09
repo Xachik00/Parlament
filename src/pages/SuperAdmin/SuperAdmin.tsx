@@ -28,7 +28,7 @@ const SuperAdmin = () => {
 
     useEffect(() => {
         setValidPwd(PWD_REGEX.test(pwd));
-    }, [pwd])
+    }, [])
 
     useEffect(() => {
         setErrMsg('');
