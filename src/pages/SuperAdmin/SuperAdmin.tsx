@@ -11,30 +11,26 @@ import './SuperAdmin.scss'
 const SuperAdmin = () => {
 
     const dispatch = useAppDispatch()
-    const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{4,20}$/;
+    let PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{4,20}$/;
     const { SuperAdmin } = useAppSelector(state => state.SuperAdmin)
     const [removeitem, setRemoveitem] = useState([-1, {}])
     const [validPwd, setValidPwd] = useState(false);
     const [pwdFocus, setPwdFocus] = useState(false);
-    const [errMsg, setErrMsg] = useState('');
     const [add, setAdd] = useState(false)
     const [edit, setEdit] = useState(0)
     const [pwd, setPwd] = useState('');
-    const errRef: any = useRef();
 
     useEffect(() => {
         dispatch(fetchSuperAdmin())
     }, [dispatch]);
 
-    useEffect(() => {
-        setErrMsg('');
-    }, [pwd])
+   useEffect(()=>{
+    setValidPwd(PWD_REGEX.test(pwd));
+   },[pwd,PWD_REGEX])
 
 
     async function editAdmin(value: string, id: number) {
-        setValidPwd(PWD_REGEX.test(pwd));
         if (!pwdFocus && validPwd) {
-
             const newAdmin = {
                 pwd: value
             }
@@ -50,7 +46,6 @@ const SuperAdmin = () => {
         await axios.delete('superAdmin/' + id)
         dispatch(fetchSuperAdmin())
     }
-
     return (
         <div className='SuperAdmin'>
             <Header />
@@ -69,7 +64,6 @@ const SuperAdmin = () => {
                                 <th>Գաղտնաբառ</th>
                                 <th>Փոփոխել</th>
                             </thead>
-                            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                             {
                                 SuperAdmin?.map((el, index) =>
                                     <tbody>
