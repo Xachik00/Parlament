@@ -20,14 +20,13 @@ const SuperAdmin = () => {
     const [edit, setEdit] = useState(0)
     const [pwd, setPwd] = useState('');
 
-    const q=PWD_REGEX.test(pwd)
     useEffect(() => {
         dispatch(fetchSuperAdmin())
     }, [dispatch]);
 
    useEffect(()=>{
-    q;
-   },[q])
+    setValidPwd(PWD_REGEX.test(pwd));
+   },[PWD_REGEX,pwd])
 
 
     async function editAdmin(value: string, id: number) {
