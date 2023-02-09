@@ -114,7 +114,7 @@ const Register = () => {
                     />
                     <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
                         Դաշտը պետք է պարունակի 5-ից 20 նիշ,<br />
-                        մեծատառ, փոքրատառ և հետևյալ նիշերից՝ ! @ # $ %
+                        մեծատառ, փոքրատառ, թիվ և հետևյալ նիշերից՝ ! @ # $ %
                     </p>
                     <label htmlFor="confirm_pwd">
                         Կրկնել գաղտնաբառը
