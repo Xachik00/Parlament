@@ -40,7 +40,9 @@ export const CommitteesPage = () => {
         title:value[0],
         text: value[1]
       }
-      await axios.put('meets/' + id, newCommites)
+      await axios.put('meets/' + id, newCommites,{
+        headers:{'auth_token':auth.acssesToken}
+      })
       dispatch(fetchCommittees())
       setEdit(0)
     }
@@ -67,7 +69,9 @@ export const CommitteesPage = () => {
         title,
         text
       }
-      await axios.post('meets/', newCommites)
+      await axios.post('meets/', newCommites,{
+        headers:{'auth_token':auth.acssesToken}
+      })
       dispatch(fetchCommittees())
       setAdd(false)
     }
