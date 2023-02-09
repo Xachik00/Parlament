@@ -145,7 +145,7 @@ export const DocCirculationPage = () => {
       <div className='DocCirculationBody'>
         <div className='DocCirculation_title'>
           <img src="./images/Frame1.png" alt="" />
-          <h2>Քաղաքացիների ընդունելության և  փաստաթղթաշրջանառության կարգը</h2>
+          <h2>Քաղաքացիների ընդունելության կարգը</h2>
         </div>
         <hr />
         {add1 ? <div className='addDiv'>

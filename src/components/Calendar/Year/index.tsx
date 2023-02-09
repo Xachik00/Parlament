@@ -126,7 +126,9 @@ const Year = ({
           )
         })}
       </div>
-      <div>{auth.role && <button className={disabled ? "disables" : "nodisables"} onClick={() => calendarSave()}>Պահպանել</button>}</div>
+      <div className='butons'>{auth.role && <><button className={disabled ? "disables" : "nodisables"} onClick={() => calendarSave()}>Պահպանել</button>
+      <button className='nodisables' onClick={()=>navigate(0)}>Չեղարկել</button></>}</div>
+      
     </>
   )
 }

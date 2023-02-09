@@ -173,26 +173,32 @@
       }
     }
 
-    .disables {
-      margin: 0 42px;
-      display: disable;
-      background: #ece1d0;
-      font-size: 14px;
-      color: #28374A;
-      padding: 10px;
-      cursor: not-allowed;
-      pointer-events: none;
-    }
+    .butons {
+      width: 250px;
+      display: flex;
+      justify-content: space-between;
 
-    .nodisables {
-      margin: 0 42px;
-      display: disable;
-      background: #E1AA5A;
-      font-size: 14px;
-      color: #28374A;
-      padding: 10px;
-      cursor: pointer;
+      .disables {
+        margin: 0 25px;
+        display: disable;
+        background: #ece1d0;
+        font-size: 14px;
+        color: #28374A;
+        padding: 10px;
+        cursor: not-allowed;
+        pointer-events: none;
+      }
 
+      .nodisables {
+        margin: 0 25px;
+        display: disable;
+        background: #E1AA5A;
+        font-size: 14px;
+        color: #28374A;
+        padding: 10px;
+        cursor: pointer;
+
+      }
     }
   }
 }

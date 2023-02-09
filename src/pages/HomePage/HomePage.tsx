@@ -8,7 +8,7 @@ export const HomePage = () => {
     {
       "id": 1,
       "title": "DocCirculation",
-      "description": "Քաղաքացիների ընդունելության և փաստաթղթա- շրջանառության կարգը",
+      "description": "Քաղաքացիների ընդունելության կարգը",
       "img": "./images/Frame1.png"
     },
     {
