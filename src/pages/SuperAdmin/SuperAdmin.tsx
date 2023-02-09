@@ -26,7 +26,7 @@ const SuperAdmin = () => {
 
    useEffect(()=>{
     setValidPwd(PWD_REGEX.test(pwd));
-   },[pwd,pwdFocus])
+   },[pwd])
 
 
     async function editAdmin(value: string, id: number) {
