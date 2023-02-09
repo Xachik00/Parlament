@@ -9,23 +9,18 @@ const REGISTER_URL = '/superAdmin';
 const Register = () => {
 
     const navigate = useNavigate()
-    const userRef: any = useRef();
-    const errRef: any = useRef();
-
-    const [user, setUser] = useState('');
-    const [validName, setValidName] = useState(false);
-    const [userFocus, setUserFocus] = useState(false);
-
-    const [pwd, setPwd] = useState('');
-    const [validPwd, setValidPwd] = useState(false);
-    const [pwdFocus, setPwdFocus] = useState(false);
-
-    const [matchPwd, setMatchPwd] = useState('');
     const [matchFocus, setMatchFocus] = useState(false);
     const [validMatch, setValidMatch] = useState(false);
-
+    const [validName, setValidName] = useState(false);
+    const [userFocus, setUserFocus] = useState(false);
+    const [validPwd, setValidPwd] = useState(false);
+    const [pwdFocus, setPwdFocus] = useState(false);
+    const [matchPwd, setMatchPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState(false);
+    const [user, setUser] = useState('');
+    const [pwd, setPwd] = useState('');
+    const userRef: any = useRef();
+    const errRef: any = useRef();
 
     useEffect(() => {
         userRef.current.focus();
@@ -61,7 +56,6 @@ const Register = () => {
                 }
             );
             console.log(JSON.stringify(response?.data));
-            setSuccess(true);
             setUser('');
             setPwd('');
             setMatchPwd('');
@@ -104,8 +98,6 @@ const Register = () => {
                         Դաշտը պետք է պարունակի 5-ից 20 նիշ<br />
                         Բացառությամբ նմանատիպ նիշերից՝ ! @ # $ %․․․
                     </p>
-
-
                     <label htmlFor="password">
                         Գաղտնաբառ
                     </label>
@@ -124,8 +116,6 @@ const Register = () => {
                         Դաշտը պետք է պարունակի 5-ից 20 նիշ,<br />
                         մեծատառ, փոքրատառ և հետևյալ նիշերից՝ ! @ # $ %
                     </p>
-
-
                     <label htmlFor="confirm_pwd">
                         Կրկնել գաղտնաբառը
                     </label>
@@ -144,12 +134,11 @@ const Register = () => {
                         Գաղտնաբառը չի համընկնում!
                     </p>
                     <div className="buts">
-                    <button disabled={!validName || !validPwd || !validMatch ? true : false} onClick={handleSubmit} >Հաստատել</button>
-                    <button onClick={() => navigate(0)}> Չեղարկել</button>
+                        <button disabled={!validName || !validPwd || !validMatch ? true : false} onClick={handleSubmit} >Հաստատել</button>
+                        <button onClick={() => navigate(0)}> Չեղարկել</button>
                     </div>
                 </form>
             </section>
-
         </>
     )
 }

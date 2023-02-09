@@ -1,11 +1,11 @@
-import { useState, useEffect, useRef } from 'react'
-import { Header } from '../../components/Header/Header'
 import Register from '../../components/Admin/components/Register';
-import './SuperAdmin.scss'
-import axios from '../../axios';
 import { useAppSelector,useAppDispatch } from '../../hooks/redux';
 import { fetchSuperAdmin } from '../../store/action/SuperAdmin';
 import DeleteText from '../../components/Delete/DeleteText';
+import { Header } from '../../components/Header/Header'
+import { useState, useEffect, useRef } from 'react'
+import axios from '../../axios';
+import './SuperAdmin.scss'
 
 
 const SuperAdmin = () => {
@@ -13,18 +13,14 @@ const SuperAdmin = () => {
     const dispatch=useAppDispatch()
     const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{4,20}$/;
     const {SuperAdmin} =useAppSelector(state => state.SuperAdmin)
-    const [edit, setEdit] = useState(0)
-    const [add, setAdd] = useState(false)
-    const [value, setValue] = useState('')
     const [removeitem, setRemoveitem] = useState([-1, {}])
-    const errRef: any = useRef();
-    const [pwd, setPwd] = useState('');
     const [validPwd, setValidPwd] = useState(false);
     const [pwdFocus, setPwdFocus] = useState(false);
-    // const [matchPwd, setMatchPwd] = useState('');
-    // const [validMatch, setValidMatch] = useState(false);
     const [errMsg, setErrMsg] = useState('');
-    console.log(SuperAdmin)
+    const [add, setAdd] = useState(false)
+    const [edit, setEdit] = useState(0)
+    const [pwd, setPwd] = useState('');
+    const errRef: any = useRef();
 
     useEffect(() => {
         dispatch(fetchSuperAdmin())
@@ -38,34 +34,7 @@ const SuperAdmin = () => {
         setErrMsg('');
     }, [pwd])
 
-    const handleSubmit = async (e: any) => {
-        e.preventDefault();
-        const v2 = PWD_REGEX.test(pwd);
-        if (!v2) {
-            setErrMsg("Invalid Entry");
-            return;
-        }
-        try {
-            const response = await axios.post('',
-                JSON.stringify({ pwd }),
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
-                }
-            );
-            console.log(JSON.stringify(response?.data));
-            setPwd('');
-        } catch (err: any) {
-            if (!err?.response) {
-                setErrMsg('No Server Response');
-            } else if (err.response?.status === 409) {
-                setErrMsg('Username Taken');
-            } else {
-                setErrMsg('Registration Failed')
-            }
-            errRef.current.focus();
-        }
-    }
+
     async function editAdmin(value: string, id: number) {
         if (!pwdFocus && validPwd) {
             const newAdmin = {
@@ -74,6 +43,7 @@ const SuperAdmin = () => {
             await axios.put('superAdmin/' + id, newAdmin)
             dispatch(fetchSuperAdmin())
             setEdit(0)
+            setPwd('')
         }
     }
 
@@ -83,26 +53,6 @@ const SuperAdmin = () => {
         dispatch(fetchSuperAdmin())
     }
 
-    // async function addAdmin(title: string, text: string) {
-    //     setErorr(false)
-    //     setErorr1(false)
-    //     if (title.trim() === '' || text.trim() === '') {
-    //         if (text.trim() === '') {
-    //             setErorr(true)
-    //         }
-    //         if (title.trim() === '') {
-    //             setErorr1(true)
-    //         }
-    //     } else {
-    //         const newCommites = {
-    //             title,
-    //             text
-    //         }
-    //         await axios.post('meets/', newCommites)
-    //         dispatch(fetchCommittees())
-    //         setAdd(false)
-    //     }
-    // }
     return (
         <div className='SuperAdmin'>
             <Header />
@@ -142,7 +92,7 @@ const SuperAdmin = () => {
                                                     onFocus={() => setPwdFocus(true)}
                                                     onBlur={() => setPwdFocus(false)}
                                                 />{pwdFocus && !validPwd && <p id="pwdnote" className={ "instructions" }>
-                                                 <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
+                                                 Օգտագործել՝ մեծատառ,փոքրատառ,թիվ և <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
                                                    </p>}</td>
                                                
                                                 <td className='btn'>
