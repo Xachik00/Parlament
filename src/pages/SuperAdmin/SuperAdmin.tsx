@@ -26,7 +26,7 @@ const SuperAdmin = () => {
     }, [dispatch]);
 
    useEffect(()=>{
-    setValidPwd(PWD_REGEX.test(pwd));
+    q;
    },[q])
 
 
