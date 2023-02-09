@@ -69,8 +69,10 @@ export const CommitteesPage = () => {
         title,
         text
       }
-      await axios.post('meets/', newCommites,{
-        headers:{'auth_token':auth.acssesToken}
+      await axios.post('meets/', newCommites,
+      {
+        headers:{'Content-Type': 'application/json',auth_token:auth.accessToken},
+        withCredentials: true
       })
       dispatch(fetchCommittees())
       setAdd(false)
