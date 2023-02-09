@@ -51,7 +51,7 @@ const Login = () => {
             if (!err?.response) {
                 setErrMsg('Սերվերից պատասխան չկա');
             } else if (err.response?.status === 400) {
-                setErrMsg('մուտքանունը կամ գաղտնաբառը բացակայում է');
+                setErrMsg('Սխալ մուտքանուն կամ գաղտնաբառ');
             } else if (err.response?.status === 401) {
                 setErrMsg('Սխալ մուտքանուն կամ գաղտնաբառ');
             } else {
