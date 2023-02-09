@@ -21,7 +21,6 @@ const Year = ({
   const navigate = useNavigate()
   const { Calendar } = useAppSelector(state => state.Calendar)
   const dispatch = useAppDispatch()
-  const dispatching=localStorage.getItem('data')?.length
   const item = Calendar.map(item => item.date)
   const [select, setSelect] = useState<any>(item)
   const [disabled, setDisabled] = useState(true)
@@ -93,8 +92,8 @@ const Year = ({
 
                 {daysArr?.map((_, pos) => {
                   const day = pos + arrOffset;
-                  const id: any = `${dayjs().year()}` + "-" + month + "-" + day;
-                  
+                  const id: any = dayjs().year() + "-" + month + "-" + day;
+                  console.log(id)
                   
                   return (
                     auth.role ? <div onClick={async () => {
