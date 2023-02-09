@@ -21,8 +21,6 @@ export const CommitteesPage = () => {
   const [addValue, setAddValue] = useState(['', ''])
   const { Committees } = useAppSelector(state => state.Committees)
 
-  console.log(auth.role[0]);
-
   useEffect(() => {
     dispatch(fetchCommittees())
   }, [dispatch])
@@ -114,7 +112,6 @@ export const CommitteesPage = () => {
                         <button onClick={(e) => setRemoveitem([item.id,e])}><i className="fa-regular fa-trash-can"></i></button>
                         </>}</div>
                     }
-
                   </div>)
                 }
                 { auth.role && <button onClick={() => {setAdd(true)}}><i className="fa-solid fa-plus ADD">   Ավելացնել </i></button>}
