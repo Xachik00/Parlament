@@ -3,7 +3,7 @@ import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 import { fetchSuperAdmin } from '../../store/action/SuperAdmin';
 import DeleteText from '../../components/Delete/DeleteText';
 import { Header } from '../../components/Header/Header'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import axios from '../../axios';
 import './SuperAdmin.scss'
 
@@ -11,7 +11,7 @@ import './SuperAdmin.scss'
 const SuperAdmin = () => {
 
     const dispatch = useAppDispatch()
-    let PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{4,20}$/;
+    const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{4,20}$/;
     const { SuperAdmin } = useAppSelector(state => state.SuperAdmin)
     const [removeitem, setRemoveitem] = useState([-1, {}])
     const [validPwd, setValidPwd] = useState(false);
@@ -26,7 +26,7 @@ const SuperAdmin = () => {
 
    useEffect(()=>{
     setValidPwd(PWD_REGEX.test(pwd));
-   },[pwd,PWD_REGEX])
+   },[pwd,pwdFocus])
 
 
     async function editAdmin(value: string, id: number) {
