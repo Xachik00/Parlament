@@ -26,9 +26,6 @@ const SuperAdmin = () => {
         dispatch(fetchSuperAdmin())
       }, [dispatch])
 
-    useEffect(() => {
-        setValidPwd(PWD_REGEX.test(pwd));
-    }, [pwd,PWD_REGEX])
 
     useEffect(() => {
         setErrMsg('');
@@ -44,6 +41,8 @@ const SuperAdmin = () => {
             dispatch(fetchSuperAdmin())
             setEdit(0)
             setPwd('')
+        }else{
+        setValidPwd(PWD_REGEX.test(pwd));
         }
     }
 
