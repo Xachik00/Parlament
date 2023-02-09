@@ -24,11 +24,7 @@ const SuperAdmin = () => {
 
     useEffect(() => {
         dispatch(fetchSuperAdmin())
-    }, [dispatch])
-
-    useEffect(() => {
-        setValidPwd(PWD_REGEX.test(pwd));
-    }, [])
+    }, [dispatch]);
 
     useEffect(() => {
         setErrMsg('');
@@ -36,6 +32,7 @@ const SuperAdmin = () => {
 
 
     async function editAdmin(value: string, id: number) {
+        setValidPwd(PWD_REGEX.test(pwd));
         if (!pwdFocus && validPwd) {
 
             const newAdmin = {
