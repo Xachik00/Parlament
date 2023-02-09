@@ -41,6 +41,7 @@ const Login = () => {
             );
             const res=JSON.stringify(response.data)
             localStorage.setItem('response',res);
+            localStorage.setItem('token',response.data.accessToken)
             resetUser();
             setPwd('');
             navigate(from, { replace: true });
