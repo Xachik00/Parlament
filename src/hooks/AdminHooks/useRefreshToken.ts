@@ -5,9 +5,10 @@ const useRefreshToken = () => {
     const { setAuth }:any = useAuth();
     const {auth}:any=useAuth()
     // const refreshToken=auth.refreshToken;
+    console.log(auth);
     
     const refresh = async () => {
-        const response = await axios.post('/refresh',{refreshToken : auth.refreshToken});
+        const response = await axios.post('/refresh',{refreshToken : auth?.refreshToken});
         
         setAuth((prev:any) => {
             return {
