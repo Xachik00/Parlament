@@ -25,16 +25,6 @@ export const DocCirculationtSlice = createSlice({
       state.DocCirculation = action.payload;
       state.error = ''
     },
-    // fetchSuccess_11(state, action: PayloadAction<IDocCirculation[]>) {
-    //   state.loading = false;
-    //   state.DocCirculation_2 = action.payload;
-    //   state.error = ''
-    // },
-    // fetchSuccess_12(state, action: PayloadAction<IDocCirculation[]>) {
-    //   state.loading = false;
-    //   state.DocCirculation_3 = action.payload;
-    //   state.error = ''
-    // },
     fetchError_1(state, action: PayloadAction<Error>) {
       state.loading = false;
       state.error = action.payload.message

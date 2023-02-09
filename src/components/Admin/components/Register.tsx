@@ -55,7 +55,6 @@ const Register = () => {
                     withCredentials: true
                 }
             );
-            console.log(JSON.stringify(response?.data));
             setUser('');
             setPwd('');
             setMatchPwd('');

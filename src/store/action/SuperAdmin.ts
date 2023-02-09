@@ -6,9 +6,7 @@ export const fetchSuperAdmin = () => {
     return async (dispatch:Dispatch)=>{
         try{
             dispatch(fetchingSuper());
-            const response =await axios.get('superAdmin');
-            console.log(response.data);
-                        
+            const response =await axios.get('superAdmin');                        
             dispatch(fetchSuccessSuper(response.data));
         }
         catch(error){

@@ -93,7 +93,6 @@ const Year = ({
                 {daysArr?.map((_, pos) => {
                   const day = pos + arrOffset;
                   const id: any = dayjs().year() + "-" + month + "-" + day;
-                  console.log(id)
                   
                   return (
                     auth.role ? <div onClick={async () => {
