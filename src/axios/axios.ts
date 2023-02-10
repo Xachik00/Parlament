@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 export default axios.create({
-    baseURL: process.env.BASE_URL+'auth'
+    baseURL: process.env.BASE_URL+'api/v1/auth'
 });
 
 export const axiosPrivate = axios.create({
