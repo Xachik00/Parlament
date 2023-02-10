@@ -67,11 +67,11 @@ const SuperAdmin = () => {
                             {
                                 SuperAdmin?.map((el, index) =>
                                     <tbody>
-                                        {edit === el.id ?
+                                        {edit === el?.id ?
                                             <>
                                                 <tr className='SuperAdmin_edit'>
                                                     <td>{index + 1}</td>
-                                                    <td>{el.user}</td>
+                                                    <td>{el?.user}</td>
                                                     <td><input
                                                         type="password"
                                                         id="password"
@@ -95,7 +95,7 @@ const SuperAdmin = () => {
                                             </> :
                                             <tr>
                                                 <td>{index + 1}</td>
-                                                <td>{el.user}</td>
+                                                <td>{el?.user}</td>
                                                 <td>******</td>
                                                 <td className='btn'><button onClick={() => setEdit(el.id)}><i className="fa-solid fa-pen"></i></button>
                                                     <button onClick={(e) => setRemoveitem([el.id, e])}><i className="fa-regular fa-trash-can"></i></button></td>
