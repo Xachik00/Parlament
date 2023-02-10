@@ -278,8 +278,6 @@ export const TimeTablePage = () => {
                       }}><i className="fa-regular fa-trash-can"></i></button>}
                     </td>}
                   </tr>}
-
-
               </tbody>
               )
             }
