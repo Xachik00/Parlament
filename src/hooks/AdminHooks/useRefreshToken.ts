@@ -4,8 +4,6 @@ import useAuth from './useAuth';
 const useRefreshToken = () => {
     const { setAuth }: any = useAuth();
     const { auth }: any = useAuth()
-    // const refreshToken=auth.refreshToken;
-    console.log(auth);
 
     const refresh = async () => {
         if (auth.refreshToken) {
