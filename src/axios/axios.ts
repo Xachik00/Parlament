@@ -12,9 +12,11 @@ export const axiosPrivate = axios.create({
     headers: { 'Content-Type': 'application/json' },
     withCredentials: true
 });
-export const axsios = axios.create({
+export const axsios = token?axios.create({
     baseURL: env.BACK_APP_BASE_URL,
     headers:{
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`}
-});
+        'Authorization': `Bearer ${token}`}
+}):axios.create({
+    baseURL: env.BACK_APP_BASE_URL,
+})
