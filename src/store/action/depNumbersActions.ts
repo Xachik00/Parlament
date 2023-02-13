@@ -1,12 +1,12 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import axios from "../../axios";
+import axsios from "../../axios/axios";
 import {  fetching, fetchSuccess, fetchError } from "../slice/depNumbersSlice";
 
 export const fetchDepNum = () => {
     return async (dispatch:Dispatch)=>{
         try{
             dispatch(fetching());
-            const response =await axios.get('units');
+            const response =await axsios.get('units');
             
             dispatch(fetchSuccess(response.data));
         }

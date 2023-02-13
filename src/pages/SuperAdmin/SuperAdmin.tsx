@@ -4,7 +4,7 @@ import { fetchSuperAdmin } from '../../store/action/SuperAdmin';
 import DeleteText from '../../components/Delete/DeleteText';
 import { Header } from '../../components/Header/Header'
 import { useState, useEffect } from 'react'
-import axios from '../../axios';
+import axsios from '../../axios/axios';
 import './SuperAdmin.scss'
 
 
@@ -34,7 +34,7 @@ const SuperAdmin = () => {
             const newAdmin = {
                 pwd: value
             }
-            await axios.put('superAdmin/' + id, newAdmin)
+            await axsios.put('superAdmin/' + id, newAdmin)
             dispatch(fetchSuperAdmin())
             setEdit(0)
             setPwd('')
@@ -43,7 +43,7 @@ const SuperAdmin = () => {
 
     async function deleteAdmin(id: Number, e: any) {
         e.preventDefault()
-        await axios.delete('superAdmin/' + id)
+        await axsios.delete('superAdmin/' + id)
         dispatch(fetchSuperAdmin())
     }
     return (

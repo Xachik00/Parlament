@@ -1,12 +1,12 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import axios from "../../axios";
+import axsios from "../../axios/axios";
 import {  fetching, fetchSuccess, fetchError } from "../slice/parlamentSlice";
 
 export const fetchParlament = ()=>{
     return async (dispatch:Dispatch)=>{
         try{
             dispatch(fetching());
-            const response =await axios.get('parlament');
+            const response =await axsios.get('parlament');
             dispatch(fetchSuccess(response.data));
         }
         catch(error){

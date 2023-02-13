@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux'
 import { fetchMpsnumber } from "../../store/action/NumbersAction";
 import useAuth from '../../hooks/AdminHooks/useAuth';
-import axios from '../../axios';
+import axsios from '../../axios/axios';
 import { IMPs } from '../../models/model';
 import './StepStyle.scss'
 import { ErrorMessage } from '../Error/Error';
@@ -73,7 +73,7 @@ export const MPsPage = () => {
        firstname: value.firstname, lastname: value.lastname,
       surname: value.surname, phonenumber: value.phonenumber,
     }
-    await axios.put('parlament/' + id, EditMPs)
+    await axsios.put('parlament/' + id, EditMPs)
     dispatch(fetchMpsnumber())
     setEdit(-1)
   }
@@ -90,14 +90,14 @@ export const MPsPage = () => {
         firstname: addvalue.firstname, lastname: addvalue.lastname,
         surname: addvalue.surname,  key: addvalue.key
       }
-      await axios.post('parlament/', newMPs)
+      await axsios.post('parlament/', newMPs)
     }else{
       
       const newMPs = {
       firstname: addvalue.firstname, lastname: addvalue.lastname,
       surname: addvalue.surname, phonenumber: addvalue.phonenumber, key: addvalue.key
     }
-    await axios.post('parlament/', newMPs)
+    await axsios.post('parlament/', newMPs)
     }
     dispatch(fetchMpsnumber())
     setAdd(false)
@@ -105,7 +105,7 @@ export const MPsPage = () => {
 
   async function Delete(id: number, e: React.FormEvent) {
     e.preventDefault()
-    await axios.delete('parlament/' + id,)
+    await axsios.delete('parlament/' + id,)
     dispatch(fetchMpsnumber())
     setAdd(false)
   }

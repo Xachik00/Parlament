@@ -3,7 +3,7 @@ import { Header } from '../../components/Header/Header';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux' 
 import { fetchDepNum } from "../../store/action/depNumbersActions"; 
 import { ErrorMessage } from '../../components/Error/Error';
-import axios from '../../axios/index'; 
+import axsios from '../../axios/axios'; 
 import useAuth from '../../hooks/AdminHooks/useAuth'; 
 import "./depNum.scss" 
 import DeleteText from '../../components/Delete/DeleteText';
@@ -37,14 +37,14 @@ export const DepNumbersPage = () => {
       name:value, 
       internalphone:value1, 
     } 
-    await axios.put(page + "/" + id, newInfo);
+    await axsios.put(page + "/" + id, newInfo);
     dispatch(fetchDepNum()) 
     setEdit(-1)
   } 
  
   async function adminDelete(id:number, page:string, e:any){
     e.preventDefault()
-    await axios.delete(page+"/" + id); 
+    await axsios.delete(page+"/" + id); 
     dispatch(fetchDepNum()) 
   } 
 
@@ -67,7 +67,7 @@ export const DepNumbersPage = () => {
       name:value, 
       internalphone:value1, 
     } 
-    await axios.post("units/", newInfo); 
+    await axsios.post("units/", newInfo); 
     setAdd(!add)
     dispatch(fetchDepNum())
   

@@ -4,7 +4,7 @@ import { Header } from '../../components/Header/Header'
 import useAuth from '../../hooks/AdminHooks/useAuth';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import axios from '../../axios/index';
+import axsios from '../../axios/axios';
 import './CommitteesPage.scss'
 import DeleteText from "../../components/Delete/DeleteText";
 
@@ -40,7 +40,7 @@ export const CommitteesPage = () => {
         title:value[0],
         text: value[1]
       }
-      await axios.put('meets/' + id, newCommites)
+      await axsios.put('meets/' + id, newCommites)
       dispatch(fetchCommittees())
       setEdit(0)
     }
@@ -48,7 +48,7 @@ export const CommitteesPage = () => {
 
   async function deleteItem(id: Number,e:any) {
     e.preventDefault()
-    await axios.delete('meets/' + id)
+    await axsios.delete('meets/' + id)
     dispatch(fetchCommittees())
   }
 
@@ -67,7 +67,7 @@ export const CommitteesPage = () => {
         title,
         text
       }
-      await axios.post('meets/', newCommites)
+      await axsios.post('meets/', newCommites)
       dispatch(fetchCommittees())
       setAdd(false)
     }

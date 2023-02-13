@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from '../../axios';
+import axsios from '../../axios/axios';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux'
 import { fetchCommitte } from "../../store/action/NumbersAction";
 import useAuth from '../../hooks/AdminHooks/useAuth';
@@ -46,7 +46,7 @@ export const CommittePage = () => {
       member2: value.member2, cityphone: value.cityphone,
       internalphone: value.internalphone, internalphone2: value.internalphone2
     }
-    await axios.put('committee/' + id, Editcomitee)
+    await axsios.put('committee/' + id, Editcomitee)
     dispatch(fetchCommitte())
     setEdit(-1)
   }
@@ -63,14 +63,14 @@ export const CommittePage = () => {
       member2: addvalue.member2, cityphone: addvalue.cityphone,
       internalphone: addvalue.internalphone, internalphone2: addvalue.internalphone2
     }
-    await axios.post('committee/', newComitee)
+    await axsios.post('committee/', newComitee)
     dispatch(fetchCommitte())
     setAdd(false)
   }
 
   async function Delete(id: number, e: React.FormEvent) {
     e.preventDefault()
-    await axios.delete('committee/' + id,)
+    await axsios.delete('committee/' + id,)
     dispatch(fetchCommitte())
     setAdd(false)
   }
