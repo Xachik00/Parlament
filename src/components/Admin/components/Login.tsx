@@ -30,7 +30,7 @@ const Login = () => {
     }, [user, pwd])
 
     const handleSubmit = async (e: any) => {
-        e.preventDefault();
+        
         try {
             const response:any = await axios.post(LOGIN_URL,
                 JSON.stringify({ user , pwd }),
