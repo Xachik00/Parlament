@@ -47,7 +47,8 @@ const Login = () => {
             navigate(from, { replace: true });
             // const resp:any=localStorage.getItem('response')
             // const respons=JSON.parse(resp)
-            setAuth({...response});    
+            setAuth({...response}); 
+            navigate(0)
         } catch (err: any) {
             if (!err?.response) {
                 setErrMsg('Սերվերից պատասխան չկա');
@@ -60,6 +61,7 @@ const Login = () => {
             }
             errRef.current.focus();
         }
+
     }
     return (
 
