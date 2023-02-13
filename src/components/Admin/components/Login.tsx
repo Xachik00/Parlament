@@ -30,8 +30,8 @@ const Login = () => {
     }, [user, pwd])
 
     const handleSubmit = async (e: any) => {
-        e.preventDefault();
         try {
+            e.preventDefault();
             const response:any = await axios.post(LOGIN_URL,
                 JSON.stringify({ user , pwd }),
                 {
@@ -44,7 +44,6 @@ const Login = () => {
             localStorage.setItem('token',response.data.accessToken)
             resetUser();
             setPwd('');
-            navigate(from, { replace: true });
             const resp:any=localStorage.getItem('response')
             const respons=JSON.parse(resp)
             setAuth(respons );    
@@ -61,6 +60,7 @@ const Login = () => {
             }
             errRef.current.focus();
         }
+        navigate(from, { replace: true });
     }
     return (
 
