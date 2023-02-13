@@ -4,7 +4,7 @@ import { Header } from '../../components/Header/Header'
 import useAuth from '../../hooks/AdminHooks/useAuth';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import axios from '../../axios';
+import axios from '../../axios/index';
 import './CommitteesPage.scss'
 import DeleteText from "../../components/Delete/DeleteText";
 
