@@ -60,7 +60,6 @@ const Login = () => {
             }
             errRef.current.focus();
         }
-        navigate(0)
 
     }
     return (
