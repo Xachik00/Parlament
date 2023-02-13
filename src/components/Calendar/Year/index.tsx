@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 import { IYear } from '../types'
-import axios from '../../../axios'
+import axsios from '../../../axios/axios'
 import { useState, useEffect } from 'react'
 import isBetween from 'dayjs/plugin/isBetween'
 import { useNavigate } from 'react-router-dom';
@@ -47,7 +47,7 @@ const Year = ({
     }
 
 
-      await axios.post('timestamp/', select1)
+      await axsios.post('timestamp/', select1)
     
     navigate(0)
   }
