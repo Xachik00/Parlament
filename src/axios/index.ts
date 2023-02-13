@@ -8,7 +8,7 @@ console.log(envv,'env');
 
 
 export default axios.create({
-    baseURL: env.BACK_APP_BASE_URL,
+    baseURL: 'http://34.125.34.1:3000/api/v1/',
     headers:{
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`}
