@@ -14,7 +14,7 @@ const Admin = () => {
         localStorage.removeItem('data')
         navigate('/admin');
     }
-    navigate(0)
+    // navigate(0)
     return (
         <>
         <section className="section">
