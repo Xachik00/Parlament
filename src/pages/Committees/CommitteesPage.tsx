@@ -40,7 +40,12 @@ export const CommitteesPage = () => {
         title:value[0],
         text: value[1]
       }
-      await axios.put('meets/' + id, newCommites)
+      await axios.put('meets/' + id, newCommites,
+      {
+        headers:{
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${auth.accessToken}`}
+      })
       dispatch(fetchCommittees())
       setEdit(0)
     }
@@ -48,7 +53,12 @@ export const CommitteesPage = () => {
 
   async function deleteItem(id: Number,e:any) {
     e.preventDefault()
-    await axios.delete('meets/' + id)
+    await axios.delete('meets/' + id,
+    {
+      headers:{
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${auth.accessToken}`}
+    })
     dispatch(fetchCommittees())
   }
 
@@ -67,7 +77,12 @@ export const CommitteesPage = () => {
         title,
         text
       }
-      await axios.post('meets/', newCommites)
+      await axios.post('meets/', newCommites,
+      {
+        headers:{
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${auth.accessToken}`}
+      })
       dispatch(fetchCommittees())
       setAdd(false)
     }
