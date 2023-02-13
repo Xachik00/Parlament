@@ -1,5 +1,5 @@
 import axios from "axios"
-import env from "react-dotenv"
+// import env from "react-dotenv"
 const token=localStorage.getItem('token')
 console.log(token,'token');
 const envv=process.env
