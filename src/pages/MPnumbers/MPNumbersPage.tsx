@@ -5,10 +5,6 @@ import { CommittePage } from '../../components/Step/CommittePage';
 import { FactionPage } from '../../components/Step/FactionPage';
 import './MPnumStyle.scss'
 
-
-
-
-
 export const MPNumbersPage = () => {
 
 
