@@ -2,10 +2,10 @@ import axios from "axios"
 import env from "react-dotenv";
 import { useEffect,useState } from "react";
 
-const [token,setToken]=useState<any>(localStorage.getItem('token'));
+const [token,setToken]=useState<any>();
 
+setToken(localStorage.getItem('token')) 
 // useEffect(()=>{
-//     setToken(localStorage.getItem('token')) 
 // },[localStorage]) 
 
 export default axios.create({
