@@ -1,5 +1,5 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import axsios from "../../axios/axios";
+import axios from "../../axios";
 import {  fetchingCal, fetchSuccessCal, fetchErrorCal } from "../slice/CalendarSlice";
 
 export const fetchCalendar = ()=>{
@@ -8,10 +8,10 @@ export const fetchCalendar = ()=>{
             dispatch(fetchingCal());
             const Token=localStorage.getItem('token');
             if(Token){
-                const response =await axsios.get( 'timestamp/getAllDate');
+                const response =await axios.get('timestamp/getAllDate');
                 dispatch(fetchSuccessCal(response.data));
             }else{
-                const response =await axsios.get('timestamp');
+                const response =await axios.get('timestamp');
                 dispatch(fetchSuccessCal(response.data));
             }
         }

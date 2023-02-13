@@ -1,12 +1,12 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import axsios from "../../axios/axios";
+import axios from "../../axios";
 import {  fetching_3, fetchSuccess_3, fetchError_3 } from "../slice/CommitteesSlice";
 
 export const fetchCommittees = ()=>{
     return async (dispatch:Dispatch)=>{
         try{
             dispatch(fetching_3());
-            const response =await axsios.get('meets');
+            const response =await axios.get('meets');
             dispatch(fetchSuccess_3(response.data));
             
         }
