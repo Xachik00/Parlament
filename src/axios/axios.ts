@@ -1,16 +1,12 @@
 import axios from 'axios';
-// import env from 'react-dotenv'
-const token=localStorage.getItem('token')
-console.log(token);
+import env from 'react-dotenv'
 
 export default axios.create({
-    baseURL: 'http://34.125.34.1:3000/api/v1/'+'auth',
-    headers: { 'Content-Type': 'application/json' },
-    withCredentials: true
+    baseURL: env.BACK_APP_BASE_URL+'auth'
 });
 
 export const axiosPrivate = axios.create({
-    baseURL: 'http://34.125.34.1:3000/api/v1/',
+    baseURL: env.BACK_APP_BASE_URL+'auth',
     headers: { 'Content-Type': 'application/json' },
     withCredentials: true
 });
