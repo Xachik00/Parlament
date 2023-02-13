@@ -6,7 +6,9 @@ const Admin = () => {
 
     const navigate = useNavigate();
     const { setAuth }:any = useAuth();    
-    const { auth }:any = useAuth();    
+    const { auth }:any = useAuth(); 
+    
+    
     const signOut = async () => {
         setAuth({});
         localStorage.removeItem('token')

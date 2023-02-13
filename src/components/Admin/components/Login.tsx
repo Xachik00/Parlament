@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import useInput from '../../../hooks/AdminHooks/useInput';
 import useToggle from '../../../hooks/AdminHooks/useToggle';
 import axios from '../../../axios/axios';
+import axioss from '../../../axios/index';
 import '../Style/Login.scss'
 
 const LOGIN_URL = '/login';
@@ -30,24 +31,35 @@ const Login = () => {
     }, [user, pwd])
 
     const handleSubmit = async (e: any) => {
+        e.preventDefault();
         try {
-            e.preventDefault();
-            const response:any = await axios.post(LOGIN_URL,
-                JSON.stringify({ user , pwd }),
+            const response: any = await axios.post(LOGIN_URL,
+                JSON.stringify({ user, pwd }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
                 }
             );
-            const res=JSON.stringify(response.data)
-            localStorage.setItem('response',res);
-            localStorage.setItem('token',response.data.accessToken)
+            const res = JSON.stringify(response.data)
+            localStorage.setItem('response', res);
+            localStorage.setItem('token', response.data.accessToken)
             resetUser();
             setPwd('');
-            const resp:any=localStorage.getItem('response')
-            const respons=JSON.parse(resp)
-            setAuth(respons );    
+            const resp: any = localStorage.getItem('response')
+            navigate(from, { replace: true });
+            const respons = JSON.parse(resp)
+            setAuth(respons);
             // navigate(0)
+
+
+
+            axioss.interceptors.request.use(function (config: any) {
+                    config.headers.Authorization = `Bearer ${response.data.accessToken}`;
+                return config;
+            });
+            
+
+
         } catch (err: any) {
             if (!err?.response) {
                 setErrMsg('Սերվերից պատասխան չկա');
@@ -60,7 +72,6 @@ const Login = () => {
             }
             errRef.current.focus();
         }
-        navigate(from, { replace: true });
     }
     return (
 
