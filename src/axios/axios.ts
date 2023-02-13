@@ -4,7 +4,9 @@ const token=localStorage.getItem('token')
 console.log(token);
 
 export default axios.create({
-    baseURL: 'http://34.125.34.1:3000/api/v1/'+'auth'
+    baseURL: 'http://34.125.34.1:3000/api/v1/'+'auth',
+    headers: { 'Content-Type': 'application/json' },
+    withCredentials: true
 });
 
 export const axiosPrivate = axios.create({
