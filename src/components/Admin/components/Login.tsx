@@ -49,17 +49,11 @@ const Login = () => {
             navigate(from, { replace: true });
             const respons = JSON.parse(resp)
             setAuth(respons);
-            // navigate(0)
-
-
-
+            
             axioss.interceptors.request.use(function (config: any) {
                     config.headers.Authorization = `Bearer ${response.data.accessToken}`;
                 return config;
             });
-            
-
-
         } catch (err: any) {
             if (!err?.response) {
                 setErrMsg('Սերվերից պատասխան չկա');
