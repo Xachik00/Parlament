@@ -44,11 +44,11 @@ const Login = () => {
             localStorage.setItem('token',response.data.accessToken)
             resetUser();
             setPwd('');
-            navigate(from, { replace: true });
             const resp:any=localStorage.getItem('response')
             const respons=JSON.parse(resp)
             setAuth(respons );    
-            navigate(0)
+            navigate(from, { replace: true });
+            
         } catch (err: any) {
             if (!err?.response) {
                 setErrMsg('Սերվերից պատասխան չկա');
