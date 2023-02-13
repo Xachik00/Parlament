@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Header } from '../../components/Header/Header';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux'
 import { fetchTimeTable } from "../../store/action/timeTableActions";
-import axsios from '../../axios/axios';
+import axios from '../../axios';
 import { ErrorMessage } from '../../components/Error/Error';
 import useAuth from '../../hooks/AdminHooks/useAuth';
 import DeleteText from '../../components/Delete/DeleteText';
@@ -47,7 +47,7 @@ export const TimeTablePage = () => {
       day: valueCitizen1,
       time: valueCitizen2
     }
-    await axsios.put(page + "/" + id, newInfo);
+    await axios.put(page + "/" + id, newInfo);
     dispatch(fetchTimeTable())
     seteditCitizen(-1)
   }
@@ -60,20 +60,20 @@ export const TimeTablePage = () => {
       day: value1,
       time: value2
     }
-    await axsios.put(page + "/" + id, newInfo);
+    await axios.put(page + "/" + id, newInfo);
     dispatch(fetchTimeTable())
     setEdit(-1)
   }
 
   async function adminDelete(id: any, page: string, e:any) {
     e.preventDefault()
-    await axsios.delete(page + "/" + id);
+    await axios.delete(page + "/" + id);
     dispatch(fetchTimeTable())
   }
 
   async function adminDeleteCitizen(id: any, page: string, e:any) {
     e.preventDefault()
-    await axsios.delete(page + "/" + id);
+    await axios.delete(page + "/" + id);
     dispatch(fetchTimeTable())
   }
 
@@ -107,7 +107,7 @@ export const TimeTablePage = () => {
       day: value1,
       time: value2,
     }
-    await axsios.post("acceptability/", newInfo);
+    await axios.post("acceptability/", newInfo);
     dispatch(fetchTimeTable())
     setAdd(!add)
   }
@@ -125,7 +125,7 @@ export const TimeTablePage = () => {
       day: valueCitizen1,
       time: valueCitizen2,
     }
-    await axsios.post("acceptability/", newInfo);
+    await axios.post("acceptability/", newInfo);
     dispatch(fetchTimeTable())
     setAdd1(!add1)
   }

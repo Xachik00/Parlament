@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axsios from '../../axios/axios';
+import axios from '../../axios';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux'
 import { fetchFraction } from "../../store/action/NumbersAction";
 import useAuth from '../../hooks/AdminHooks/useAuth';
@@ -42,7 +42,7 @@ export const FactionPage = () => {
       member2: value.member2, cityphone: value.cityphone,
       internalphone: value.internalphone
     }
-    await axsios.put('faction/' + id, Editfraction)
+    await axios.put('faction/' + id, Editfraction)
     dispatch(fetchFraction())
     setEdit(-1)
   }
@@ -59,14 +59,14 @@ export const FactionPage = () => {
       member1: addvalue.member1, cityphone: addvalue.cityphone,
       internalphone: addvalue.internalphone
     }
-    await axsios.post('faction/', newFraction)
+    await axios.post('faction/', newFraction)
     dispatch(fetchFraction())
     setAdd(false)
   }
 
   async function Delete(id: number, e: React.FormEvent) {
     e.preventDefault()
-    await axsios.delete('faction/' + id,)
+    await axios.delete('faction/' + id,)
     dispatch(fetchFraction())
     setAdd(false)
   }

@@ -4,7 +4,7 @@ const token=localStorage.getItem('token')
 console.log(token,'token');
 
 
-export const axsios = token?axios.create({
+export default token?axios.create({
     baseURL: env.BACK_APP_BASE_URL,
     headers:{
         'Content-Type': 'application/json',

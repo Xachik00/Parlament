@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from '../../hooks/redux'
 import { fetchDocCirculation } from "../../store/action/DocCirculationActions";
 import './DocCirculation.scss';
 import useAuth from '../../hooks/AdminHooks/useAuth';
-import axsios from '../../axios/axios';
+import axios from '../../axios';
 import { useNavigate } from 'react-router-dom';
 import DeleteText from '../../components/Delete/DeleteText';
 
@@ -51,7 +51,7 @@ export const DocCirculationPage = () => {
         title,
         text
       }
-      await axsios.put('citizen/' + id, newDocCirculation)
+      await axios.put('citizen/' + id, newDocCirculation)
       setValue('')
       setValue2(['', ''])
       dispatch(fetchDocCirculation())
@@ -62,7 +62,7 @@ export const DocCirculationPage = () => {
         text,
         subtitle1: value[0]
       }
-      await axsios.put('citizen/' + id, newnewDocCirculation)
+      await axios.put('citizen/' + id, newnewDocCirculation)
       setValue('')
       setValue2(['', ''])
       dispatch(fetchDocCirculation())
@@ -73,7 +73,7 @@ export const DocCirculationPage = () => {
         text,
         subtitle2: value2[1]
       }
-      await axsios.put('citizen/' + id, newnewDocCirculation)
+      await axios.put('citizen/' + id, newnewDocCirculation)
       setValue('')
       setValue2(['', ''])
       dispatch(fetchDocCirculation())
@@ -85,7 +85,7 @@ export const DocCirculationPage = () => {
         subtitle1: value2[0],
         subtitle2: value2[1]
       }
-      await axsios.put('citizen/' + id, newDocCirculation);
+      await axios.put('citizen/' + id, newDocCirculation);
       setValue('')
       setValue2(['', ''])
       dispatch(fetchDocCirculation())
@@ -97,7 +97,7 @@ export const DocCirculationPage = () => {
 
   async function deleteItem(id: number, e: any) {
     e.preventDefault()
-    await axsios.delete('citizen/' + id)
+    await axios.delete('citizen/' + id)
     dispatch(fetchDocCirculation())
   }
 
@@ -109,7 +109,7 @@ export const DocCirculationPage = () => {
         title: titlea,
         text: value[0]
       }
-      await axsios.post('citizen', newDocCirculation)
+      await axios.post('citizen', newDocCirculation)
       navigate(0)
     } else if (value[1] !== '' && value[2] === '') {
       const newDocCirculation = {
@@ -117,7 +117,7 @@ export const DocCirculationPage = () => {
         text: value[0],
         subtitle1: value[1]
       }
-      await axsios.post('citizen', newDocCirculation)
+      await axios.post('citizen', newDocCirculation)
       navigate(0)
     } else if (value[1] === '' && value[2] !== '') {
       const newDocCirculation = {
@@ -125,7 +125,7 @@ export const DocCirculationPage = () => {
         text: value[0],
         subtitle2: value[2]
       }
-      await axsios.post('citizen', newDocCirculation)
+      await axios.post('citizen', newDocCirculation)
       navigate(0)
     } else {
       const newDocCirculation = {
@@ -134,7 +134,7 @@ export const DocCirculationPage = () => {
         subtitle1: value[1],
         subtitle2: value[2],
       }
-      await axsios.post('citizen', newDocCirculation)
+      await axios.post('citizen', newDocCirculation)
       navigate(0)
     }
   }

@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import axsios from '../../../axios/axios';
+import axios from '../../../axios';
 import { useNavigate } from "react-router-dom";
 import '../Style/Register.scss'
 const USER_REGEX = /^[A-z][A-z0-9-_]{4,20}$/;
@@ -48,7 +48,7 @@ const Register = () => {
             return;
         }
         try {
-             await axsios.post(REGISTER_URL,
+             await axios.post(REGISTER_URL,
                 JSON.stringify({ user, pwd }),
                 {
                     headers: { 'Content-Type': 'application/json' },
