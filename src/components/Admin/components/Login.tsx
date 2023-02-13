@@ -30,7 +30,7 @@ const Login = () => {
     }, [user, pwd])
 
     const handleSubmit = async (e: any) => {
-        
+        e.preventDefault();
         try {
             const response:any = await axios.post(LOGIN_URL,
                 JSON.stringify({ user , pwd }),
@@ -44,11 +44,11 @@ const Login = () => {
             localStorage.setItem('token',response.data.accessToken)
             resetUser();
             setPwd('');
+            navigate(from, { replace: true });
             const resp:any=localStorage.getItem('response')
             const respons=JSON.parse(resp)
             setAuth(respons );    
-            navigate(from, { replace: true });
-            
+            // navigate(0)
         } catch (err: any) {
             if (!err?.response) {
                 setErrMsg('Սերվերից պատասխան չկա');
