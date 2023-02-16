@@ -91,12 +91,13 @@ const Register = () => {
                         aria-invalid={validName ? "false" : "true"}
                         aria-describedby="uidnote"
                         onFocus={() => setUserFocus(true)}
-                        onBlur={() => setUserFocus(false)}
                     />
-                    <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
+                    {userFocus && user && !validName &&
+                    <p>
                         Դաշտը պետք է պարունակի 5-ից 20 նիշ<br />
                         Բացառությամբ նմանատիպ նիշերից՝ ! @ # $ %․․․
                     </p>
+                    }
                     <label htmlFor="password">
                         Գաղտնաբառ
                     </label>
@@ -109,12 +110,12 @@ const Register = () => {
                         aria-invalid={validPwd ? "false" : "true"}
                         aria-describedby="pwdnote"
                         onFocus={() => setPwdFocus(true)}
-                        onBlur={() => setPwdFocus(false)}
                     />
-                    <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
+                    {pwdFocus && !validPwd &&
+                    <p>
                         Դաշտը պետք է պարունակի 5-ից 20 նիշ,<br />
                         մեծատառ, փոքրատառ, թիվ և հետևյալ նիշերից՝ ! @ # $ %
-                    </p>
+                    </p>}
                     <label htmlFor="confirm_pwd">
                         Կրկնել գաղտնաբառը
                     </label>
@@ -127,11 +128,12 @@ const Register = () => {
                         aria-invalid={validMatch ? "false" : "true"}
                         aria-describedby="confirmnote"
                         onFocus={() => setMatchFocus(true)}
-                        onBlur={() => setMatchFocus(false)}
                     />
-                    <p id="confirmnote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
+                    {matchFocus && !validMatch && 
+                    <p>
                         Գաղտնաբառը չի համընկնում!
                     </p>
+                    }
                     <div className="buts">
                         <button disabled={!validName || !validPwd || !validMatch ? true : false} onClick={handleSubmit} >Հաստատել</button>
                         <button onClick={() => navigate(0)}> Չեղարկել</button>
