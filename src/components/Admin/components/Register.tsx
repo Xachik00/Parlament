@@ -93,7 +93,7 @@ const Register = () => {
                         onFocus={() => setUserFocus(true)}
                     />
                     {userFocus && user && !validName &&
-                    <p>
+                    <p className="erorrValidate">
                         Դաշտը պետք է պարունակի 5-ից 20 նիշ<br />
                         Բացառությամբ նմանատիպ նիշերից՝ ! @ # $ %․․․
                     </p>
@@ -112,7 +112,7 @@ const Register = () => {
                         onFocus={() => setPwdFocus(true)}
                     />
                     {pwdFocus && !validPwd &&
-                    <p>
+                    <p className="erorrValidate">
                         Դաշտը պետք է պարունակի 5-ից 20 նիշ,<br />
                         մեծատառ, փոքրատառ, թիվ և հետևյալ նիշերից՝ ! @ # $ %
                     </p>}
@@ -130,7 +130,7 @@ const Register = () => {
                         onFocus={() => setMatchFocus(true)}
                     />
                     {matchFocus && !validMatch && 
-                    <p>
+                    <p className="erorrValidate">
                         Գաղտնաբառը չի համընկնում!
                     </p>
                     }
