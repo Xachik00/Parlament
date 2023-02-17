@@ -56,7 +56,7 @@ const SuperAdmin = () => {
                 </div>
                 <hr />
                 {
-                    add ? <Register /> :
+                    add ? <Register SuperAdmin={SuperAdmin} /> :
                         <table>
                             <thead>
                                 <th>Հ․Հ․</th>
