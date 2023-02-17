@@ -11,7 +11,6 @@ import Login from './components/Admin/components/Login';
 import useAuth from "./hooks/AdminHooks/useAuth";
 import RequireAuth from './components/Admin/components/RequireAuth';
 import PersistLogin from './components/Admin/components/PersistLogin';
-import NotFaundPage from "./pages/NotFaund/NotFaundPage";
 import SuperAdmin from "./pages/SuperAdmin/SuperAdmin";
 
 
@@ -58,7 +57,6 @@ function App() {
             <Route path="SuperAdmin" element={<SuperAdmin />} />
           </Route>
         </Route>
-        <Route path="*" element={<NotFaundPage/>} />
       </Routes>
     </div>
   );
