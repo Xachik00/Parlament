@@ -30,10 +30,9 @@ function App() {
 
 
   useEffect(() => {
-    if (!auth?.role || url !== 'http://localhost:3000/admin') {
+    if (!auth?.role && url !== 'http://localhost:3000/admin' && url !== 'http://localhost:3000/') {
       const timeout = setTimeout(() => {
         navigate('/')
-        console.log(url);
       }, 120000);
       return () => clearTimeout(timeout)
     }

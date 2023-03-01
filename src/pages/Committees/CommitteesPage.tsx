@@ -73,9 +73,6 @@ export const CommitteesPage = () => {
     }
   }
 
-  console.log(window);
-  
-
   return (
     <div className='Committees'>
       <Header />
