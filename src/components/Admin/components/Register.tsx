@@ -2,12 +2,11 @@ import { useRef, useState, useEffect } from "react";
 import axios from '../../../axios';
 import { useNavigate } from "react-router-dom";
 import '../Style/Register.scss'
-import { ISuperAdmin } from "../../../models/model";
 const USER_REGEX = /^[A-z][A-z0-9-_]{4,20}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{4,20}$/;
 const REGISTER_URL = '/superAdmin';
 
-const Register = ({SuperAdmin}:any) => {
+const Register = () => {
 
     const navigate = useNavigate()
     const [matchFocus, setMatchFocus] = useState(false);
