@@ -167,7 +167,7 @@ export const FactionPage = () => {
                   <td className='td2 up'>{item.member1}<br /><span>քարտուղար </span>{item.member2}</td>
                   <td className='td3'>{item.cityphone}</td>
                   <td className='td4'>{item.internalphone}</td>
-                  {auth.role && <td><button onClick={() => { setEdit(index); setValue({ name: item.name, member1: item.member1, 
+                  {auth.role && <td><button onClick={(e) => {e.preventDefault(); setEdit(index); setValue({ name: item.name, member1: item.member1, 
                     member2: item.member2, cityphone: item.cityphone, internalphone: item.internalphone }) }}><i className="fa-solid fa-pen"></i></button>
                     <button onClick={(e) => {setRemoveitem([item.id, e]);e.preventDefault()}}><i className="fa-regular fa-trash-can"></i></button></td>}
                  </tr>
