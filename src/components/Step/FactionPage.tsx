@@ -35,6 +35,7 @@ export const FactionPage = () => {
   const [erorrdiv, setErrordiv] = useState(false)
   const [erorrdiv1, setErrordiv1] = useState(false)
   const [erorrdiv2, setErrordiv2] = useState(false)
+  const [erorrdiv3, setErrordiv3] = useState(false)
 
   useEffect(() => {
     dispatch(fetchFraction())
@@ -50,6 +51,9 @@ export const FactionPage = () => {
     }
     if(value.member2===''){
       setErrordiv2(true)
+    }
+    if(value.internalphone===''){
+      setErrordiv3(true)
     }else{
     const Editfraction = {
       name: value.name, member1: value.member1,
@@ -156,11 +160,11 @@ export const FactionPage = () => {
                       member1: value.member1, member2: e.target.value, cityphone: value.cityphone, internalphone: value.internalphone }); setErrordiv2(false) }} /></td>
                   <td><input className='td3_input' maxLength={9} value={value.cityphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setValue({ name: value.name, 
                     member1: value.member1, member2: value.member2, cityphone: e.target.value, internalphone: value.internalphone }) }} /></td>
-                  <td><input className='td3_input' maxLength={8} value={value.internalphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setValue({ name: value.name, 
-                    member1: value.member1, member2: value.member2, cityphone: value.cityphone, internalphone: e.target.value }) }} /></td>
+                  <td><input className={erorrdiv3 ? 'td3_input errordiv' : 'td3_input'} maxLength={8} value={value.internalphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setValue({ name: value.name, 
+                    member1: value.member1, member2: value.member2, cityphone: value.cityphone, internalphone: e.target.value }); setErrordiv3(false)  }} /></td>
                   <td>
                     <button className='save'> <i onClick={(e) => Save(item.id, e)} className="fa-regular fa-square-check"></i></button>
-                    <button onClick={() => setEdit(-1)} ><i className="fa-solid fa-xmark"></i></button>
+                    <button onClick={(e) =>{e.preventDefault(); setEdit(-1)}} ><i className="fa-solid fa-xmark"></i></button>
                   </td>
                 </tr> : <tr key={item.id}>
                   <td className='td1'>{item.name}</td>
