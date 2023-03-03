@@ -30,7 +30,7 @@ function App() {
 
 
   useEffect(() => {
-    if (!auth?.role && url !== env.FRONT_APP_BASE_URL+'/admin' && url !== env.FRONT_APP_BASE_URL) {
+    if (!auth?.role && url !== env.FRONT_APP_BASE_URL+'admin' && url !== env.FRONT_APP_BASE_URL) {
       const timeout = setTimeout(() => {
         navigate('/')
       }, 120000);
