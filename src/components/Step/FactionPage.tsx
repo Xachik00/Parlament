@@ -68,7 +68,7 @@ export const FactionPage = () => {
   async function Add(e: React.FormEvent) {
     e.preventDefault()
     setError('');
-    if(addvalue.member1.trim().length=== 0 || addvalue.member2.trim().length=== 0){
+    if(addvalue.name.trim().length===0 ||addvalue.member1.trim().length=== 0 || addvalue.member2.trim().length=== 0||addvalue.internalphone.trim().length===0 ){
     setError('Անհրաժեշտ է լրացնել');
       return
     }
@@ -99,6 +99,7 @@ export const FactionPage = () => {
           cityphone: addvalue.cityphone, internalphone: addvalue.internalphone
         })
       }} />
+        {error && addvalue.name.trim().length===0 && <ErrorMessage error={error} />} 
       <label>Կուսակցության Ղեկավարը</label>
       <input className='td1 up' maxLength={20} value={addvalue.member1} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
         setAddvalue({
@@ -133,6 +134,7 @@ export const FactionPage = () => {
           cityphone: addvalue.cityphone, internalphone: e.target.value
         },)
       }} />
+        {error && addvalue.internalphone.trim().length===0 && <ErrorMessage error={error} />} 
       <div className='button'>
          <button className='button1' onClick={(e) => Add(e)} >Ավելացնել</button>
          <button className='button2' onClick={()=>{setAdd(false); setError('')}}>Չեղարկել</button>

@@ -67,7 +67,7 @@ export const CommittePage = () => {
   async function Add(e: React.FormEvent) {
     e.preventDefault()
     setError('');
-    if(addvalue.member2.trim().length===0 || addvalue.member1.trim().length === 0){
+    if(addvalue.name.trim().length===0 ||addvalue.member2.trim().length===0 || addvalue.member1.trim().length === 0||addvalue.internalphone.trim().length===0){
     setError('Անհրաժեշտ է լրացնել');
       return
     }
@@ -99,6 +99,7 @@ export const CommittePage = () => {
             internalphone: addvalue.internalphone, internalphone2: addvalue.internalphone2
           })
         }} />
+          {error &&  addvalue.name.trim().length===0 && <ErrorMessage error={error} />}
         <label>Հանձնաժողովի նախագահ</label>
         <input className='td1' maxLength={20} value={addvalue.member1} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setAddvalue({
@@ -121,24 +122,25 @@ export const CommittePage = () => {
         <input className='td1' maxLength={9} value={addvalue.internalphone2} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setAddvalue({
             name: addvalue.name, member1: addvalue.member1,
-            member2: addvalue.member2, cityphone: addvalue.cityphone, 
-            internalphone: addvalue.internalphone, internalphone2: e.target.value
+            member2: addvalue.member2, cityphone: e.target.value, 
+            internalphone: addvalue.internalphone, internalphone2:addvalue.internalphone2 
           })
         }} />
         <label>1-ին Ներքին հեռախոսահամարը</label>
         <input className='td1' maxLength={8} value={addvalue.cityphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setAddvalue({
             name: addvalue.name, member1: addvalue.member1,
-            member2: addvalue.member2, cityphone: e.target.value, 
-            internalphone: addvalue.internalphone, internalphone2: addvalue.internalphone2
+            member2: addvalue.member2, cityphone: addvalue.cityphone, 
+            internalphone: e.target.value, internalphone2: addvalue.internalphone2
           })
         }} />
+          {error &&  addvalue.internalphone.trim().length===0 && <ErrorMessage error={error} />}
         <label>2-րդ Ներքին հեռախոսահամարը</label>
         <input className='td1' maxLength={8} value={addvalue.internalphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setAddvalue({
             name: addvalue.name, member1: addvalue.member1,
             member2: addvalue.member2, cityphone: addvalue.cityphone, 
-            internalphone: e.target.value, internalphone2: addvalue.internalphone2
+            internalphone: addvalue.internalphone, internalphone2: e.target.value
           })
         }} />
        <div className='button'>

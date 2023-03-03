@@ -98,7 +98,7 @@ export const MPsPage = () => {
   async function Add(e: React.FormEvent) {
     e.preventDefault()
     setError('');
-    if (addvalue.firstname.trim().length === 0 || addvalue.lastname.trim().length === 0 || addvalue.surname.trim().length === 0) {
+    if (addvalue.firstname.trim().length === 0 || addvalue.lastname.trim().length === 0 || addvalue.surname.trim().length === 0||addvalue.phonenumber.trim().length===0) {
       setError('Անհրաժեշտ է լրացնել');
       return
     }else if(addvalue.phonenumber===''){
@@ -162,6 +162,7 @@ export const MPsPage = () => {
             surname: addvalue.surname, phonenumber: e.target.value, key: addvalue.key
           })
         }} />
+        {error && addvalue.phonenumber.trim().length === 0 && <ErrorMessage error={error} />}
         <label className='label5' >
           <span className='span'>Նահագահ կամ տեղակալ ?</span>
           <input type='checkbox' className='input'  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
