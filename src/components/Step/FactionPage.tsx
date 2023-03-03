@@ -144,7 +144,9 @@ export const FactionPage = () => {
                     member1: value.member1, member2: value.member2, cityphone: e.target.value, internalphone: value.internalphone }) }} /></td>
                   <td><input className='td3_input' maxLength={8} value={value.internalphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setValue({ name: value.name, 
                     member1: value.member1, member2: value.member2, cityphone: value.cityphone, internalphone: e.target.value }) }} /></td>
-                  <button className='save'> <i onClick={(e) => Save(item.id, e)} className="fa-regular fa-square-check"></i></button>
+                  <td><button className='save'> <i onClick={(e) => Save(item.id, e)} className="fa-regular fa-square-check"></i></button>
+                  <button onClick={() => setEdit(-1)} ><i className="fa-solid fa-xmark"></i></button>
+                  </td>
                 </tr> : <tr key={item.id}>
                   <td className='td1'>{item.name}</td>
                   <td className='td2 up'>{item.member1}<br /><span>քարտուղար </span>{item.member2}</td>

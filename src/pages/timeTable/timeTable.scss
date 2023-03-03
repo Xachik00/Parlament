@@ -15,7 +15,9 @@
             border-radius: 5px;
             
 
-            
+            .errordiv{
+                border: 1px solid red;
+            }
             .form{
                 display: flex;
                 text-align: center;

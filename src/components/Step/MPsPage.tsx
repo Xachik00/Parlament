@@ -200,7 +200,10 @@ export const MPsPage = () => {
                       })
                       }}/>
                     </td>
-                  <button className='save'> <i onClick={() => Save(item.id)} className="fa-regular fa-square-check"></i></button>
+                  <td>
+                    <button className='save'> <i onClick={() => Save(item.id)} className="fa-regular fa-square-check"></i></button>
+                    <button onClick={() => setEdit(-1)} ><i className="fa-solid fa-xmark"></i></button>
+                  </td>
                 </tr> : <tr key={item.id}>
                   <td className='td1'>{index + 1}</td>
                   <td className='td2'>{item.lastname} {item.firstname} {item.surname} </td>
@@ -262,7 +265,10 @@ export const MPsPage = () => {
                             })
                             }} />
                           </td>
-                          <button className='save'> <i onClick={() => Save(iteme.id)} className="fa-regular fa-square-check"></i></button>
+                          <td>
+                            <button className='save'> <i onClick={() => Save(iteme.id)} className="fa-regular fa-square-check"></i></button>
+                            <button onClick={() => setEdit(-1)} ><i className="fa-solid fa-xmark"></i></button>
+                        </td> 
                         </tr> : <>
                           <tr key={iteme.id}>
                             <td className='td1'>{index + 4}</td>
