@@ -33,9 +33,9 @@ export const TimeTablePage = () => {
   const [add1, setAdd1] = useState(false)
   const [removeitem, setRemoveitem] = useState([-1, '', {}])
 
-  const [erorrdiv,setErrordiv]=useState(false)
-  const [erorrdiv1,setErrordiv1]=useState(false)
-  const [erorrdiv2,setErrordiv2]=useState(false)
+  const [erorrdiv, setErrordiv] = useState(false)
+  const [erorrdiv1, setErrordiv1] = useState(false)
+  const [erorrdiv2, setErrordiv2] = useState(false)
 
   useEffect(() => {
     dispatch(fetchTimeTable())
@@ -43,15 +43,25 @@ export const TimeTablePage = () => {
 
   async function adminSave1(id: any, valueCitizen: any, valueCitizen1: any, valueCitizen2: any, page: string, e: any) {
     e.preventDefault()
-    const newInfo = {
-
-      name: valueCitizen,
-      day: valueCitizen1,
-      time: valueCitizen2
+    if (valueCitizen === '') {
+      setErrordiv(true)
     }
-    await axios.put(page + "/" + id, newInfo);
-    dispatch(fetchTimeTable())
-    seteditCitizen(-1)
+    if (valueCitizen1 === '') {
+      setErrordiv1(true)
+    }
+    if (valueCitizen2 === '') {
+      setErrordiv2(true)
+    } else {
+      const newInfo = {
+
+        name: valueCitizen,
+        day: valueCitizen1,
+        time: valueCitizen2
+      }
+      await axios.put(page + "/" + id, newInfo);
+      dispatch(fetchTimeTable())
+      seteditCitizen(-1)
+    }
   }
 
   async function adminSave(id: any, value: any, value1: any, value2: any, page: string, e: any) {
@@ -207,13 +217,13 @@ export const TimeTablePage = () => {
                   admission.map((item: any, index: number) => !item.title && <tbody key={item.id}>
                     {edit === index ? <tr>
                       <td>
-                        <textarea className={erorrdiv ? 'errordiv' :''} rows={4} maxLength={150} value={value} onChange={(e: any) => { setValue(e.target.value) }} style={{ resize: "none" }}></textarea>
+                        <textarea className={erorrdiv ? 'errordiv' : ''} rows={4} maxLength={150} value={value} onChange={(e: any) => { setValue(e.target.value); setErrordiv(false) }} style={{ resize: "none" }}></textarea>
                       </td>
                       <td>
-                        <input className={erorrdiv1 ? 'errordiv' :''} value={value1} maxLength={10} onChange={(e: any) => { setValue1(e.target.value) }} />
+                        <input className={erorrdiv1 ? 'errordiv' : ''} value={value1} maxLength={10} onChange={(e: any) => { setValue1(e.target.value); setErrordiv1(false) }} />
                       </td>
                       <td>
-                        <input className={erorrdiv2 ? 'errordiv' :''} value={value2} maxLength={11} onChange={(e: any) => { setValue2(e.target.value) }} />
+                        <input className={erorrdiv2 ? 'errordiv' : ''} value={value2} maxLength={11} onChange={(e: any) => { setValue2(e.target.value); setErrordiv2(false) }} />
                       </td>
                       <td>
                         <button className='save'> <i onClick={(e) => adminSave(item.id, value, value1, value2, 'acceptability', e)} className="fa-regular fa-square-check"></i></button>
@@ -260,13 +270,13 @@ export const TimeTablePage = () => {
                   admission.map((item: any, index: number) => item.title && <tbody key={item.id}>
                     {editCitizen === index ? <tr>
                       <td>
-                        <textarea value={valueCitizen} onChange={(e: any) => { setValueCitizen(e.target.value) }} style={{ resize: "none" }}></textarea>
+                        <textarea className={erorrdiv ? 'errordiv' : ''} value={valueCitizen} onChange={(e: any) => { setValueCitizen(e.target.value); setErrordiv(false) }} style={{ resize: "none" }}></textarea>
                       </td>
                       <td>
-                        <input value={valueCitizen1} onChange={(e: any) => { setValueCitizen1(e.target.value) }} />
+                        <input className={erorrdiv1 ? 'errordiv' : ''} value={valueCitizen1} onChange={(e: any) => { setValueCitizen1(e.target.value); setErrordiv1(false) }} />
                       </td>
                       <td>
-                        <input value={valueCitizen2} onChange={(e: any) => { setValueCitizen2(e.target.value) }} />
+                        <input className={erorrdiv2 ? 'errordiv' : ''} value={valueCitizen2} onChange={(e: any) => { setValueCitizen2(e.target.value); setErrordiv2(false) }} />
                       </td>
                       <td>
                         <button className='save'> <i onClick={(e) => adminSave1(item.id, valueCitizen, valueCitizen1, valueCitizen2, 'acceptability', e)} className="fa-regular fa-square-check"></i></button>
