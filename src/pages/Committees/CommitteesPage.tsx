@@ -90,7 +90,7 @@ export const CommitteesPage = () => {
             <span>Վերնագիր *։ <textarea className={erorr1 ? 'erorrText' : 'text'} value={addValue[0]} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setAddValue([e.target.value, addValue[1]]); setErorr1(false) }} /></span>
             <span>Տեղեկություն *։ <textarea className={erorr ? 'erorrText' : 'text'} value={addValue[1]} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setAddValue([addValue[0], e.target.value]); setErorr(false) }} /></span>
             <button onClick={() => setAdd(false)} className='back' >Չեղարկել</button>
-            <button onClick={() => addText(addValue[0], addValue[1])} className='save' style={addValue&&{backgroundColor:"#fff"}}>Հաստատել</button>
+            <button onClick={() => addText(addValue[0], addValue[1])} className='save'>Հաստատել</button>
             <p>* : Դաշտը պետք է լրացվի!!!</p>
           </div> :
 

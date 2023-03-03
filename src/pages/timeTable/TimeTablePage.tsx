@@ -122,7 +122,7 @@ export const TimeTablePage = () => {
   async function adminsSave(value: any, value1: any, value2: any, e: any) {
     e.preventDefault()
     setError('');
-    if (value.trim().length === 0 || value.trim().length === 0) {
+    if (value.trim().length === 0 || value1.trim().length === 0|| value2.trim().length === 0) {
       setError('Անհրաժեշտ է լրացնել');
       return
     }
@@ -139,7 +139,7 @@ export const TimeTablePage = () => {
   async function adminsSave1(valueCitizen: any, valueCitizen1: any, valueCitizen2: any, e: any) {
     e.preventDefault()
     setError('');
-    if (valueCitizen.trim().length === 0 || valueCitizen1.trim().length === 0) {
+    if (valueCitizen.trim().length === 0 || valueCitizen1.trim().length === 0|| valueCitizen2.trim().length === 0) {
       setError('Անհրաժեշտ է լրացնել');
       return
     }
@@ -178,6 +178,7 @@ export const TimeTablePage = () => {
 
           <label>Ժամը</label>
           <input className='input_num' maxLength={11} value={value2} onChange={(e: any) => { setValue2(e.target.value) }} />
+          {error && value2.trim().length === 0 && <ErrorMessage error={error} />}
 
           <div className='form_div'>
             <button onClick={(e) => adminsSave(value, value1, value2, e)} >Ավելացնել</button>
@@ -197,6 +198,7 @@ export const TimeTablePage = () => {
 
           <label>Ժամը</label>
           <input className='input_num' maxLength={11} value={valueCitizen2} onChange={(e: any) => { setValueCitizen2(e.target.value) }} style={{ resize: "none" }} />
+          {error && valueCitizen2.trim().length === 0 && <ErrorMessage error={error} />}
 
           <div className='form_div'>
             <button onClick={(e) => adminsSave1(valueCitizen, valueCitizen1, valueCitizen2, e)} >Ավելացնել</button>
@@ -251,7 +253,7 @@ export const TimeTablePage = () => {
                   )}
 
               </table>
-              {auth.role && <button onClick={() => adminAdd()} className="ADD"><FontAwesomeIcon icon={faPen} />   Ավելացնել</button>}
+              {auth.role && <button onClick={() => adminAdd()} className="ADD"><FontAwesomeIcon icon={faPlus} />   Ավելացնել</button>}
             </div>
             {removeitem[0] !== -1 && <DeleteText removeitem={removeitem} setRemoveitem={setRemoveitem} deleteItem={adminDelete} />}
 
