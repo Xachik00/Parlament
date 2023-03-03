@@ -6,6 +6,8 @@ import useAuth from '../../hooks/AdminHooks/useAuth';
 import './StepStyle.scss'
 import { ErrorMessage } from '../Error/Error';
 import DeleteText from '../Delete/DeleteText';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck,faXmark,faPen,faTrash,faPlus } from '@fortawesome/free-solid-svg-icons'
 
 
 export const FactionPage = () => {
@@ -165,8 +167,8 @@ export const FactionPage = () => {
                   <td><input className={erorrdiv3 ? 'td3_input errordiv' : 'td3_input'} maxLength={8} value={value.internalphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setValue({ name: value.name, 
                     member1: value.member1, member2: value.member2, cityphone: value.cityphone, internalphone: e.target.value }); setErrordiv3(false)  }} /></td>
                   <td>
-                    <button className='save'> <i onClick={(e) => Save(item.id, e)} className="fa-regular fa-square-check"></i></button>
-                    <button onClick={(e) =>{e.preventDefault(); setEdit(-1)}} ><i className="fa-solid fa-xmark"></i></button>
+                    <button className='save'> <FontAwesomeIcon icon={faCheck} onClick={(e) => Save(item.id, e)}/></button>
+                    <button onClick={(e) =>{e.preventDefault(); setEdit(-1)}} ><FontAwesomeIcon icon={faXmark} /></button>
                   </td>
                 </tr> : <tr key={item.id}>
                   <td className='td1'>{item.name}</td>
@@ -174,16 +176,16 @@ export const FactionPage = () => {
                   <td className='td3'>{item.cityphone}</td>
                   <td className='td4'>{item.internalphone}</td>
                   {auth.role && <td><button onClick={(e) => {e.preventDefault(); setEdit(index); setValue({ name: item.name, member1: item.member1, 
-                    member2: item.member2, cityphone: item.cityphone, internalphone: item.internalphone }) }}><i className="fa-solid fa-pen"></i></button>
-                    <button onClick={(e) => {setRemoveitem([item.id, e]);e.preventDefault()}}><i className="fa-regular fa-trash-can"></i></button></td>}
+                    member2: item.member2, cityphone: item.cityphone, internalphone: item.internalphone }) }}><FontAwesomeIcon icon={faPen} /></button>
+                    <button onClick={(e) => {setRemoveitem([item.id, e]);e.preventDefault()}}><FontAwesomeIcon icon={faTrash} /></button></td>}
                  </tr>
               }</tbody>)}
         </>
       </table>
-      {auth.role &&<i onClick={() =>{ setAdd(!add) ; setAddvalue({
+      {auth.role &&<button onClick={() =>{ setAdd(!add) ; setAddvalue({
     name: '',   member1: '',    member2: '',
     cityphone: '',    internalphone: '',  })}}
-     className="fa-solid fa-plus icon">   Ավելացնել</i>}
+     className="icon"><FontAwesomeIcon icon={faPlus} />   Ավելացնել</button>}
     </form>
     }
       {removeitem[0] !== -1 && <DeleteText removeitem={removeitem} setRemoveitem={setRemoveitem} deleteItem={Delete} />}

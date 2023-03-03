@@ -7,6 +7,8 @@ import useAuth from '../../hooks/AdminHooks/useAuth';
 import axios from '../../axios';
 import { useNavigate } from 'react-router-dom';
 import DeleteText from '../../components/Delete/DeleteText';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck,faXmark,faPen,faTrash,faPlus } from '@fortawesome/free-solid-svg-icons'
 
 export const DocCirculationPage = () => {
 
@@ -170,21 +172,21 @@ export const DocCirculationPage = () => {
                               <textarea className={erorr ? 'erorrText' : 'text'} value={value} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setValue(e.target.value) }} />
                               {item?.subtitle1 && <textarea className={erorr ? 'erorrText' : 'text'} value={value2[0]} onChange={(e: any) => { setValue2([e.target.value, value2[1]]) }} />}
                               {item?.subtitle2 && <textarea className={erorr ? 'erorrText' : 'text'} value={value2[1]} onChange={(e: any) => { setValue2([value2[0], e.target.value]) }} />}
-                              <button onClick={(e: any) => saveDate(item.id, value, e, item.title)}><i className="fa-regular fa-square-check"></i></button>
-                              <button onClick={() => setEdit(-1)} ><i className="fa-solid fa-xmark"></i></button>
+                              <button onClick={(e: any) => saveDate(item.id, value, e, item.title)}><FontAwesomeIcon icon={faCheck} /></button>
+                              <button onClick={() => setEdit(-1)} ><FontAwesomeIcon icon={faXmark} /></button>
                             </li> :
                             <li>{item.text}
                               {item.subtitle1 && <p>{item?.subtitle1}</p>}
                               {item.subtitle2 && <p>{item?.subtitle2}</p>}
                               <br />
                               {auth.role && <>
-                                <button onClick={() => { setEdit(item.id); setValue(item.text); item.subtitle1 && item.subtitle2 ? setValue2([item.subtitle1, item.subtitle2]) : item.subtitle1 ? setValue2([item.subtitle1, '']) : item.subtitle2 && setValue2(['', item.subtitle2]) }} ><i className="fa-solid fa-pen"></i></button>
-                                <button onClick={(e: any) => setRemoveitem([item.id, e])}><i className="fa-regular fa-trash-can"></i></button></>}
+                                <button onClick={() => { setEdit(item.id); setValue(item.text); item.subtitle1 && item.subtitle2 ? setValue2([item.subtitle1, item.subtitle2]) : item.subtitle1 ? setValue2([item.subtitle1, '']) : item.subtitle2 && setValue2(['', item.subtitle2]) }} ><FontAwesomeIcon icon={faPen} /></button>
+                                <button onClick={(e: any) => setRemoveitem([item.id, e])}><FontAwesomeIcon icon={faTrash} /></button></>}
                             </li>
                         }
                       </ul>)
                     }
-                    {auth.role && <button onClick={() => { setAdd1(true); setTitle(el) }}><i className="fa-solid fa-plus ADD">   Ավելացնել</i></button>}
+                    {auth.role && <button onClick={() => { setAdd1(true); setTitle(el) }}><FontAwesomeIcon icon={faPlus} className="ADD"/>   Ավելացնել</button>}
                   </div>
                 )
               }

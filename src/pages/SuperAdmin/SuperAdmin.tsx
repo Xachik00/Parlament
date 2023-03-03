@@ -5,7 +5,9 @@ import DeleteText from '../../components/Delete/DeleteText';
 import { Header } from '../../components/Header/Header'
 import { useState, useEffect } from 'react'
 import axios from '../../axios';
-import './SuperAdmin.scss'
+import './SuperAdmin.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck,faXmark,faPen,faTrash,faPlus,faUsersGear } from '@fortawesome/free-solid-svg-icons'
 
 
 const SuperAdmin = () => {
@@ -51,7 +53,7 @@ const SuperAdmin = () => {
             <Header />
             <div className='SuperAdminBody'>
                 <div className='SuperAdmin_title'>
-                    <i className="fa-solid fa-users-gear"></i>
+                <FontAwesomeIcon icon={faUsersGear} />
                     <h2>Ադմինների Ցուցակ</h2>
                 </div>
                 <hr />
@@ -88,8 +90,8 @@ const SuperAdmin = () => {
                                                     </p>}</td>
 
                                                     <td className='btn'>
-                                                        <i className="fa-regular fa-square-check" onClick={() => editAdmin(pwd, el.id)} ></i>
-                                                        <i className="fa-solid fa-xmark" onClick={() => setEdit(-1)}></i>
+                                                    <FontAwesomeIcon icon={faCheck} onClick={() => editAdmin(pwd, el.id)} />
+                                                    <FontAwesomeIcon icon={faXmark} onClick={() => setEdit(-1)}/>
                                                     </td>
                                                 </tr>
                                             </> :
@@ -97,13 +99,13 @@ const SuperAdmin = () => {
                                                 <td>{index + 1}</td>
                                                 <td>{el?.user}</td>
                                                 <td>******</td>
-                                                <td className='btn'><button onClick={() => setEdit(el.id)}><i className="fa-solid fa-pen"></i></button>
-                                                    <button onClick={(e) => setRemoveitem([el.id, e])}><i className="fa-regular fa-trash-can"></i></button></td>
+                                                <td className='btn'><button onClick={() => setEdit(el.id)}><FontAwesomeIcon icon={faPen} /></button>
+                                                    <button onClick={(e) => setRemoveitem([el.id, e])}><FontAwesomeIcon icon={faTrash} /></button></td>
                                             </tr>
 
                                         }
                                     </tbody>)}
-                            <i className="fa-solid fa-plus AddAdmin " onClick={() => setAdd(true)} >   Ավելացնել Ադմին</i>
+                            <button className="AddAdmin " onClick={() => setAdd(true)} ><FontAwesomeIcon icon={faPlus} />   Ավելացնել Ադմին</button>
                         </table>}
             </div>
             {removeitem[0] !== -1 && <DeleteText removeitem={removeitem} setRemoveitem={setRemoveitem} deleteItem={deleteAdmin} />}

@@ -7,6 +7,8 @@ import axios from '../../axios/index';
 import useAuth from '../../hooks/AdminHooks/useAuth'; 
 import "./depNum.scss" 
 import DeleteText from '../../components/Delete/DeleteText';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck,faXmark,faPen,faTrash,faPlus } from '@fortawesome/free-solid-svg-icons'
  
  
 export const DepNumbersPage = () => { 
@@ -124,8 +126,8 @@ export const DepNumbersPage = () => {
                 <textarea className={erorrdiv1 ? 'errordiv' : ''} maxLength={8} value={value1} onChange={(e:any) => {setValue1(e.target.value); setErrordiv1(false)}}></textarea> 
               </td> 
               <td className='textarea_td'> 
-                <button className='save'> <i onClick={(e) => adminSave(item.id, value, value1, "units", e)} className="fa-regular fa-square-check"></i></button>
-                <button onClick={() => setEdit(-1)} ><i className="fa-solid fa-xmark"></i></button>
+                <button className='save'> <FontAwesomeIcon icon={faCheck}  onClick={(e) => adminSave(item.id, value, value1, "units", e)}/></button>
+                <button onClick={() => setEdit(-1)} ><FontAwesomeIcon icon={faXmark} /></button>
               </td> 
               </tr> : <tr> 
               <td>{item.name}</td> 
@@ -134,10 +136,10 @@ export const DepNumbersPage = () => {
                 setEdit(index) 
                 setValue(item.name) 
                 setValue1(item.internalphone) 
-              }}><i className="fa-solid fa-pen"></i></button>
+              }}><FontAwesomeIcon icon={faPen} /></button>
                   {auth.role && <button onClick={(e) => { 
                   setRemoveitem([item.id, "units", e]) 
-                  }}><i className="fa-regular fa-trash-can"></i></button> } 
+                  }}><FontAwesomeIcon icon={faTrash} /></button> } 
               </td>   }
             </tr>} 
             </tbody> 
@@ -145,7 +147,7 @@ export const DepNumbersPage = () => {
         } 
         </table>
 
-        {auth.role && <i onClick={() => adminAdd()} className="fa-solid fa-plus ADD">   Ավելացնել</i>}
+        {auth.role && <button onClick={() => adminAdd()} className="ADD"><FontAwesomeIcon icon={faPlus} />   Ավելացնել</button>}
 
         </> }
       </div> 

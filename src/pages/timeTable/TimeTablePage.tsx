@@ -7,6 +7,8 @@ import { ErrorMessage } from '../../components/Error/Error';
 import useAuth from '../../hooks/AdminHooks/useAuth';
 import DeleteText from '../../components/Delete/DeleteText';
 import "./timeTable.scss"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck,faXmark,faPen,faTrash,faPlus } from '@fortawesome/free-solid-svg-icons'
 
 
 export const TimeTablePage = () => {
@@ -226,8 +228,8 @@ export const TimeTablePage = () => {
                         <input className={erorrdiv2 ? 'errordiv' : ''} value={value2} maxLength={11} onChange={(e: any) => { setValue2(e.target.value); setErrordiv2(false) }} />
                       </td>
                       <td>
-                        <button className='save'> <i onClick={(e) => adminSave(item.id, value, value1, value2, 'acceptability', e)} className="fa-regular fa-square-check"></i></button>
-                        <button onClick={() => setEdit(-1)} ><i className="fa-solid fa-xmark"></i></button>
+                        <button className='save'> <FontAwesomeIcon icon={faCheck}  onClick={(e) => adminSave(item.id, value, value1, value2, 'acceptability', e)} /></button>
+                        <button onClick={() => setEdit(-1)} ><FontAwesomeIcon icon={faXmark} /></button>
                       </td>
                     </tr> : <tr>
                       <td>{item.name}</td>
@@ -238,18 +240,18 @@ export const TimeTablePage = () => {
                         setValue(item.name);
                         setValue1(item.day);
                         setValue2(item.time)
-                      }}><i className="fa-solid fa-pen"></i></button>
+                      }}><FontAwesomeIcon icon={faPen} /></button>
 
                         {auth.role && <button onClick={(e) => {
                           setRemoveitem([item.id, "acceptability", e])
-                        }}><i className="fa-regular fa-trash-can"></i></button>}
+                        }}><FontAwesomeIcon icon={faTrash} /></button>}
                       </td>}
                     </tr>}
                   </tbody>
                   )}
 
               </table>
-              {auth.role && <i onClick={() => adminAdd()} className="fa-solid fa-plus ADD">   Ավելացնել</i>}
+              {auth.role && <button onClick={() => adminAdd()} className="ADD"><FontAwesomeIcon icon={faPen} />   Ավելացնել</button>}
             </div>
             {removeitem[0] !== -1 && <DeleteText removeitem={removeitem} setRemoveitem={setRemoveitem} deleteItem={adminDelete} />}
 
@@ -279,8 +281,8 @@ export const TimeTablePage = () => {
                         <input className={erorrdiv2 ? 'errordiv' : ''} value={valueCitizen2} onChange={(e: any) => { setValueCitizen2(e.target.value); setErrordiv2(false) }} />
                       </td>
                       <td>
-                        <button className='save'> <i onClick={(e) => adminSave1(item.id, valueCitizen, valueCitizen1, valueCitizen2, 'acceptability', e)} className="fa-regular fa-square-check"></i></button>
-                        <button onClick={() => seteditCitizen(-1)} ><i className="fa-solid fa-xmark"></i></button>
+                        <button className='save'> <FontAwesomeIcon icon={faCheck} onClick={(e) => adminSave1(item.id, valueCitizen, valueCitizen1, valueCitizen2, 'acceptability', e)} /></button>
+                        <button onClick={() => seteditCitizen(-1)} ><FontAwesomeIcon icon={faXmark} /></button>
                       </td>
                     </tr>
                       :
@@ -293,11 +295,11 @@ export const TimeTablePage = () => {
                           setValueCitizen(item.name);
                           setValueCitizen1(item.day);
                           setValueCitizen2(item.time)
-                        }}><i className="fa-solid fa-pen"></i></button>
+                        }}><FontAwesomeIcon icon={faPen} /></button>
 
                           {auth.role && <button onClick={(e) => {
                             setRemoveitem([item.id, "acceptability", e])
-                          }}><i className="fa-regular fa-trash-can"></i></button>}
+                          }}><FontAwesomeIcon icon={faTrash} /></button>}
                         </td>}
                       </tr>}
                   </tbody>
@@ -305,7 +307,7 @@ export const TimeTablePage = () => {
                 }
 
               </table>
-              {auth.role && <i onClick={() => adminAdd1()} className="fa-solid fa-plus ADD">   Ավելացնել</i>}
+              {auth.role && <button onClick={() => adminAdd1()} className="ADD"><FontAwesomeIcon icon={faPlus} />   Ավելացնել</button>}
             </div>
           </div>
         }

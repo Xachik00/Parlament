@@ -6,6 +6,8 @@ import useAuth from '../../hooks/AdminHooks/useAuth';
 import './StepStyle.scss'
 import { ErrorMessage } from '../Error/Error';
 import DeleteText from '../Delete/DeleteText';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck,faXmark,faPen,faTrash,faPlus } from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -200,8 +202,8 @@ export const CommittePage = () => {
                         })
                       }} /></td>
                       <td>
-                        <button className='save'> <i onClick={(e) => Save(item.id, e)} className="fa-regular fa-square-check"></i></button>
-                        <button onClick={() => setEdit(-1)} ><i className="fa-solid fa-xmark"></i></button>
+                        <button className='save'> <FontAwesomeIcon icon={faCheck} onClick={(e) => Save(item.id, e)}/></button>
+                        <button onClick={() => setEdit(-1)} ><FontAwesomeIcon icon={faXmark} /></button>
                         </td>
                     </tr> : <tr key={item.id}>
                       <td className='td1'>{item.name}</td>
@@ -213,8 +215,8 @@ export const CommittePage = () => {
                           name: item.name, member1: item.member1, member2:item.member2,
                           cityphone: item.cityphone, internalphone: item.internalphone, internalphone2:item.internalphone2
                         })
-                      }}><i className="fa-solid fa-pen"></i></button>
-                        <button onClick={(e) =>{ setRemoveitem([item.id, e]);e.preventDefault()}}><i className="fa-regular fa-trash-can"></i></button></td>
+                      }}><FontAwesomeIcon icon={faPen} /></button>
+                        <button onClick={(e) =>{ setRemoveitem([item.id, e]);e.preventDefault()}}><FontAwesomeIcon icon={faTrash} /></button></td>
                       }
                     </tr>
                   }
@@ -223,7 +225,7 @@ export const CommittePage = () => {
             }
           </>
         </table>
-        {auth.role && <i onClick={() => { setAdd(!add) }} className="fa-solid fa-plus icon">   Ավելացնել</i>}
+        {auth.role && <button onClick={() => { setAdd(!add) }} className="icon"><FontAwesomeIcon icon={faPlus} />   Ավելացնել</button>}
       </form>}
       {removeitem[0] !== -1 && <DeleteText removeitem={removeitem} setRemoveitem={setRemoveitem} deleteItem={Delete} />}
     </>

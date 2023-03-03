@@ -7,6 +7,8 @@ import { IMPs } from '../../models/model';
 import './StepStyle.scss'
 import { ErrorMessage } from '../Error/Error';
 import DeleteText from '../Delete/DeleteText';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck,faXmark,faPen,faTrash,faPlus } from '@fortawesome/free-solid-svg-icons'
 
 
 interface Ibos {
@@ -219,20 +221,20 @@ export const MPsPage = () => {
                       }}/>
                     </td>
                   <td>
-                    <button className='save'> <i onClick={() => Save(item.id)} className="fa-regular fa-square-check"></i></button>
-                    <button onClick={() => setEdit(-1)} ><i className="fa-solid fa-xmark"></i></button>
+                    <button className='save'> <FontAwesomeIcon icon={faCheck}  onClick={() => Save(item.id)}/></button>
+                    <button onClick={() => setEdit(-1)} ><FontAwesomeIcon icon={faXmark} /></button>
                   </td>
                 </tr> : <tr key={item.id}>
                   <td className='td1'>{index + 1}</td>
                   <td className='td2'>{item.lastname} {item.firstname} {item.surname} </td>
                   <td className='td4'>{item.phonenumber}</td>
-                  <td className='button' >{auth.role && <><button><i onClick={() => {
+                  <td className='button' >{auth.role && <><button><FontAwesomeIcon icon={faPen} onClick={() => {
                     setEdit(item.id); setValue({
                       firstname: item.firstname,
                       lastname: item.lastname, surname: item.surname, phonenumber: item.phonenumber
                     })
-                  }} className="fa-solid fa-pen"></i></button>
-                    <button onClick={(e) => {setRemoveitem([item.id, e]);e.preventDefault()}}><i className="fa-regular fa-trash-can"></i></button></>
+                  }}/></button>
+                    <button onClick={(e) => {setRemoveitem([item.id, e]);e.preventDefault()}}><FontAwesomeIcon icon={faTrash} /></button></>
                   }</td>
                 </tr>
                 }
@@ -284,8 +286,8 @@ export const MPsPage = () => {
                             }} />
                           </td>
                           <td>
-                            <button className='save'> <i onClick={() => Save(iteme.id)} className="fa-regular fa-square-check"></i></button>
-                            <button onClick={() => setEdit(-1)} ><i className="fa-solid fa-xmark"></i></button>
+                            <button className='save'> <FontAwesomeIcon icon={faCheck}  onClick={() => Save(iteme.id)}/></button>
+                            <button onClick={() => setEdit(-1)} ><FontAwesomeIcon icon={faXmark} /></button>
                         </td> 
                         </tr> : <>
                           <tr key={iteme.id}>
@@ -297,8 +299,8 @@ export const MPsPage = () => {
                                 firstname: iteme.firstname,
                                 lastname: iteme.lastname, surname: iteme.surname, phonenumber: iteme.phonenumber
                               })
-                            }}><i className="fa-solid fa-pen"></i></button>
-                              <button onClick={(e) => setRemoveitem([iteme.id, e])}><i className="fa-regular fa-trash-can"></i></button></td>
+                            }}><FontAwesomeIcon icon={faPen} /></button>
+                              <button onClick={(e) => setRemoveitem([iteme.id, e])}><FontAwesomeIcon icon={faTrash} /></button></td>
                             }</>
                           </tr>
                         </>
@@ -311,12 +313,12 @@ export const MPsPage = () => {
             )
           }
         </>
-        {auth.role && <i onClick={() => {
+        {auth.role && <button onClick={() => {
           setAdd(!add); setAddvalue({
             firstname: '', lastname: '', surname: '',
             phonenumber: '', key: false
           })
-        }} className="fa-solid fa-plus icon">   Ավելացնել</i>}
+        }} className="icon"><FontAwesomeIcon icon={faPlus} />   Ավելացնել</button>}
       </>}
       {removeitem[0] !== -1 && <DeleteText removeitem={removeitem} setRemoveitem={setRemoveitem} deleteItem={Delete} />}
     </>

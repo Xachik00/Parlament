@@ -116,7 +116,7 @@ export const CommitteesPage = () => {
                     }
                   </div>)
                 }
-                { auth.role && <button onClick={() => {setAdd(true)}}><FontAwesomeIcon icon={faPlus} />Ավելացնել </button>}
+                { auth.role && <button onClick={() => {setAdd(true)}}><FontAwesomeIcon icon={faPlus} className='ADD' />Ավելացնել </button>}
               </div>
             </div>}
             {removeitem[0]!==-1 && <DeleteText removeitem={removeitem} setRemoveitem={setRemoveitem} deleteItem={deleteItem} />}
