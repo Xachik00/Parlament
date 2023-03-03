@@ -246,7 +246,9 @@ $darkgray:#E1E1E1;
             flex-direction: column;
             width: 8rem;
         }
-
+        .errordiv{
+            border: 1px solid red;
+        }
         .button {
             i {
                 cursor: pointer;

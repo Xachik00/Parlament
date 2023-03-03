@@ -31,12 +31,26 @@ export const FactionPage = () => {
     cityphone: '',
     internalphone: '',
   })
+
+  const [erorrdiv, setErrordiv] = useState(false)
+  const [erorrdiv1, setErrordiv1] = useState(false)
+  const [erorrdiv2, setErrordiv2] = useState(false)
+
   useEffect(() => {
     dispatch(fetchFraction())
   }, [dispatch])
 
   async function Save(id: number, e: React.FormEvent) {
     e.preventDefault()
+    if(value.name===''){
+      setErrordiv(true)
+    }
+    if(value.member1===''){
+      setErrordiv1(true)
+    }
+    if(value.member2===''){
+      setErrordiv2(true)
+    }else{
     const Editfraction = {
       name: value.name, member1: value.member1,
       member2: value.member2, cityphone: value.cityphone,
@@ -45,7 +59,7 @@ export const FactionPage = () => {
     await axios.put('faction/' + id, Editfraction)
     dispatch(fetchFraction())
     setEdit(-1)
-  }
+  }}
 
   async function Add(e: React.FormEvent) {
     e.preventDefault()
@@ -134,18 +148,19 @@ export const FactionPage = () => {
             Fraction.map((item, index) => 
             <tbody key={index}>{edit === index ?
                 <tr key={item.id} >
-                  <td><input className='td3_input jj' maxLength={20} value={value.name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setValue({ name: e.target.value, 
-                    member1: value.member1, member2: value.member2, cityphone: value.cityphone, internalphone: value.internalphone }) }} /></td>
-                  <td><input className='td3_input jj' maxLength={20} value={value.member1} onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setValue({ name: value.name, 
-                    member1: e.target.value, member2: value.member2, cityphone: value.cityphone, internalphone: value.internalphone }) }} />
-                    <input className='td3_input jj' maxLength={20} value={value.member2} onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setValue({ name: value.name, 
-                      member1: value.member1, member2: e.target.value, cityphone: value.cityphone, internalphone: value.internalphone }) }} /></td>
+                  <td><input className={erorrdiv ? 'td3_input jj errordiv' : 'td3_input jj'} maxLength={20} value={value.name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setValue({ name: e.target.value, 
+                    member1: value.member1, member2: value.member2, cityphone: value.cityphone, internalphone: value.internalphone }) ; setErrordiv(false)}} /></td>
+                  <td><input className={erorrdiv1 ? 'td3_input jj errordiv' : 'td3_input jj'} maxLength={20} value={value.member1} onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setValue({ name: value.name, 
+                    member1: e.target.value, member2: value.member2, cityphone: value.cityphone, internalphone: value.internalphone }) ; setErrordiv1(false)}} />
+                    <input className={erorrdiv2 ? 'td3_input jj errordiv' : 'td3_input jj'} maxLength={20} value={value.member2} onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setValue({ name: value.name, 
+                      member1: value.member1, member2: e.target.value, cityphone: value.cityphone, internalphone: value.internalphone }); setErrordiv2(false) }} /></td>
                   <td><input className='td3_input' maxLength={9} value={value.cityphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setValue({ name: value.name, 
                     member1: value.member1, member2: value.member2, cityphone: e.target.value, internalphone: value.internalphone }) }} /></td>
                   <td><input className='td3_input' maxLength={8} value={value.internalphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => { setValue({ name: value.name, 
                     member1: value.member1, member2: value.member2, cityphone: value.cityphone, internalphone: e.target.value }) }} /></td>
-                  <td><button className='save'> <i onClick={(e) => Save(item.id, e)} className="fa-regular fa-square-check"></i></button>
-                  <button onClick={() => setEdit(-1)} ><i className="fa-solid fa-xmark"></i></button>
+                  <td>
+                    <button className='save'> <i onClick={(e) => Save(item.id, e)} className="fa-regular fa-square-check"></i></button>
+                    <button onClick={() => setEdit(-1)} ><i className="fa-solid fa-xmark"></i></button>
                   </td>
                 </tr> : <tr key={item.id}>
                   <td className='td1'>{item.name}</td>

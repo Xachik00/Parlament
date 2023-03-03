@@ -44,6 +44,11 @@ export const MPsPage = () => {
     phonenumber: '',
     key: false,
   })
+
+  const [erorrdiv, setErrordiv] = useState(false)
+  const [erorrdiv1, setErrordiv1] = useState(false)
+  const [erorrdiv2, setErrordiv2] = useState(false)
+  const [erorrdiv3, setErrordiv3] = useState(false)
   
   useEffect(() => {
     dispatch(fetchMpsnumber())
@@ -69,6 +74,18 @@ export const MPsPage = () => {
   }
 
   async function Save(id: number) {
+    if(value.firstname===''){
+      setErrordiv(true)
+    }
+    if(value.lastname===''){
+      setErrordiv1(true)
+    }
+    if(value.surname===''){
+      setErrordiv2(true)
+    }
+    if(value.phonenumber===''){
+      setErrordiv3(true)
+    }else{
     const EditMPs = {
        firstname: value.firstname, lastname: value.lastname,
       surname: value.surname, phonenumber: value.phonenumber,
@@ -76,7 +93,7 @@ export const MPsPage = () => {
     await axios.put('parlament/' + id, EditMPs)
     dispatch(fetchMpsnumber())
     setEdit(-1)
-  }
+  }}
 
   async function Add(e: React.FormEvent) {
     e.preventDefault()
@@ -173,31 +190,31 @@ export const MPsPage = () => {
                 <>{edit === item.id ? <tr key={index}>
                   <td>{index + 1}</td>
                   <td>
-                    <input className='td1_input' maxLength={20} value={value.firstname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    <input className={erorrdiv ? 'td1_input errordiv' : 'td1_input'} maxLength={20} value={value.firstname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       setValue({
                         firstname: e.target.value,
                         lastname: value.lastname, surname: value.surname, phonenumber: value.phonenumber
-                      })
+                      }); setErrordiv(false)
                     }}/>
-                    <input className='td1_input gg' maxLength={20} value={value.lastname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    <input className={erorrdiv1 ? 'td1_input gg errordiv' : 'td1_input gg'} maxLength={20} value={value.lastname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       setValue({
                         firstname: value.firstname,
                         lastname: e.target.value, surname: value.surname, phonenumber: value.phonenumber,
-                      })
+                      }); setErrordiv1(false)
                     }}/>
-                    <input className='td1_input gg' maxLength={20} value={value.surname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    <input className={erorrdiv2 ? 'td1_input gg errordiv' : 'td1_input gg'} maxLength={20} value={value.surname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       setValue({
                         firstname: value.firstname,
                         lastname: value.lastname, surname: e.target.value, phonenumber: value.phonenumber
-                      })
+                      }); setErrordiv2(false)
                     }}/>
                     </td>
                     <td>
-                      <input className='td1_input' maxLength={8} value={value.phonenumber} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      <input className={erorrdiv3 ? 'td1_input errordiv' : 'td1_input'} maxLength={8} value={value.phonenumber} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       setValue({
                         firstname: value.firstname,
                         lastname: value.lastname, surname: value.surname, phonenumber: e.target.value
-                      })
+                      }); setErrordiv3(false)
                       }}/>
                     </td>
                   <td>
@@ -238,31 +255,31 @@ export const MPsPage = () => {
                         {edit === iteme.id ? <tr>
                           <td className='td1'>{index + 1}</td>
                           <td>
-                            <input className='td1_input' maxLength={20} value={value.firstname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            <input className={erorrdiv ? 'td1_input errordiv' : 'td1_input'} maxLength={20} value={value.firstname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                             setValue({
                               firstname: e.target.value,
                               lastname: value.lastname, surname: value.surname, phonenumber: value.phonenumber
-                            })
+                            }); setErrordiv(false)
                             }} />
-                            <input className='td1_input gg' maxLength={20} value={value.lastname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            <input className={erorrdiv1 ? 'td1_input gg errordiv' : 'td1_input gg'} maxLength={20} value={value.lastname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                               setValue({
                                 firstname: value.firstname,
                                 lastname: e.target.value, surname: value.surname, phonenumber: value.phonenumber,
-                              })
+                              }); setErrordiv1(false)
                             }} />
-                            <input className='td1_input gg' maxLength={20} value={value.surname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            <input className={erorrdiv2 ? 'td1_input gg errordiv' : 'td1_input gg'} maxLength={20} value={value.surname} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                               setValue({
                                 firstname: value.firstname,
                                 lastname: value.lastname, surname: e.target.value, phonenumber: value.phonenumber
-                              })
+                              }); setErrordiv2(false)
                             }} />
                           </td>
                           <td>
-                            <input className='td1_input' maxLength={8} value={value.phonenumber} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            <input className={erorrdiv3 ? 'td1_input errordiv' : 'td1_input'} maxLength={8} value={value.phonenumber} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                             setValue({
                               firstname: value.firstname,
                               lastname: value.lastname, surname: value.surname, phonenumber: e.target.value
-                            })
+                            }); setErrordiv3(false)
                             }} />
                           </td>
                           <td>

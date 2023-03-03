@@ -35,12 +35,25 @@ export const CommittePage = () => {
     internalphone2: '',
   })
 
+  const [erorrdiv, setErrordiv] = useState(false)
+  const [erorrdiv1, setErrordiv1] = useState(false)
+  const [erorrdiv2, setErrordiv2] = useState(false)
+
   useEffect(() => {
     dispatch(fetchCommitte())
   }, [dispatch])
 
   async function Save(id: number, e: React.FormEvent) {
     e.preventDefault()
+    if(value.name===''){
+      setErrordiv(true)
+    }
+    if(value.member2===''){
+      setErrordiv1(true)
+    }
+    if(value.internalphone===''){
+      setErrordiv2(true)
+    }else{
     const Editcomitee = {
       name: value.name, member1: value.member1,
       member2: value.member2, cityphone: value.cityphone,
@@ -49,7 +62,7 @@ export const CommittePage = () => {
     await axios.put('committee/' + id, Editcomitee)
     dispatch(fetchCommitte())
     setEdit(-1)
-  }
+  }}
 
   async function Add(e: React.FormEvent) {
     e.preventDefault()
@@ -148,35 +161,35 @@ export const CommittePage = () => {
                 <tbody key={index}>
                   {edit === index ?
                     <tr>
-                      <td><input className='td2_input jj' maxLength={20} value={value.name} onChange={(e:React.ChangeEvent<HTMLInputElement>) => {
+                      <td><input className={erorrdiv ? 'td2_input jj errordiv' : 'td2_input jj'} maxLength={20} value={value.name} onChange={(e:React.ChangeEvent<HTMLInputElement>) => {
                         setValue({
                           name: e.target.value, member1: value.member1, member2: value.member2, 
                           cityphone: value.cityphone, internalphone: value.internalphone, internalphone2: value.internalphone2
-                        })
+                        }); setErrordiv(false)
                       }} /></td>
-                      <td><input className='td2_input jj' maxLength={20} value={value.member1} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      <td><input className= 'td2_input jj' maxLength={20} value={value.member1} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         setValue({
                           name: value.name, member1: e.target.value, member2: value.member2, 
                           cityphone: value.cityphone, internalphone: value.internalphone, internalphone2: value.internalphone2
                         })
                       }} />
-                        <input className='td2_input jj' maxLength={20} value={value.member2} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        <input className={erorrdiv1 ? 'td2_input jj errordiv' : 'td2_input jj'} maxLength={20} value={value.member2} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                           setValue({
                             name: value.name, member1: value.member1, member2: e.target.value, 
                             cityphone: value.cityphone, internalphone: value.internalphone, internalphone2: value.internalphone2
-                          })
+                          }); setErrordiv1(false)
                         }} /></td>
-                      <td><input className='td2_input' maxLength={9} value={value.cityphone} onChange={(e:React.ChangeEvent<HTMLInputElement>) => {
+                      <td><input className= 'td2_input' maxLength={9} value={value.cityphone} onChange={(e:React.ChangeEvent<HTMLInputElement>) => {
                         setValue({
                           name: value.name, member1: value.member1, member2: value.member2, 
                           cityphone: e.target.value, internalphone: value.internalphone, internalphone2: value.internalphone2
                         })
                       }} /></td>
-                      <td><input className='td2_input'maxLength={8} value={value.internalphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      <td><input className={erorrdiv1 ? 'td2_input errordiv' :'td2_input'} maxLength={8} value={value.internalphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         setValue({
                           name: value.name, member1: value.member1, member2: value.member2, 
                           cityphone: value.cityphone, internalphone: e.target.value, internalphone2: value.internalphone2
-                        })
+                        }); setErrordiv1(false)
                       }} />
                       <input className='td2_input' maxLength={8} value={value.internalphone2} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         setValue({
