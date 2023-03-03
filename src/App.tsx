@@ -13,7 +13,7 @@ import RequireAuth from './components/Admin/components/RequireAuth';
 import PersistLogin from './components/Admin/components/PersistLogin';
 import SuperAdmin from "./pages/SuperAdmin/SuperAdmin";
 import { useEffect } from "react";
-
+import env from "react-dotenv";
 
 const ROLE = {
   'Admin': 'admin',
@@ -30,7 +30,7 @@ function App() {
 
 
   useEffect(() => {
-    if (!auth?.role && url !== 'http://localhost:3000/admin' && url !== 'http://localhost:3000/') {
+    if (!auth?.role && url !== env.FRONT_APP_BASE_URL+'/admin' && url !== env.FRONT_APP_BASE_URL) {
       const timeout = setTimeout(() => {
         navigate('/')
       }, 120000);

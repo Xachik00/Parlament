@@ -49,7 +49,8 @@
   },
   "react-dotenv": {
     "whitelist": [
-      "BACK_APP_BASE_URL"
+      "BACK_APP_BASE_URL",
+      "FRONT_APP_BASE_URL"
     ]
   },
   "devDependencies": {
