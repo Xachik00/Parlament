@@ -7,6 +7,9 @@ import { useState } from 'react';
 import axios from '../../axios/index';
 import './CommitteesPage.scss'
 import DeleteText from "../../components/Delete/DeleteText";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck,faXmark,faPen,faTrash,faPlus } from '@fortawesome/free-solid-svg-icons'
+
 
 export const CommitteesPage = () => {
 
@@ -101,19 +104,19 @@ export const CommitteesPage = () => {
                         <span>{item.id}.</span>
                         <textarea className={erorr ? 'erorrText' : 'text'} value={value[0]} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setValue([e.target.value,value[1]]); setErorr(false) }} />
                         <textarea className={erorr1 ? 'erorrText' : 'text'} value={value[1]} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setValue([value[0] ,e.target.value]); setErorr(false) }} />
-                        <button onClick={() => saveData(value, item.id)} ><i className="fa-regular fa-square-check"></i></button>
-                        <button onClick={() => setEdit(0)} ><i className="fa-solid fa-xmark"></i></button>
+                        <button onClick={() => saveData(value, item.id)} ><FontAwesomeIcon icon={faCheck} /></button>
+                        <button onClick={() => setEdit(0)} ><FontAwesomeIcon icon={faXmark} /></button>
                       </div> : <div>
                         <h3><span>{item.id}.</span>{item.title}</h3>
                         <p>{item?.text}</p>
                         { auth.role && <>
-                        <button onClick={() => { setValue([item.title,item.text]); setEdit(item.id) }}><i className="fa-solid fa-pen"></i></button>
-                        <button onClick={(e) => setRemoveitem([item.id,e])}><i className="fa-regular fa-trash-can"></i></button>
+                        <button onClick={() => { setValue([item.title,item.text]); setEdit(item.id) }}><FontAwesomeIcon icon={faPen} /></button>
+                        <button onClick={(e) => setRemoveitem([item.id,e])}><FontAwesomeIcon icon={faTrash} /></button>
                         </>}</div>
                     }
                   </div>)
                 }
-                { auth.role && <button onClick={() => {setAdd(true)}}><i className="fa-solid fa-plus ADD">   Ավելացնել </i></button>}
+                { auth.role && <button onClick={() => {setAdd(true)}}><FontAwesomeIcon icon={faPlus} />Ավելացնել </button>}
               </div>
             </div>}
             {removeitem[0]!==-1 && <DeleteText removeitem={removeitem} setRemoveitem={setRemoveitem} deleteItem={deleteItem} />}
