@@ -185,11 +185,11 @@ export const CommittePage = () => {
                           cityphone: e.target.value, internalphone: value.internalphone, internalphone2: value.internalphone2
                         })
                       }} /></td>
-                      <td><input className={erorrdiv1 ? 'td2_input errordiv' :'td2_input'} maxLength={8} value={value.internalphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      <td><input className={erorrdiv2 ? 'td2_input errordiv' :'td2_input'} maxLength={8} value={value.internalphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         setValue({
                           name: value.name, member1: value.member1, member2: value.member2, 
                           cityphone: value.cityphone, internalphone: e.target.value, internalphone2: value.internalphone2
-                        }); setErrordiv1(false)
+                        }); setErrordiv2(false)
                       }} />
                       <input className='td2_input' maxLength={8} value={value.internalphone2} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         setValue({
