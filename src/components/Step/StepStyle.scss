@@ -152,6 +152,9 @@ $darkgray:#E1E1E1;
             flex-direction: column;
             width: 8rem;
         }
+        .errordiv{
+            box-shadow: 0.5px 0.5px 5px red;
+        }
 
         .button {
             i {
@@ -246,7 +249,9 @@ $darkgray:#E1E1E1;
             flex-direction: column;
             width: 8rem;
         }
-
+        .errordiv{
+            box-shadow: 0.5px 0.5px 5px red;
+        }
         .button {
             i {
                 cursor: pointer;
@@ -260,9 +265,7 @@ $darkgray:#E1E1E1;
 
     }
 }
-.errordiv{
-    box-shadow: 0.5px 0.5px 5px red;
-}
+
 .table1 {
     margin: 1.5rem 1.5rem .5rem .3rem;
     font-size: .7rem;
@@ -342,6 +345,9 @@ $darkgray:#E1E1E1;
         .gg {
             margin: 4px 30px;
         }
+        .errordiv{
+            box-shadow: 0.5px 0.5px 5px red;
+        }
 
         .button {
             i {
@@ -401,6 +407,9 @@ $darkgray:#E1E1E1;
 
         .gg {
             margin: 4px 30px;
+        }
+        .errordiv{
+            box-shadow: 0.5px 0.5px 5px red;
         }
 
         .button {
