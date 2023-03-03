@@ -26,6 +26,9 @@ export const DepNumbersPage = () => {
   const [add, setAdd] = useState(false)
   const [removeitem,setRemoveitem]=useState([-1,'',{}])
  
+  const [erorrdiv, setErrordiv] = useState(false)
+  const [erorrdiv1, setErrordiv1] = useState(false)
+
   useEffect(()=>{ 
     dispatch(fetchDepNum())
   },[dispatch]) 
@@ -33,6 +36,12 @@ export const DepNumbersPage = () => {
 
   async function adminSave(id:any, value:any, value1:any, page:string, e:any){ 
     e.preventDefault()
+    if(value===''){
+      setErrordiv(true)
+    }
+    if(value1===''){
+      setErrordiv1(true)
+    }else{
     const newInfo={  
       name:value, 
       internalphone:value1, 
@@ -40,7 +49,7 @@ export const DepNumbersPage = () => {
     await axios.put(page + "/" + id, newInfo);
     dispatch(fetchDepNum()) 
     setEdit(-1)
-  } 
+  } }
  
   async function adminDelete(id:number, page:string, e:any){
     e.preventDefault()
@@ -109,10 +118,10 @@ export const DepNumbersPage = () => {
           depnum.map((item:any, index:number)=> <tbody key={item.id}> 
             {edit === index ? <tr className='textarea_tr'> 
               <td className='textarea_td'> 
-                <textarea maxLength={100} value={value} onChange={(e:any) => {setValue(e.target.value)}}></textarea> 
+                <textarea className={erorrdiv ? 'errordiv' : ''} maxLength={100} value={value} onChange={(e:any) => {setValue(e.target.value); setErrordiv(false)}}></textarea> 
               </td> 
               <td className='textarea_td'> 
-                <textarea maxLength={8} value={value1} onChange={(e:any) => {setValue1(e.target.value)}}></textarea> 
+                <textarea className={erorrdiv1 ? 'errordiv' : ''} maxLength={8} value={value1} onChange={(e:any) => {setValue1(e.target.value); setErrordiv1(false)}}></textarea> 
               </td> 
               <td className='textarea_td'> 
                 <button className='save'> <i onClick={(e) => adminSave(item.id, value, value1, "units", e)} className="fa-regular fa-square-check"></i></button>
