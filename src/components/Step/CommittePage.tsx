@@ -94,7 +94,7 @@ export const CommittePage = () => {
     <>
       {add ? <form className='form' onSubmit={(e) => Add(e)}>
         <label>Հանձնաժողովի անվանումը</label>
-        <input className='td1'maxLength={20}  value={addvalue.name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+        <input className='td1'  value={addvalue.name} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setAddvalue({
             name: e.target.value, member1: addvalue.member1,
             member2: addvalue.member2, cityphone: addvalue.cityphone, 
@@ -103,7 +103,7 @@ export const CommittePage = () => {
         }} />
           {error &&  addvalue.name.trim().length===0 && <ErrorMessage error={error} />}
         <label>Հանձնաժողովի նախագահ</label>
-        <input className='td1' maxLength={20} value={addvalue.member1} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+        <input className='td1'  value={addvalue.member1} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setAddvalue({
             name: addvalue.name, member1: e.target.value,
             member2: addvalue.member2, cityphone: addvalue.cityphone, 
@@ -112,7 +112,7 @@ export const CommittePage = () => {
         }} />
           {error &&  addvalue.member1.trim().length===0 && <ErrorMessage error={error} />}
         <label>Հանձնաժողովի նախագահի տեղակալ</label>
-        <input className='td1' maxLength={20} value={addvalue.member2} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+        <input className='td1'  value={addvalue.member2} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setAddvalue({
             name: addvalue.name, member1: addvalue.member1,
             member2: e.target.value, cityphone: addvalue.cityphone, 
@@ -121,7 +121,7 @@ export const CommittePage = () => {
         }} />
           {error &&  addvalue.member2.trim().length===0 && <ErrorMessage error={error} />}
         <label>Քաղաքային հեռախոսահամարը</label>
-        <input className='td1' maxLength={9} value={addvalue.internalphone2} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+        <input className='td1'  value={addvalue.cityphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setAddvalue({
             name: addvalue.name, member1: addvalue.member1,
             member2: addvalue.member2, cityphone: e.target.value, 
@@ -129,7 +129,7 @@ export const CommittePage = () => {
           })
         }} />
         <label>1-ին Ներքին հեռախոսահամարը</label>
-        <input className='td1' maxLength={8} value={addvalue.cityphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+        <input className='td1'  value={addvalue.internalphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setAddvalue({
             name: addvalue.name, member1: addvalue.member1,
             member2: addvalue.member2, cityphone: addvalue.cityphone, 
@@ -138,7 +138,7 @@ export const CommittePage = () => {
         }} />
           {error &&  addvalue.internalphone.trim().length===0 && <ErrorMessage error={error} />}
         <label>2-րդ Ներքին հեռախոսահամարը</label>
-        <input className='td1' maxLength={8} value={addvalue.internalphone} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+        <input className='td1'  value={addvalue.internalphone2} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           setAddvalue({
             name: addvalue.name, member1: addvalue.member1,
             member2: addvalue.member2, cityphone: addvalue.cityphone, 
